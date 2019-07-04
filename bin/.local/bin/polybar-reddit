@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# This script retrieves unread messages from your Reddit account using a JSON
+# link.
+#
+# To use this script, make sure you have the following dependencies installed:
+# `curl`, `jq`, `ttf-font-awesome`.
+#
+# To get your Reddit token:
+# 1. Go to "https://www.reddit.com/prefs/feeds/"
+# 2. Click "your inbox" > "unread messages" > "JSON" and copy the token
+# following of your username, in the navigation bar (<token>&user=<username>).
+#
+# NOTE: `polybar-reddit` can also be used outside of polybar by replacing the
+# following line: echo -e "%{F#cb4b16} %{F-}$unread"
+# by: echo " $unread"
+#
+# WARNING: in order to easily share this script without security risk, it is
+# recommended to place the JSON part containing the sensitive information in a
+# separate GPG file.
+
+# Replace this path by yours.
+if [ ! -z "$GNUPGHOME" ]; then
+    REDDIT_GPG="$GNUPGHOME/shared/reddit-json.gpg"
+else
+    REDDIT_GPG="/home/$USER/.gnupg/shared/reddit-json.gpg"
+fi
+
+url="https://www.reddit.com/message/unread/.json?feed=$(gpg -qd "$REDDIT_GPG")"
+unread=$(curl -sf "$url" | jq '.["data"]["children"] | length')
+
+case "$unread" in
+    ''|*[!0-9]*)
+	unread=0
+esac;
+
+if [ "$unread" -gt 0 ]; then
+    echo "%{F#cb4b16} %{F-}$unread"
+else
+    echo " 0"
+fi
