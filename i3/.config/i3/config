@@ -337,6 +337,6 @@ exec --no-startup-id i3-msg 'workspace $ws2; exec Thunar'
 exec --no-startup-id i3-msg 'workspace $ws1; exec termite; exec termite'
 exec --no-startup-id i3-msg 'workspace $ws8; exec emacs'
 exec --no-startup-id i3-msg 'workspace $ws10; exec thunderbird; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws3; exec qutebrowser'
+# exec --no-startup-id i3-msg 'workspace $ws3; exec qutebrowser'
 exec --no-startup-id i3-msg 'workspace $ws4; exec firefox'
 # exec --no-startup-id i3-msg 'workspace $ws1;
