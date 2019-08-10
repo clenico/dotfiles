@@ -312,22 +312,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 exec --no-startup-id odrive
 
-exec --no-startup-id i3-msg 'workspace $ws2; exec okular'
-exec --no-startup-id i3-msg 'workspace $ws2; exec Thunar'
-exec --no-startup-id i3-msg 'workspace $ws2; exec Thunar'
-# exec --no-startup-id i3-msg 'workspace $ws2; exec dolphin'
-# exec --no-startup-id i3-msg 'workspace $ws2; exec dolphin'
-
-
-#i3-msg "workspace $ws2; append_layout /home/niccle27/.i3/workspace-2.json"
-#exec --no-startup-id i3-msg exec dolphin
-#exec --no-startup-id i3-msg 'workspace $ws8; exec emacs; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws1; exec termite; exec termite'
-exec --no-startup-id i3-msg 'workspace $ws8; exec emacs'
-exec --no-startup-id i3-msg 'workspace $ws10; exec thunderbird; workspace $ws1'
-# exec --no-startup-id i3-msg 'workspace $ws3; exec qutebrowser'
-exec --no-startup-id i3-msg 'workspace $ws4; exec firefox'
-# exec --no-startup-id i3-msg 'workspace $ws1;
 # # Get a password with rofi from pass.
 bindsym $mod+Shift+p exec ~/.local/bin/rofi-pass
 # # Get an emoji from emoji picker
@@ -336,3 +320,5 @@ bindsym $mod+Shift+u exec ~/.local/bin/rofi-emojis
 # bindsym $mod+y exec ~/.local/bin/rofi-yubi
 bindsym $mod+Shift+f exec ~/.local/bin/rofi-finder
 bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
+
+exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh > /home/niccle27/test.txt"
