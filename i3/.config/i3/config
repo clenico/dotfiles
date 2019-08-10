@@ -314,7 +314,7 @@ for_window [class="powder64"] floating disable
 #exec_always feh --bg-scale /home/niccle27/Pictures/Wallpaper/Arch-Linux-Wallpaper-Full-HD.png
 exec nitrogen --set-auto --head=xin_0 --random /home/niccle27/Pictures/Wallpaper
 exec nitrogen --set-auto --head=xin_1 --random /home/niccle27/Pictures/Wallpaper
-exec_always compton -b --config ~/.config/compton/compton.conf
+exec compton -b --config ~/.config/compton/compton.conf
 
 #application
 exec thunar --daemon
