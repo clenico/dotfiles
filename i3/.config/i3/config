@@ -341,3 +341,11 @@ exec --no-startup-id i3-msg 'workspace $ws10; exec thunderbird; workspace $ws1'
 # exec --no-startup-id i3-msg 'workspace $ws3; exec qutebrowser'
 exec --no-startup-id i3-msg 'workspace $ws4; exec firefox'
 # exec --no-startup-id i3-msg 'workspace $ws1;
+# # Get a password with rofi from pass.
+bindsym $mod+Shift+p exec ~/.local/bin/rofi-pass
+# # Get an emoji from emoji picker
+bindsym $mod+Shift+u exec ~/.local/bin/rofi-emojis
+# # Get an OTP with rofi from YubiKey.
+# bindsym $mod+y exec ~/.local/bin/rofi-yubi
+bindsym $mod+Shift+f exec ~/.local/bin/rofi-finder
+bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
