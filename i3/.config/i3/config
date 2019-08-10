@@ -302,6 +302,9 @@ for_window [class="ark"] floating enable #resize set 640 480
 for_window [class="konsole"] floating enable resize set 640 480
 for_window [class="TestWin"] floating enable #resize set 640 480
 for_window [class="Mictray"] floating enable resize set 640 480
+for_window [class="Gnome-calculator"] floating enable resize set 640 480
+
+
 
 #disable floating windows
 for_window [class="Wireshark"] floating disable resize set 640 480
