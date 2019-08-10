@@ -108,3 +108,4 @@ alias radrop="ranger ~/Dropbox/"
 alias tmp="cd  /tmp/"
 alias doc="cd  ~/Documents/"
 alias dow="cd  ~/Downloads/"
+alias ranloc='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
