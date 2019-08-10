@@ -282,13 +282,15 @@ for_window [class="^kile$"] move to workspace $ws4
 # for_window [class="^kile$"] move to workspace $ws8; workspace $ws8
 
 #assign setup
-assign [class="^dolphin$"] → $ws2
-assign [class="^Emacs$"] → $ws8
-#assign [class="^Inkscape$"] → $ws9
-assign [class="^photoflare$"] → $ws9
-assign [class="^qutebrowser$"] → $ws3
-assign [class="^VirtualBox Manager$"] → $ws5
-assign [class="^VirtualBox Machine$"] → $ws5
+assign [class="^dolphin$"]            → $ws2
+assign [class="^Emacs$"]              → $ws8
+#assign [class="^Inkscape$"]          → $ws9
+assign [class="^photoflare$"]         → $ws9
+assign [class="^qutebrowser$"]        → $ws3
+assign [class="^okular$"]             → $ws4
+assign [class="^Zotero$"]             → $ws5
+assign [class="^VirtualBox Manager$"] → $ws6
+assign [class="^VirtualBox Machine$"] → $ws6
 
 #floating windows
 for_window [class="kwrite"] floating enable resize set 640 480
