@@ -32,6 +32,7 @@ fi
 export EDITOR="emacsclient -a -c" # $EDITOR opens in terminal
 export VISUAL="emacsclient -a -c" # $VISUAL opens in GUI mode
 export PATH="${PATH}:/opt/OpenDrive"
+export QT_SCREEN_SCALE_FACTORS=2
 
 test "$XDG_BIN_HOME"    || export XDG_BIN_HOME="$HOME/.local/bin"
 test "$XDG_CACHE_HOME"  || export XDG_CACHE_HOME="$HOME/.cache"
