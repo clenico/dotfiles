@@ -170,10 +170,6 @@ bindsym $mod+Shift+agrave move container to workspace $ws10
 #client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 #client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
-#add a screen on the left
-bindsym $mod+Shift+u exec "xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal;nitrogen --restore"
-bindsym $mod+Escape exec "xrandr --output HDMI1 --off --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal"
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
