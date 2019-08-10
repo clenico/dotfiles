@@ -42,8 +42,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+d exec nitrogen --set-auto --head=xin_0 --random /home/niccle27/Pictures/Wallpaper
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec rofi -show run
-# bindsym $mod+w exec rofi -show window
+bindsym $mod+d exec $menu rofi -location 0 -width 30 -show "drun" -display-drun " Application Manager:" -modi "drun"
+bindsym $mod+w exec rofi -show window
 bindsym $mod+c exec xfce4-appfinder
 bindsym $mod+b exec kwrite
 
