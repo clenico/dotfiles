@@ -275,7 +275,8 @@ assign [class="^Zotero$"]             → $ws5
 assign [class="^VirtualBox Manager$"] → $ws6
 assign [class="^VirtualBox Machine$"] → $ws6
 assign [class="^Emacs$"]              → $ws8
-assign [class="^Inkscape$"]          → $ws9
+assign [class="^Inkscape$"]           → $ws9
+assign [class="^Gimp$"]               → $ws9
 assign [class="^photoflare$"]         → $ws9
 
 #floating windows
