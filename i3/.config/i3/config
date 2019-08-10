@@ -258,23 +258,25 @@ bindsym $mod+p mode "$mode_launch"
 exec --no-startup-id i3-msg 'workspace $ws2; append_layout /home/niccle27/.i3/workspace-2Thunar.json'
 # exec --no-startup-id i3-msg 'workspace $ws2; append_layout /home/niccle27/.i3/workspace-2.json'
 #for_window setup
-for_window [instance="scratchpad"] move window to scratchpad
+for_window [instance="scratchpad"]           move window to scratchpad
 #for_window [instance="s^(?i)libreoffice.*"] move window to $ws8
-for_window [class="^libreoffice.*$"] move to workspace $ws7; workspace $ws7
-for_window [class="^Atom$"] move to workspace $ws4; workspace $ws4
-for_window [class="^kile$"] move to workspace $ws4
-# for_window [class="^kile$"] move to workspace $ws8; workspace $ws8
+for_window [class="^libreoffice.*$"]         move to workspace $ws7; workspace $ws7
+for_window [class="^Atom$"]                  move to workspace $ws4; workspace $ws4
+for_window [class="^kile$"]                  move to workspace $ws4
+for_window [class="^Nemo$"]                  move to workspace $ws2
+for_window [class="^Thunderbird$"]           move to workspace $ws10
+
 
 #assign setup
 assign [class="^dolphin$"]            → $ws2
-assign [class="^Emacs$"]              → $ws8
-#assign [class="^Inkscape$"]          → $ws9
-assign [class="^photoflare$"]         → $ws9
 assign [class="^qutebrowser$"]        → $ws3
 assign [class="^okular$"]             → $ws4
 assign [class="^Zotero$"]             → $ws5
 assign [class="^VirtualBox Manager$"] → $ws6
 assign [class="^VirtualBox Machine$"] → $ws6
+assign [class="^Emacs$"]              → $ws8
+assign [class="^Inkscape$"]          → $ws9
+assign [class="^photoflare$"]         → $ws9
 
 #floating windows
 for_window [class="kwrite"] floating enable resize set 640 480
