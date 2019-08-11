@@ -211,8 +211,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 
 # Sreen brightness controls
 set_from_resource $screen echo "$SCREEN"
-bindsym XF86MonBrightnessUp exec ~/Scripts/brightness.sh + $screen
-bindsym XF86MonBrightnessDown exec  ~/Scripts/brightness.sh - $screen
+bindsym XF86MonBrightnessUp exec ~/.local/bin/brightness.sh + $screen
+bindsym XF86MonBrightnessDown exec  ~/.local/bin/brightness.sh - $screen
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
