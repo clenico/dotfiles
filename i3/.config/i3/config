@@ -313,3 +313,5 @@ bindsym $mod+Shift+f exec ~/.local/bin/rofi-finder
 bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
 
 exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh > /home/niccle27/test.txt"
+exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh"
+
