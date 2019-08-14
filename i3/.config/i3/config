@@ -39,7 +39,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # change background wallpaper
-bindsym $mod+Shift+d exec nitrogen --set-auto --head=xin_0 --random /home/niccle27/Pictures/Wallpaper
+bindsym $mod+Shift+d exec ~/.local/bin/RandomWallpaper.sh
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec rofi -show run
