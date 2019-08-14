@@ -312,6 +312,13 @@ bindsym $mod+Shift+u exec ~/.local/bin/rofi-emojis
 bindsym $mod+Shift+f exec ~/.local/bin/rofi-finder
 bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
 
-exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh > /home/niccle27/test.txt"
 exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh"
 
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# Cycle through active workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
