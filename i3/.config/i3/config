@@ -267,6 +267,8 @@ for_window [class="^Thunderbird$"]           move to workspace $ws10
 
 
 #assign setup
+assign [class="^Nemo$"]               → $ws2
+assign [class="^Nautilus$"]           → $ws2
 assign [class="^dolphin$"]            → $ws2
 assign [class="^qutebrowser$"]        → $ws3
 assign [class="^okular$"]             → $ws4
