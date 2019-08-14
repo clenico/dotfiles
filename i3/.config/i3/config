@@ -300,18 +300,8 @@ for_window [class="powder64"] floating disable
 #launche on start up
 #custom
 #exec_always feh --bg-scale /home/niccle27/Pictures/Wallpaper/Arch-Linux-Wallpaper-Full-HD.png
-exec nitrogen --set-auto --head=xin_0 --random /home/niccle27/Pictures/Wallpaper
-exec nitrogen --set-auto --head=xin_1 --random /home/niccle27/Pictures/Wallpaper
-exec compton -b --config ~/.config/compton/compton.conf
-
-#application
-exec thunar --daemon
 
 exec --no-startup-id exec "termite" --name scratchpad
-exec --no-startup-id volumeicon
-exec --no-startup-id nm-applet
-exec --no-startup-id dunst
-exec --no-startup-id odrive
 
 # # Get a password with rofi from pass.
 bindsym $mod+Shift+p exec ~/.local/bin/rofi-pass
