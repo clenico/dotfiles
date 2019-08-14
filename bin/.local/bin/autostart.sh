@@ -8,9 +8,11 @@ if have zotero; then
     zotero &
 fi
 
-if have nemo; then
-    nemo &
+if have nautilus; then
+    nautilus &
+    nautilus &
 elif have Thunar; then
+    thunar --daemon
     Thunar &
     Thunar &
 fi
@@ -22,7 +24,7 @@ fi
 
 if have compton; then
     # compton &
-    :
+    compton -b --config ~/.config/compton/compton.conf &
 fi
 
 if pgrep i3 && have dunst; then
@@ -66,3 +68,21 @@ if have firefox; then
     i3-msg 'workspace 3:'
     firefox &
 fi
+
+if have volumeicon; then
+    volumeicon &
+fi
+
+if have nm-applet; then
+    nm-applet &
+fi
+
+if have dunst; then
+    dunst &
+fi
+
+if have onedrive; then
+    onedrive --monitor &
+fi
+
+~/.local/bin/RandomWallpaper.sh &
