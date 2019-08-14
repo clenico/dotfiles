@@ -47,7 +47,6 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+w exec rofi -show window
 
 bindsym $mod+c exec xfce4-appfinder
-bindsym $mod+b exec kwrite
 bindsym $mod+Shift+s exec flameshot gui
 
 # change focus
