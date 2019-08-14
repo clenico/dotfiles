@@ -32,7 +32,7 @@ fi
 export EDITOR="emacsclient -a -c" # $EDITOR opens in terminal
 export VISUAL="emacsclient -a -c" # $VISUAL opens in GUI mode
 export PATH="${PATH}:/opt/OpenDrive"
-export QT_SCREEN_SCALE_FACTORS=2
+export QT_SCREEN_SCALE_FACTORS=1
 export SCREEN=$(xrandr | awk '($2 == "connected"){print $1}' | head -n 1)
 
 
