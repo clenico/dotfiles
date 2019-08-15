@@ -2,13 +2,13 @@
 
 #Usage : CreateSimLink.sh ~/OneDrive
 
-directories=(Org Notes)
+directories=(Org Notes "Pictures/Wallpaper")
 for directory in ${directories[@]}; do
     link="$HOME/$directory"
 if [ -L $link ];then
     echo "$link already exists"
 else
-    ln -s $1"/$location" $link
-    echo "$link created"
+    ln -s $1"/$directory" $link
+    echo $1"/$directory -> ""$link created"
 fi
 done
