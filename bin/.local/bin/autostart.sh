@@ -85,4 +85,9 @@ if have onedrive; then
     onedrive --monitor &
 fi
 
+if have libinput-gestures-setup; then
+    libinput-gestures-setup start
+fi
+
+
 ~/.local/bin/RandomWallpaper.sh &
