@@ -2,7 +2,7 @@
 
 #Usage : CreateSimLink.sh ~/OneDrive
 
-directories=(Org Notes "Pictures/Wallpaper")
+directories=(Org Notes "Pictures/Wallpaper" TFE)
 for directory in ${directories[@]}; do
     link="$HOME/$directory"
 if [ -L $link ];then
