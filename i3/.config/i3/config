@@ -9,43 +9,41 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Set defaults
+
+# Set Modifier
 set $mod Mod4
+set $mod2 control
 
-#disable focuse on moving mouse
-focus_follows_mouse no
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+
+# start a terminal
+# bindsym $mod+Return exec termite
+bindsym $mod+Return exec i3-sensible-terminal #execute the terminal describe by $TERMINAL
+
+
+# Settings
+focus_follows_mouse no #disable focuse on moving mouse
 font pango:monospace 14
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
+# font pango:DejaVu Sans Mono 14
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec termite
-#bindsym $mod+Return exec i3-sensible-terminal
+
+
+# set shortcuts
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # change background wallpaper
 bindsym $mod+Shift+d exec ~/.local/bin/RandomWallpaper.sh
-# start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
+
+# launcher
 bindsym $mod+d exec rofi -show run
 # bindsym $mod+d exec rofi -show run -location 0 -width 30 -show "drun" -display-drun " Application Manager:" -modi "drun"
 bindsym $mod+w exec rofi -show window
 
+# application shortcut
 bindsym $mod+c exec xfce4-appfinder
 bindsym $mod+Shift+s exec flameshot gui
 
@@ -77,39 +75,28 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+u move workspace to output left
 bindsym $mod+i move workspace to output right
 
-# Make the currently focused window a scratchpad
-bindsym $mod+Shift+minus move scratchpad
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad # Make the currently focused window a scratchpad
+bindsym $mod+minus scratchpad show # Show the first scratchpad window
 
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
+# Toggle
+bindsym $mod+a bar mode toggle # Toggle between dock mode and hide mode
+bindsym $mod+f fullscreen toggle # enter fullscreen mode for the focused container
+bindsym $mod+Shift+space floating toggle # toggle tiling / floating
 
-# Toggle between dock mode and hide mode
-bindsym $mod+a bar mode toggle
-# split in horizontal orientation
-bindsym $mod+g split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+# Split
+bindsym $mod+g split h # split in horizontal orientation
+bindsym $mod+v split v # split in vertical orientation
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+z layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+q focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
+# change focus
+bindsym $mod+space focus mode_toggle # change focus between tiling / floating windows
+bindsym $mod+Shift+p focus parent # focus the parent container
+bindsym $mod+Shift+c focus child # focus the child container
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -123,7 +110,19 @@ set $ws7 "7"
 set $ws8 "8:"
 set $ws9 "9:"
 set $ws10 "10:"
-set $ws11 "11"
+
+set $ws0b "0b"
+set $ws1b "1b"
+set $ws2b "2b"
+set $ws3b "3b"
+set $ws4b "4b"
+set $ws5b "5b"
+set $ws6b "6b"
+set $ws7b "7b"
+set $ws8b "8b"
+set $ws9b "9b"
+set $ws10b "10b"
+
 
 # switch to workspace
 bindsym $mod+ampersand workspace $ws1
@@ -137,6 +136,16 @@ bindsym $mod+exclam workspace $ws8
 bindsym $mod+ccedilla workspace $ws9
 bindsym $mod+agrave workspace $ws10
 
+bindsym $mod2+ampersand workspace $ws1b
+bindsym $mod2+eacute workspace $ws2b
+bindsym $mod2+quotedbl workspace $ws3b
+bindsym $mod2+apostrophe workspace $ws4b
+bindsym $mod2+parenleft workspace $ws5b
+bindsym $mod2+section workspace $ws6b
+bindsym $mod2+egrave workspace $ws7b
+bindsym $mod2+exclam workspace $ws8b
+bindsym $mod2+ccedilla workspace $ws9b
+bindsym $mod2+agrave workspace $ws10b
 # move focused container to workspace
 bindsym $mod+Shift+ampersand move container to workspace $ws1
 bindsym $mod+Shift+eacute move container to workspace $ws2
@@ -149,41 +158,31 @@ bindsym $mod+Shift+exclam move container to workspace $ws8
 bindsym $mod+Shift+ccedilla move container to workspace $ws9
 bindsym $mod+Shift+agrave move container to workspace $ws10
 
-# position Assignement
-#assign [class="Firefox"] $ws4
-#set $bg-color 	         #2f343f
-#set $inactive-bg-color   #2f343f
-#set $text-color          #f3f4f5
-#set $inactive-text-color #676E7D
-#set $urgent-bg-color     #E53935
+bindsym $mod2+Shift+ampersand move container to workspace $ws1b
+bindsym $mod2+Shift+eacute move container to workspace $ws2b
+bindsym $mod2+Shift+quotedbl move container to workspace $ws3b
+bindsym $mod2+Shift+apostrophe move container to workspace $ws4b
+bindsym $mod2+Shift+5 move container to workspace $ws5b
+bindsym $mod2+Shift+section move container to workspace $ws6b
+bindsym $mod2+Shift+egrave move container to workspace $ws7b
+bindsym $mod2+Shift+exclam move container to workspace $ws8b
+bindsym $mod2+Shift+ccedilla move container to workspace $ws9b
+bindsym $mod2+Shift+agrave move container to workspace $ws10b
 
-# window colors
-#                       border              background         text                 indicator
-#client.focused          $bg-color           $bg-color          $text-color          #00ff00
-#client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-#client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-#client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-msg exit"
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+c reload # reload the configuration file
+bindsym $mod+Shift+r restart # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+e exec "i3-msg exit" # exit i3 (logs you out of your X session)
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt #  will shrink the window’s width.
+        bindsym j resize shrink height 10 px or 10 ppt #  will shrink the window’s height.
+        bindsym k resize grow height 10 px or 10 ppt #  will grow the window’s height.
+        bindsym l resize grow width 10 px or 10 ppt #  will grow the window’s width.
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -254,7 +253,7 @@ mode "$mode_launch" {
 
 bindsym $mod+p mode "$mode_launch"
 #layout setup
-exec --no-startup-id i3-msg 'workspace $ws2; append_layout /home/niccle27/.i3/workspace-2Thunar.json'
+# exec --no-startup-id i3-msg 'workspace $ws2; append_layout /home/niccle27/.i3/workspace-2Thunar.json'
 # exec --no-startup-id i3-msg 'workspace $ws2; append_layout /home/niccle27/.i3/workspace-2.json'
 #for_window setup
 for_window [instance="scratchpad"]           move window to scratchpad
@@ -287,11 +286,11 @@ for_window [class="Pavucontrol"] floating enable resize set 640 480
 for_window [class="Equalx"] floating enable resize set 640 480
 for_window [class="Xfce4-appfinder"] floating enable resize set 640 480
 for_window [class="ark"] floating enable #resize set 640 480
+for_window [class="File-roller"] floating enable resize set 640 800
 for_window [class="konsole"] floating enable resize set 640 480
 for_window [class="TestWin"] floating enable #resize set 640 480
 for_window [class="Mictray"] floating enable resize set 640 480
 for_window [class="Gnome-calculator"] floating enable resize set 640 480
-
 
 
 #disable floating windows
@@ -304,7 +303,7 @@ for_window [class="powder64"] floating disable
 exec --no-startup-id exec "termite" --name scratchpad
 
 # # Get a password with rofi from pass.
-bindsym $mod+Shift+p exec ~/.local/bin/rofi-pass
+# bindsym $mod+Shift+p exec ~/.local/bin/rofi-pass
 # # Get an emoji from emoji picker
 bindsym $mod+Shift+u exec ~/.local/bin/rofi-emojis
 # # Get an OTP with rofi from YubiKey.
@@ -315,7 +314,7 @@ bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
 exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh"
 
 # workspace back and forth (with/without active container)
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
