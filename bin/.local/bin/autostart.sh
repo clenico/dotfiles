@@ -89,5 +89,8 @@ if have libinput-gestures-setup; then
     libinput-gestures-setup start
 fi
 
+if have dropbox; then
+    dropbox start
+fi
 
 ~/.local/bin/RandomWallpaper.sh &
