@@ -35,6 +35,7 @@ export PATH="${PATH}:/opt/OpenDrive"
 export QT_SCREEN_SCALE_FACTORS=1
 export SCREEN=$(xrandr | awk '($2 == "connected"){print $1}' | head -n 1)
 export TERMINAL="termite"
+export BROWSER="firefox"
 
 test "$XDG_BIN_HOME"    || export XDG_BIN_HOME="$HOME/.local/bin"
 test "$XDG_CACHE_HOME"  || export XDG_CACHE_HOME="$HOME/.cache"
