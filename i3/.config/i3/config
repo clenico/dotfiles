@@ -84,6 +84,7 @@ bindsym $mod+Shift+u exec ~/.local/bin/rofi-emojis
 # bindsym $mod+y exec ~/.local/bin/rofi-yubi
 bindsym $mod+Shift+f exec ~/.local/bin/rofi-finder
 bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
+bindsym $mod+Escape exec "xrandr --auto"
 bindsym $mod+Shift+d exec ~/.local/bin/RandomWallpaper.sh
 
 # Pulse Audio controls
