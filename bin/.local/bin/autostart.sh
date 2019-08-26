@@ -90,7 +90,8 @@ if have libinput-gestures-setup; then
 fi
 
 if have dropbox; then
-    dropbox start
+    HOME=~/.clouds/Dropbox/School dropbox start -i
+    HOME=~/.clouds/Dropbox/Personnal dropbox start -i
 fi
 
 ~/.local/bin/RandomWallpaper.sh &
