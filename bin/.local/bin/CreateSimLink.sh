@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 #Usage : CreateSimLink.sh ~/OneDrive
+#        CreateSimLink.sh $(pwd)/Dropbox
+
 
 directories=(Org Notes "Pictures/Wallpaper" TFE)
 for directory in ${directories[@]}; do
