@@ -62,7 +62,7 @@ if have termite; then
     termite &
 fi
 
-sleep 1
+sleep 2
 
 if have firefox; then
     i3-msg 'workspace 3:'
