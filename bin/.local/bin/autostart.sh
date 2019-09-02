@@ -4,6 +4,12 @@
 
 have() { type "$1" > /dev/null 2>&1; }
 
+# Authentication agent
+if have lxpolkit;then
+    lxpolkit &
+fi
+
+
 if have zotero; then
     zotero &
 fi
