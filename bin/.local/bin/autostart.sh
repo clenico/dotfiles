@@ -75,6 +75,11 @@ if have firefox; then
     firefox &
 fi
 
+if have clipit; then
+    clipit &
+fi
+
+
 if have volumeicon; then
     volumeicon &
 fi
