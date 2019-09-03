@@ -368,4 +368,4 @@ assign [class="^Thunderbird$"]        → $ws10
 ############
 
 exec --no-startup-id exec "termite" --name scratchpad
-exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh"
+exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh > ~/.output/autostart.sh"
