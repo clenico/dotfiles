@@ -318,7 +318,7 @@ bar {
 # For_Window #
 ##############
 
-for_window [instance="scratchpad"]           move window to scratchpad
+for_window [instance="scratchpad"] move window to scratchpad
 
 #floating windows
 for_window [class="kwrite"] floating enable resize set 640 480
