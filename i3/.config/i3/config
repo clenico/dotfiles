@@ -318,7 +318,7 @@ bar {
 # For_Window #
 ##############
 
-for_window [instance="scratchpad"]           move window to scratchpad
+for_window [instance="scratchpad"] move window to scratchpad
 
 #floating windows
 for_window [class="kwrite"] floating enable resize set 640 480
@@ -338,6 +338,9 @@ for_window [class="Gnome-calculator"] floating enable resize set 640 480
 for_window [class="Wireshark"] floating disable resize set 640 480
 for_window [class="powder64"] floating disable
 
+# set border for all windows i3
+for_window [class=".*"] border pixel 3
+hide_edge_borders smart
 
 ##########
 # Assign #
@@ -361,7 +364,18 @@ assign [class="^Gimp$"]               → $ws9
 assign [class="^photoflare$"]         → $ws9
 assign [class="^Thunderbird$"]        → $ws10
 
+##########
+# Colors #
+##########
 
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #00ff00
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #2e8b57
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
 
 ############
 # Start up #
