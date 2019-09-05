@@ -338,6 +338,9 @@ for_window [class="Gnome-calculator"] floating enable resize set 640 480
 for_window [class="Wireshark"] floating disable resize set 640 480
 for_window [class="powder64"] floating disable
 
+# set border for all windows i3
+for_window [class=".*"] border pixel 3
+hide_edge_borders smart
 
 ##########
 # Assign #
