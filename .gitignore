@@ -49,3 +49,5 @@ bin/.local/bin/scenariotreeserver
 bin/.local/bin/test.pyomo
 bin/.local/bin/test.pyutilib
 bin/.local/bin/vorta
+*.pyc
+/Ranger/.config/ranger/plugins/devicons.py
