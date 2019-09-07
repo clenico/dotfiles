@@ -173,10 +173,8 @@ bindsym $mod+Shift+Tab workspace prev
 bindsym $mod+u move workspace to output left
 bindsym $mod+i move workspace to output right
 
-# split in horizontal orientation
-bindsym $mod+g split h
-# split in vertical orientation
-bindsym $mod+v split v
+# split in toggle orientation (h,v)
+bindsym $mod+v split toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
