@@ -19,6 +19,7 @@ set $mod2 control
 
 # Set locker
 set $Locker i3lock && sleep 1
+# set $Locker i3exit lock
 # set $Locker gnome-screensaver-command --lock && sleep 1
 
 # Set Workspaces
