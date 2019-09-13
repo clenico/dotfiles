@@ -117,6 +117,7 @@ alias ec="emacsclient"
 alias r="ranger"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Fix completion git and docker
 autoload -Uz compinit
 compinit
