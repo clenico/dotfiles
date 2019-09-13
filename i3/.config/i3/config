@@ -322,7 +322,7 @@ bar {
 
 for_window [instance="scratchpad"] move window to scratchpad
 
-#floating windows
+# floating windows
 for_window [class="kwrite"] floating enable resize set 640 480
 for_window [class="Sxiv"] floating enable resize set 640 480
 for_window [class="Pavucontrol"] floating enable resize set 640 480
@@ -334,9 +334,10 @@ for_window [class="konsole"] floating enable resize set 640 480
 for_window [class="TestWin"] floating enable #resize set 640 480
 for_window [class="Mictray"] floating enable resize set 640 480
 for_window [class="Gnome-calculator"] floating enable resize set 640 480
+for_window [class="qt5ct"] floating enable resize set 640 480
 
 
-#disable floating windows
+# disable floating windows
 for_window [class="Wireshark"] floating disable resize set 640 480
 for_window [class="powder64"] floating disable
 
