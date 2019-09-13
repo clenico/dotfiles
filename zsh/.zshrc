@@ -115,6 +115,7 @@ alias python="python3"
 alias pip="pip3"
 alias ec="emacsclient"
 alias r="ranger"
+alias ubuntu="docker run -it --rm ubuntu"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
