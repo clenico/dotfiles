@@ -116,6 +116,7 @@ alias dow="cd  ~/Downloads/"
 alias ranloc='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias python="python3"
 alias pip="pip3"
+alias pip2="/usr/bin/pip"
 alias ec="emacsclient"
 alias r="ranger"
 alias ubuntu="docker run -it --rm ubuntu"
