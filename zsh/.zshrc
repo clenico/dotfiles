@@ -119,6 +119,8 @@ alias pip="pip3"
 alias ec="emacsclient"
 alias r="ranger"
 alias ubuntu="docker run -it --rm ubuntu"
+alias gc="git clone "
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
