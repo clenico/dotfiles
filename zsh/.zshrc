@@ -119,7 +119,8 @@ alias pip="pip3"
 alias pip2="/usr/bin/pip"
 alias ec="emacsclient"
 alias r="ranger"
-alias ubuntu="docker run -it --rm ubuntu"
+alias ubuntu="docker run -it --rm mubuntu"
+alias centos="docker run -it --rm mcentos"
 alias gc="git clone "
 
 
