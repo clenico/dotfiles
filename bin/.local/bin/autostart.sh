@@ -10,9 +10,9 @@ if have lxpolkit;then
 fi
 
 
-if have zotero; then
-    zotero &
-fi
+# if have zotero; then
+#     zotero &
+# fi
 
 if have nautilus; then
     nautilus &
