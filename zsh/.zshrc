@@ -121,9 +121,9 @@ alias pip2="/usr/bin/pip"
 alias ec="emacsclient"
 alias r="ranger"
 alias ubuntu="docker run -it --rm mubuntu"
-alias centos="docker run -it --rm mcentos"
+alias centos="docker run -it --rm centos bash"
 alias gc="git clone "
-
+alias psg="ps -aux | grep"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
