@@ -298,6 +298,7 @@ bindsym $mod+n mode "$mode_system"
 set $mode_launch launch (f)firefox (q)qutebrowser (e)Emacs (c)Kcalc (w)Kwrite
 mode "$mode_launch" {
     bindsym f exec --no-startup-id firefox, mode "default"
+    bindsym p exec --no-startup-id "firefox -private", mode "default"
     bindsym q exec --no-startup-id qutebrowser, mode "default"
     bindsym e exec --no-startup-id emacs, mode "default"
     bindsym c exec --no-startup-id kcalc, mode "default"
