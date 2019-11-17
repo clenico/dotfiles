@@ -2,6 +2,7 @@
 *~
 \#*\#
 /zsh/.zsh_history
+*.pyo
 
 bin/.local/bin/OSSolverService
 bin/.local/bin/__pycache__/
