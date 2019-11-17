@@ -111,5 +111,5 @@ if have dropbox; then
     HOME=~/.clouds/Dropbox/Personnal dropbox start -i &
     # HOME=~/.clouds/Dropbox/School dropbox start -i &
     sleep 5
-    ~/.local/bin/launchDropbox.sh
+    ~/MyScripts/launchDropbox.sh
 fi
