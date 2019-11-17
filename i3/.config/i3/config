@@ -82,13 +82,13 @@ bindsym $mod+w exec rofi -show window
 # # Get a password with rofi from pass.
 # bindsym $mod+Shift+p exec ~/.local/bin/rofi-pass
 # # Get an emoji from emoji picker
-bindsym $mod+Shift+u exec ~/.local/bin/rofi-emojis
+bindsym $mod+Shift+u exec ~/MyScripts/rofi-emojis
 # # Get an OTP with rofi from YubiKey.
-# bindsym $mod+y exec ~/.local/bin/rofi-yubi
-bindsym $mod+Shift+f exec ~/.local/bin/rofi-finder
-bindsym $mod+Shift+x exec ~/.local/bin/rofi-xrandr
+# bindsym $mod+y exec ~/MyScripts/rofi-yubi
+bindsym $mod+Shift+f exec ~/MyScripts/rofi-finder
+bindsym $mod+Shift+x exec ~/MyScripts/rofi-xrandr
 bindsym $mod+Escape exec "xrandr --auto"
-bindsym $mod+Shift+d exec ~/.local/bin/RandomWallpaper.sh
+bindsym $mod+Shift+d exec ~/MyScripts/RandomWallpaper.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -97,8 +97,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 
 # Sreen brightness controls
 set_from_resource $screen echo "$SCREEN"
-bindsym XF86MonBrightnessUp exec ~/.local/bin/brightness.sh + $screen
-bindsym XF86MonBrightnessDown exec  ~/.local/bin/brightness.sh - $screen
+bindsym XF86MonBrightnessUp exec ~/MyScripts/brightness.sh + $screen
+bindsym XF86MonBrightnessDown exec  ~/MyScripts/brightness.sh - $screen
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh
@@ -387,4 +387,4 @@ client.background       #ffffff
 ############
 
 exec --no-startup-id exec "termite" --name scratchpad
-exec --no-startup-id "/home/niccle27/.local/bin/autostart.sh > ~/.output/autostart.sh"
+exec --no-startup-id "/home/niccle27/MyScripts/autostart.sh > ~/.output/autostart.sh"
