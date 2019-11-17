@@ -100,6 +100,11 @@ if have libinput-gestures-setup; then
     libinput-gestures-setup start
 fi
 
+if have zeal; then
+    zeal &
+fi
+
+
 ~/.local/bin/RandomWallpaper.sh &
 
 if have dropbox; then
