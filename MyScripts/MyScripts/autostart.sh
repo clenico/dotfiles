@@ -105,7 +105,7 @@ if have zeal; then
 fi
 
 
-~/.local/bin/RandomWallpaper.sh &
+~/MyScripts/RandomWallpaper.sh &
 
 if have dropbox; then
     HOME=~/.clouds/Dropbox/Personnal dropbox start -i &
