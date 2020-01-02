@@ -52,3 +52,4 @@ bin/.local/bin/test.pyutilib
 bin/.local/bin/vorta
 *.pyc
 /Ranger/.config/ranger/plugins/devicons.py
+/zsh/.#.zshrc
