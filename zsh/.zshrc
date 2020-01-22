@@ -125,7 +125,12 @@ alias centos="docker run -it --rm centos bash"
 alias gc="git clone "
 alias psg="ps -aux | grep"
 alias mm="mkdir build && cd build && cmake .. && make"
-
+alias iava="source iava"
+alias da="deactivate"
+alias jn="jupyter notebook"
+alias pp="source pingProject"
+alias rip="sudo ip addr add 192.168.2.1/24 dev eno2"
+alias sshpi="ssh -v -X pi@192.168.2.10"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib6
