@@ -337,6 +337,11 @@ for_window [class="TestWin"] floating enable #resize set 640 480
 for_window [class="Mictray"] floating enable resize set 640 480
 for_window [class="Gnome-calculator"] floating enable resize set 640 480
 for_window [class="qt5ct"] floating enable resize set 640 480
+for_window [class="RTMaps_App"] floating enable resize set 640 480
+for_window [title="GL2_3D_Viewer*"] floating enable resize set 640 480
+for_window [title="DataViewer_*"] floating enable resize set 640 480
+for_window [class="matplotlib"] floating enable resize set 800 600
+for_window [class="Matplotlib"] floating enable resize set 800 600
 
 
 # disable floating windows
