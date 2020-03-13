@@ -64,10 +64,10 @@ ZSH_THEME="xxf"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    zsh-syntax-highlighting
 	zsh-autosuggestions
     docker
     docker-compose
-    # zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -139,3 +139,4 @@ export PATH=$PATH:"/home/niccle27/MyScripts/"
 # Fix completion git and docker
 autoload -Uz compinit
 compinit
+ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
