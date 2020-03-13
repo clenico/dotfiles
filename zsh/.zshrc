@@ -140,4 +140,8 @@ export PATH=$PATH:"/home/niccle27/MyScripts/"
 # Fix completion git and docker
 autoload -Uz compinit
 compinit
+
+export WORKON_HOME=~/.virtualenvs
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
