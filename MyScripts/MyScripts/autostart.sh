@@ -63,7 +63,7 @@ fi
 
 
 if have termite; then
-    i3-msg 'workspace 1:'
+    i3-msg 'workspace 1'
     termite &
     termite &
 fi
@@ -71,7 +71,7 @@ fi
 sleep 2
 
 if have firefox; then
-    i3-msg 'workspace 3:'
+    i3-msg 'workspace 3'
     firefox &
 fi
 
