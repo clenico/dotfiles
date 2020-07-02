@@ -352,8 +352,11 @@ for_window [class="qt5ct"] floating enable resize set 640 480
 for_window [class="RTMaps_App"] floating enable resize set 640 480
 for_window [title="GL2_3D_Viewer*"] floating enable resize set 640 480
 for_window [title="DataViewer_*"] floating enable resize set 640 480
+for_window [title="Slider_*"] floating enable resize set 80 480
+for_window [title="Led_*"] floating enable resize set 80 80
 for_window [class="matplotlib"] floating enable resize set 800 600
 for_window [class="Matplotlib"] floating enable resize set 800 600
+for_window [class="SimpleScreenRecorder"] floating enable resize set 800 600
 
 
 # disable floating windows

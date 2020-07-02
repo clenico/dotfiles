@@ -132,6 +132,7 @@ alias jn="jupyter notebook"
 alias pp="source pingProject"
 alias rip="sudo ip addr add 192.168.2.1/24 dev eno2"
 alias sshpi="ssh -v -X pi@192.168.2.10"
+alias sshpiw="ssh -v -X pi@192.168.1.3"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib6
