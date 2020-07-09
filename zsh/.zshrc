@@ -143,6 +143,7 @@ autoload -Uz compinit
 compinit
 
 export WORKON_HOME=~/.virtualenvs
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /home/niccle27/.local/bin/virtualenvwrapper.sh
 
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
