@@ -1,6 +1,10 @@
 mkdir .output
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install i3 git stow rofi curl python3-pip mlocate
+
+git config --global user.name "niccle27"
+git config --global user.email niccle27@gmail.com
+
 git clone https://github.com/niccle27/Dotfiles
 cd Dotfiles/
 stow dunst
