@@ -64,8 +64,8 @@ fi
 
 if have termite; then
     i3-msg 'workspace 1'
-    termite &
-    termite &
+    $TERMINAL &
+    $TERMINAL &
 fi
 
 sleep 2
