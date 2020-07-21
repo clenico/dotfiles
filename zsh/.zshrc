@@ -114,6 +114,7 @@ alias tmp="cd  /tmp/"
 alias opt="cd  /opt/"
 alias doc="cd  ~/Documents/"
 alias dow="cd  ~/Downloads/"
+alias dot="cd  ~/Dotfiles/"
 alias ranloc='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias rl='ranloc'
 alias python="python3"
