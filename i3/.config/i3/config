@@ -376,6 +376,7 @@ for_window [class=".*"] border pixel 3
 assign [class="^Org.gnome.Nautilus$"] → $ws2
 assign [class="^Nemo$"]               → $ws2
 assign [class="^Nautilus$"]           → $ws2
+assign [class="^Thunar$"]             → $ws2
 assign [class="^dolphin$"]            → $ws2
 assign [class="^Nemo$"]               → $ws2
 assign [class="^qutebrowser$"]        → $ws3
