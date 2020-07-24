@@ -386,11 +386,11 @@ main = do
         , ppSep = "  "
         , ppWsSep = "  "
         , ppLayout = (\ x -> case x of
-           "Spacing Tall"                 -> "<fn=1>Tall</fn>"
-           "Spacing Grid"                 -> "<fn=1>Grid</fn>"
-           "Spacing Spiral"               -> "<fn=1>spiral</fn>"
-           "Spacing ThreeCol"             -> "<fn=1>ThreeColMid</fn>"
-           "Spacing Full"                 -> "<fn=1>Full</fn>"
+           "Spacing Tall"                 -> "<fn=2>Tall</fn>"
+           "Spacing Grid"                 -> "<fn=2>Grid</fn>"
+           "Spacing Spiral"               -> "<fn=2>spiral</fn>"
+           "Spacing ThreeCol"             -> "<fn=2>ThreeColMid</fn>"
+           "Spacing Full"                 -> "<fn=2>Full</fn>"
            _                                         -> x )
  }
 }
