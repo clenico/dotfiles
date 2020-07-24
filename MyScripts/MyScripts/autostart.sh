@@ -2,14 +2,19 @@
 #
 # Started by i3 to launch programs.
 
+
 have() { type "$1" > /dev/null 2>&1; }
+
+
+echo "start autostart" > /tmp/autostart_output
 
 # Authentication agent
 if have lxpolkit;then
     lxpolkit &
+    echo "lxpolkit &" >> /tmp/autostart_output
 fi
 
-
+echo "lvl1;" >> /tmp/autostart_output
 # if have zotero; then
 #     zotero &
 # fi
@@ -17,8 +22,11 @@ fi
 if have nautilus; then
     nautilus &
     nautilus &
+    echo "nautilus &" >> /tmp/autostart_output
+    echo "nautilus &" >> /tmp/autostart_output
+
 elif have Thunar; then
-    thunar --daemon
+    # thunar --daemon &
     Thunar &
     Thunar &
 fi
@@ -27,6 +35,7 @@ if have thunderbird;then
     thunderbird &
 fi
 
+echo "lvl2;" >> /tmp/autostart_output
 
 if have compton; then
     # compton &
@@ -48,7 +57,7 @@ fi
 if have nm-applet; then
     nm-applet &
 fi
-
+echo "lvl3;" > /tmp/autostart_output
 if have mpd; then
     [ ! -s ~/.config/mpd/pid ] && mpd &
 fi
@@ -73,6 +82,7 @@ sleep 2
 if have firefox; then
     i3-msg 'workspace 3'
     firefox &
+    echo "firefox &" >> /tmp/autostart_output
 fi
 
 if have clipit; then
@@ -108,8 +118,9 @@ fi
 ~/MyScripts/RandomWallpaper.sh &
 
 if have dropbox; then
-    HOME=~/.clouds/Dropbox/Personnal dropbox start -i &
+    dropbox start -i &
+    # HOME=~/.clouds/Dropbox/Personnal dropbox start -i &
     # HOME=~/.clouds/Dropbox/School dropbox start -i &
-    sleep 5
-    ~/MyScripts/launchDropbox.sh
+    # sleep 5
+    # ~/MyScripts/launchDropbox.sh
 fi

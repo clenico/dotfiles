@@ -292,6 +292,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   --------------------------------------------------------------------
   --  XMONAD LAYOUT KEYS
+  , ((modMask, xK_a), sendMessage ToggleStruts)
 
   -- Cycle through the available layout algorithms.
   , ((modMask, xK_space), sendMessage NextLayout)
