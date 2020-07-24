@@ -78,8 +78,9 @@ myVisibleWSColor = "#aaaaaa" -- color of inactive workspace
 myUrgentWSColor = "#c91a1a" -- color of workspace with 'urgent' window
 myHiddenNoWindowsWSColor = "white"
 
-myLayoutHook = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True $ gaps [(U,35), (D,5), (R,5), (L,5)]
-               $ avoidStruts
+myLayoutHook = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True
+               $ gaps [(U,0), (D,29), (R,0), (L,0)]
+               $ avoidStrutsOn [U,L]
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ smartBorders
                $ tiled ||| Grid ||| spiral (6/7) ||| ThreeColMid 1 (3/100) (1/2) ||| noBorders Full ||| simpleFloat
