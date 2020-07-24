@@ -82,7 +82,8 @@ myVisibleWSColor = "#aaaaaa" -- color of inactive workspace
 myUrgentWSColor = "#c91a1a" -- color of workspace with 'urgent' window
 myHiddenNoWindowsWSColor = "white"
 
-myLayoutHook = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True
+-- myLayoutHook = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True
+myLayoutHook = spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
                $ gaps [(U,0), (D,29), (R,0), (L,0)]
                $ avoidStrutsOn [U,L]
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
