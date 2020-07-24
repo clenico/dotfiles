@@ -140,12 +140,12 @@ myManageHook = composeAll . concat $
     my2Shifts = []
     my3Shifts = []
     my4Shifts = []
-    my5Shifts = ["Gimp", "feh"]
-    my6Shifts = ["vlc", "mpv"]
-    my7Shifts = ["Virtualbox"]
+    my5Shifts = []
+    my6Shifts = ["Virtualbox"]
+    my7Shifts = ["libreoffice-startcenter"]
     my8Shifts = ["Emacs"]
-    my9Shifts = []
-    my10Shifts = ["discord"]
+    my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
+    my10Shifts = ["Thunderbird"]
 
 -- keys config
 
