@@ -1,3 +1,7 @@
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.NamedScratchpad
+import XMonad.Actions.Submap
+
 import System.IO (Handle, hPutStrLn)
 import System.Exit
 import XMonad
@@ -153,7 +157,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   ----------------------------------------------------------------------
   -- SUPER + FUNCTION KEYS
 
-  [ ((modMask, xK_e), spawn $ "atom" )
+  [ ((modMask, xK_n), submap . M.fromList $
+      [ ((0, xK_l),     spawn "i3lock && sleep 1")
+      , ((0, xK_e),      io (exitWith ExitSuccess))
+      , ((0, xK_s),     spawn "i3lock && sleep 1 && systemctl suspend")
+      , ((0, xK_h),     spawn "i3lock && sleep 1 && systemctl hibernate")
+      , ((0, xK_r),     spawn "systemctl reboot")
+      , ((shiftMask , xK_s), spawn "systemctl poweroff -i")
+     ])
+  , ((modMask, xK_e), spawn $ "atom" )
   , ((modMask, xK_c), spawn $ "conky-toggle" )
   , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
   , ((modMask, xK_h), spawn $ "urxvt 'htop task manager' -e htop" )
