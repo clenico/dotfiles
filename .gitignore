@@ -56,3 +56,4 @@ bin/.local/bin/vorta
 /Ranger/.config/ranger/plugins/devicons.py
 /zsh/.#.zshrc
 /Xmonad/.xmonad/xmonad.errors
+xmonad-x86_64-linux
