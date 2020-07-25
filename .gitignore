@@ -3,6 +3,8 @@
 \#*\#
 /zsh/.zsh_history
 *.pyo
+*.hi
+*.o
 
 bin/.local/bin/OSSolverService
 bin/.local/bin/__pycache__/
@@ -53,3 +55,4 @@ bin/.local/bin/vorta
 *.pyc
 /Ranger/.config/ranger/plugins/devicons.py
 /zsh/.#.zshrc
+/Xmonad/.xmonad/xmonad.errors
