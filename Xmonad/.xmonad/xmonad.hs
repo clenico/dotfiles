@@ -53,7 +53,8 @@ import Control.Monad (liftM2)
 --controlMask= ctrl key
 --shiftMask= shift key
 myModMask = mod4Mask
-myTerminal = "termite"
+myTerminal = "urxvt"
+myFileManager = "thunar"
 
 mydefaults = def {
           normalBorderColor   = "#4c566a"
