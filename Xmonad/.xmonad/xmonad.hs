@@ -1,6 +1,7 @@
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.Submap
+import Data.Monoid
 
 import System.IO (Handle, hPutStrLn)
 import System.Exit
@@ -16,6 +17,7 @@ import XMonad.Config.Azerty
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Actions.SpawnOn
 import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
+import XMonad.Util.SpawnOnce
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.UrgencyHook
 import qualified Codec.Binary.UTF8.String as UTF8
