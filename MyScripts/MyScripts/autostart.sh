@@ -6,15 +6,12 @@
 have() { type "$1" > /dev/null 2>&1; }
 
 
-echo "start autostart" > /tmp/autostart_output
 
 # Authentication agent
 if have lxpolkit;then
     lxpolkit &
-    echo "lxpolkit &" >> /tmp/autostart_output
 fi
 
-echo "lvl1;" >> /tmp/autostart_output
 # if have zotero; then
 #     zotero &
 # fi
@@ -22,8 +19,6 @@ echo "lvl1;" >> /tmp/autostart_output
 if have nautilus; then
     nautilus &
     nautilus &
-    echo "nautilus &" >> /tmp/autostart_output
-    echo "nautilus &" >> /tmp/autostart_output
 
 elif have Thunar; then
     # thunar --daemon &
@@ -35,12 +30,11 @@ if have thunderbird;then
     thunderbird &
 fi
 
-echo "lvl2;" >> /tmp/autostart_output
 
-if have compton; then
-    # compton &
-    compton -b --config ~/.config/compton/compton.conf &
-fi
+# if have compton; then
+#     # compton &
+#     compton -b --config ~/.config/compton/compton.conf &
+# fi
 
 if pgrep i3 && have dunst; then
     dunst &
@@ -57,7 +51,7 @@ fi
 if have nm-applet; then
     nm-applet &
 fi
-echo "lvl3;" > /tmp/autostart_output
+
 if have mpd; then
     [ ! -s ~/.config/mpd/pid ] && mpd &
 fi
@@ -66,9 +60,9 @@ if have unclutter; then
     unclutter --ignore-scrolling --jitter 2 &
 fi
 
-if have xbindkeys; then
-    [ -f "$XDG_CONFIG_HOME/X11/xbindkeysrc" ] && xbindkeys -f "$XDG_CONFIG_HOME/X11/xbindkeysrc" &
-fi
+# if have xbindkeys; then
+#     [ -f "$XDG_CONFIG_HOME/X11/xbindkeysrc" ] && xbindkeys -f "$XDG_CONFIG_HOME/X11/xbindkeysrc" &
+# fi
 
 
 if have termite; then
@@ -79,11 +73,9 @@ fi
 
 sleep 2
 
-if have firefox; then
-    i3-msg 'workspace 3'
-    firefox &
-    echo "firefox &" >> /tmp/autostart_output
-fi
+# if have firefox; then
+#     firefox &
+# fi
 
 if have clipit; then
     clipit &
