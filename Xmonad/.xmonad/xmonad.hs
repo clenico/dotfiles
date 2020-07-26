@@ -66,28 +66,88 @@ mydefaults = def {
         , modMask             = myModMask
         , borderWidth         = 3
         , layoutHook          = myLayoutHook
+        , manageHook          = ( isFullscreen --> doFullFloat ) <+> insertPosition Below Newer <+> myManageHook <+> manageDocks<+> manageSpawn <+> namedScratchpadManageHook myScratchPads
+        -- , manageHook = manageSpawn <+> myManageHook
         , startupHook         = myStartupHook
-        , manageHook          = insertPosition Below Newer <+> myManageHook
         , handleEventHook     = fullscreenEventHook <+> docksEventHook <+> minimizeEventHook
-        }
+        }`additionalKeysP` myKeymap
+
+
+
+-- scratchpads = [
+-- -- run htop in xterm, find it by title, use default floating window placement
+--     -- NS "htop" "xterm -e htop" (title =? "htop") defaultFloating ,
+
+-- -- run stardict, find it by class name, place it in the floating window
+-- -- 1/6 of screen width from the left, 1/6 of screen height
+-- -- from the top, 2/3 of screen width by 2/3 of screen height
+--     NS "dropdown-terminal" myTerminal (className =? "URxvt" )
+--         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+
+-- -- run gvim, find by role, don't float
+--     -- NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
+--                  ] where role = stringProperty "WM_WINDOW_ROLE"
+
+myScratchPads :: [NamedScratchpad]
+myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manageTerm)
+                 ,NS "pavucontrol" "pavucontrol" (resource =? "pavucontrol") (defaultFloating)
+                 ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
+                ]
+  where
+    spawnTerm  = myTerminal ++ " -name dropdown-terminal"
+    findTerm   = resource =? "dropdown-terminal"
+    manageTerm = customFloating $ W.RationalRect l t w h
+               where
+                 h = 0.5
+                 w = 1
+                 t = 0
+                 l = 0
+    manageFullscreen = customFloating $ W.RationalRect l t w h
+                     where
+                       h = 1
+                       w = 1
+                       t = 0
+                       l = 0
+
+
+                 -- l = 0.95 -w
+    -- spawnMocp  = myTerminal ++ " -n mocp 'mocp'"
+    -- findMocp   = resource =? "mocp"
+    -- manageMocp = customFloating $ W.RationalRect l t w h
+    --            where
+    --              h = 0.9
+    --              w = 0.9
+    --              t = 0.95 -h
+    --              l = 0.95 -w
+
+ -- , ((modm .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
+ -- , ((modm .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
+ -- , ((modm .|. controlMask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "notes")
 
 -- Autostart
 myStartupHook = do
     -- spawn "$HOME/.xmonad/scripts/autostart.sh"
+    spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0"
+    spawnOnce "/home/niccle27/MyScripts/autostart.sh > ~/.output/autostart.sh"
+    -- spawnOn "3" "firefox"
+    -- spawnOn "1" myTerminal
+    -- spawnOn "1" myTerminal
+    -- spawnOn "3" "firefox"
     setWMName "LG3D"
 
 encodeCChar = map fromIntegral . B.unpack
 
-myTitleColor = "#c91a1a" -- color of window title
+myTitleColor = "#00ff" -- color of window title
 myTitleLength = 80 -- truncate window title to this length
-myCurrentWSColor = "#6790eb" -- color of active workspace
+myCurrentWSColor = "#00ff00" -- color of active workspace
 myVisibleWSColor = "#aaaaaa" -- color of inactive workspace
-myUrgentWSColor = "#c91a1a" -- color of workspace with 'urgent' window
+myUrgentWSColor = "#ff0000" -- color of workspace with 'urgent' window
 myHiddenNoWindowsWSColor = "white"
 
 -- myLayoutHook = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True
-myLayoutHook = spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
-               $ gaps [(U,0), (D,29), (R,0), (L,0)]
+myLayoutHook =
+  -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
+                gaps [(U,0), (D,29), (R,0), (L,0)]
                $ avoidStrutsOn [U,L]
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ smartBorders
@@ -106,17 +166,22 @@ xmobarEscape = concatMap doubleLts
           doubleLts x = [x]
 
 myWorkspaces :: [String]
--- myWorkspaces = clickable . (map xmobarEscape) $ ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
 myWorkspaces = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
     where
                clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave"] l, let n = i ]
+
+
+
 -- window manipulations
 myManageHook = composeAll . concat $
-    [ [isDialog --> doCenterFloat]
+    [ [isFullscreen --> doFullFloat]
+    , [isDialog --> doCenterFloat]
     , [className =? c --> doCenterFloat | c <- myCFloats]
+    , [className =? c --> doFullFloat | c <- myCFullscreen]
     , [title =? t --> doFloat | t <- myTFloats]
     , [resource =? r --> doFloat | r <- myRFloats]
     , [resource =? i --> doIgnore | i <- myIgnores]
+    , [className =? i --> doIgnore | i <- myIgnores]
     , [className =? c --> doShift (myWorkspaces !! 0) | c <- my1Shifts]
     , [className =? c --> doShift (myWorkspaces !! 1) | c <- my2Shifts]
     , [className =? c --> doShift (myWorkspaces !! 2) | c <- my3Shifts]
@@ -140,219 +205,126 @@ myManageHook = composeAll . concat $
        ]
     where
 --    viewShift    = doF . liftM2 (.) W.greedyView W.shift
-    myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal"]
+    myCFullscreen = ["Xfce4-appfinder"]
+    myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish"]
     myTFloats = ["Downloads", "Save As..."]
     myRFloats = []
+    myCIgnores = ["trayer"]
     myIgnores = ["desktop_window"]
     my1Shifts = []
-    my2Shifts = []
+    my2Shifts = ["Org.gnome.Nautilus","Thunar"]
     my3Shifts = []
     my4Shifts = []
     my5Shifts = []
     my6Shifts = ["Virtualbox"]
-    my7Shifts = ["libreoffice-startcenter"]
+    my7Shifts = []
     my8Shifts = ["Emacs"]
-    my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
+    my9Shifts = []
     my10Shifts = ["Thunderbird"]
+    -- my1ViewShifts = []
+    -- my2ViewShifts = []
+    -- my3ViewShifts = []
+    -- my4ViewShifts = []
+    -- my5ViewShifts = []
+    -- my6ViewShifts = ["Virtualbox"]
+    -- my7ViewShifts = ["libreoffice-startcenter"]
+    -- my8ViewShifts = []
+    -- my9ViewShifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
+    -- my1View0Shifts = []
 
 -- keys config
+myKeymap :: [(String, X ())]
+myKeymap = [
+             -- MENU shutdown (mod + n )
+              ("M-n l", spawn "i3lock && sleep 1")
+             ,("M-n e", io (exitWith ExitSuccess))
+             ,("M-S-e", io (exitWith ExitSuccess))
+             ,("M-n s", spawn "i3lock && sleep 1 && systemctl suspend")
+             ,("M-n h", spawn "i3lock && sleep 1 && systemctl hibernate")
+             ,("M-n r", spawn "systemctl reboot")
+             ,("M-n S-s", spawn "systemctl poweroff -i")
+             ,("M-n l", spawn "i3lock && sleep 1")
+             -- MENU launch app (mod + p)
+             ,("M-p c", spawn "colorpicker --short --one-shot --preview | xsel -b")
+             ,("M-p e", spawn "emacs")
+             ,("M-p f", spawn "firefox")
+             ,("M-p m", spawn "gnome-system-monitor")
+             ,("M-p n", spawn myFileManager)
+             ,("M-p w", spawn "kwrite")
+             ,("M-<Return>", spawn myTerminal)
+             ,("M-C-m", spawn myTerminal)
+             -- Xmonad
+             ,("M-r", spawn "xmonad --restart")
+             ,("M-S-r", spawn "xmonad --recompile")
+             ,("C-M-r", spawn "xmonad --recompile && xmonad --restart")
+             -- launch app
+             ,("M-c", spawn "xfce4-appfinder")
+             ,("M-d", spawn "rofi -show run")
+             ,("M-e", spawn myFileManager)
+             ,("M-u", spawn "urxvt")
+             ,("M-w", spawn "rofi -show window")
+             -- ,("M-<F1>", spawn "pavucontrol")
+             ,("C-S-<Esc>", spawn "gnome-system-monitor")
+
+             -- Workspace shortcut
+             ,("M1-<F4>", kill)
+             ,("M-S-q", kill)
+             ,("M-f", sendMessage $ Toggle NBFULL)
+             -- ,("M-<Esc>", spawn "xkill")
+             ,("M-<Space>", sendMessage NextLayout )
+             ,("M-<Tab>", moveTo Next NonEmptyWS )
+             ,("M-S-<Tab>", moveTo Prev NonEmptyWS )
+             ,("M-j", windows W.focusDown )
+             ,("M-k", windows W.focusUp )
+             ,("M-S-j", windows W.swapDown  )
+             ,("M-S-k", windows W.swapUp )
+             ,("M-m", windows W.focusMaster )
+             ,("M-h", sendMessage Shrink)
+             ,("M-l", sendMessage Expand)
+             ,("M-i", withFocused $ windows . W.sink)
+             ,("M-<R>", sendMessage (IncMasterN 1))
+             ,("M-<L>", sendMessage (IncMasterN (-1)))
+
+
+
+             -- sound and luminosity
+             ,("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
+             ,("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
+             ,("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
+             ,("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5")
+             ,("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5")
+
+             -- ,("M-S-<Space>", setLayout $ XMonad.layoutHook conf ) -- conf not available in ezconfig
+
+             -- Scratchpad
+             ,("M-~", namedScratchpadAction myScratchPads "dropdown-terminal")
+             ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
+             ,("M1-<Tab>", namedScratchpadAction myScratchPads "zeal")
+
+             -- Design
+             ,("M-C-d", spawn "nitrogen --set-auto --head=0 --random /home/niccle27/Pictures/Wallpapers")
+             ,("M-C-p", spawn "variety -p")
+             ,("M-C-n", spawn "variety -n")
+             ,("M-C-j", spawn "variety -f")
+             ]
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   ----------------------------------------------------------------------
   -- SUPER + FUNCTION KEYS
 
-  [ ((modMask, xK_n), submap . M.fromList $
-      [ ((0, xK_l),     spawn "i3lock && sleep 1")
-      , ((0, xK_e),      io (exitWith ExitSuccess))
-      , ((0, xK_s),     spawn "i3lock && sleep 1 && systemctl suspend")
-      , ((0, xK_h),     spawn "i3lock && sleep 1 && systemctl hibernate")
-      , ((0, xK_r),     spawn "systemctl reboot")
-      , ((shiftMask , xK_s), spawn "systemctl poweroff -i")
-     ])
-  , ((modMask, xK_e), spawn $ "atom" )
-  , ((modMask, xK_c), spawn $ "conky-toggle" )
-  , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
-  , ((modMask, xK_h), spawn $ "urxvt 'htop task manager' -e htop" )
-  , ((modMask, xK_m), spawn $ "pragha" )
-  , ((modMask, xK_q), kill )
-  , ((modMask, xK_r), spawn $ "rofi-theme-selector" )
-  , ((modMask, xK_t), spawn $ "urxvt" )
-  , ((modMask, xK_v), spawn $ "pavucontrol" )
-  , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle" )
-  , ((modMask, xK_x), spawn $ "arcolinux-logout" )
-  , ((modMask, xK_d), spawn $ "rofi -show run" )
-  , ((modMask, xK_Escape), spawn $ "xkill" )
-  , ((modMask, xK_Return), spawn $ myTerminal )
-  , ((controlMask .|. mod1Mask , xK_t ), spawn $ myTerminal)
-  , ((modMask, xK_F1), spawn $ "vivaldi-stable" )
-  , ((modMask, xK_F2), spawn $ "atom" )
-  , ((modMask, xK_F3), spawn $ "inkscape" )
-  , ((modMask, xK_F4), spawn $ "gimp" )
-  , ((modMask, xK_F5), spawn $ "meld" )
-  , ((modMask, xK_F6), spawn $ "vlc --video-on-top" )
-  , ((modMask, xK_F7), spawn $ "virtualbox" )
-  , ((modMask, xK_F8), spawn $ "thunar" )
-  , ((modMask, xK_F9), spawn $ "evolution" )
-  , ((modMask, xK_F10), spawn $ "spotify" )
-  , ((modMask, xK_F11), spawn $ "rofi -show run -fullscreen" )
-  , ((modMask, xK_F12), spawn $ "rofi -show run" )
+  [
+   -- ((modMask, xK_c), spawn $ "xfce4-appfinder" )
+  -- , ((modMask, xK_v), spawn $ "pavucontrol" )
+  -- , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
+  -- , ((modMask, xK_h), spawn $ "urxvt 'htop task manager' -e htop" )
+  -- , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle" )
 
-  -- FUNCTION KEYS
-  , ((0, xK_F12), spawn $ "xfce4-terminal --drop-down" )
+  -- , ((modMask, xK_Return), spawn $ myTerminal )
+   ((controlMask .|. mod1Mask , xK_t ), spawn $ myTerminal)
 
-  -- SUPER + SHIFT KEYS
-
-  , ((modMask .|. shiftMask , xK_Return ), spawn $ "thunar")
-  , ((modMask .|. shiftMask , xK_d ), spawn $ "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")
-  , ((modMask .|. shiftMask , xK_r ), spawn $ "xmonad --recompile && xmonad --restart")
-  , ((modMask .|. shiftMask , xK_q ), kill)
-  , ((modMask .|. shiftMask , xK_x), io (exitWith ExitSuccess))
-
-  -- CONTROL + ALT KEYS
-
-  , ((controlMask .|. mod1Mask , xK_Next ), spawn $ "conky-rotate -n")
-  , ((controlMask .|. mod1Mask , xK_Prior ), spawn $ "conky-rotate -p")
-  , ((controlMask .|. mod1Mask , xK_a ), spawn $ "xfce4-appfinder")
-  , ((controlMask .|. mod1Mask , xK_b ), spawn $ "thunar")
-  , ((controlMask .|. mod1Mask , xK_c ), spawn $ "catfish")
-  , ((controlMask .|. mod1Mask , xK_e ), spawn $ "arcolinux-tweak-tool")
-  , ((controlMask .|. mod1Mask , xK_f ), spawn $ "firefox")
-  , ((controlMask .|. mod1Mask , xK_g ), spawn $ "chromium -no-default-browser-check")
-  , ((controlMask .|. mod1Mask , xK_i ), spawn $ "nitrogen")
-  , ((controlMask .|. mod1Mask , xK_k ), spawn $ "arcolinux-logout")
-  , ((controlMask .|. mod1Mask , xK_l ), spawn $ "arcolinux-logout")
-  , ((controlMask .|. mod1Mask , xK_m ), spawn $ "xfce4-settings-manager")
-  , ((controlMask .|. mod1Mask , xK_o ), spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh")
-  , ((controlMask .|. mod1Mask , xK_p ), spawn $ "pamac-manager")
-  , ((controlMask .|. mod1Mask , xK_r ), spawn $ "rofi-theme-selector")
-  , ((controlMask .|. mod1Mask , xK_s ), spawn $ "spotify")
-
-  , ((controlMask .|. mod1Mask , xK_u ), spawn $ "pavucontrol")
-  , ((controlMask .|. mod1Mask , xK_v ), spawn $ "vivaldi-stable")
-  , ((controlMask .|. mod1Mask , xK_w ), spawn $ "arcolinux-welcome-app")
-  , ((controlMask .|. mod1Mask , xK_Return ), spawn $ "urxvt")
-
-  -- ALT + ... KEYS
-
-  -- , ((mod1Mask, xK_f), spawn $ "variety -f" )
-  -- , ((mod1Mask, xK_n), spawn $ "variety -n" )
-  -- , ((mod1Mask, xK_p), spawn $ "variety -p" )
-  -- , ((mod1Mask, xK_r), spawn $ "xmonad --restart" )
-  -- , ((mod1Mask, xK_t), spawn $ "variety -t" )
-  -- , ((mod1Mask, xK_Up), spawn $ "variety --pause" )
-  -- , ((mod1Mask, xK_Down), spawn $ "variety --resume" )
-  -- , ((mod1Mask, xK_Left), spawn $ "variety -p" )
-  -- , ((mod1Mask, xK_Right), spawn $ "variety -n" )
-  -- , ((mod1Mask, xK_F2), spawn $ "gmrun" )
-  -- , ((mod1Mask, xK_F3), spawn $ "xfce4-appfinder" )
-
-  --VARIETY KEYS WITH PYWAL
-
-  , ((mod1Mask .|. shiftMask , xK_f ), spawn $ "variety -f && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
-  , ((mod1Mask .|. shiftMask , xK_n ), spawn $ "variety -n && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
-  , ((mod1Mask .|. shiftMask , xK_p ), spawn $ "variety -p && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
-  , ((mod1Mask .|. shiftMask , xK_t ), spawn $ "variety -t && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
-  , ((mod1Mask .|. shiftMask , xK_u ), spawn $ "wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
-
-  --CONTROL + SHIFT KEYS
-
-  , ((controlMask .|. shiftMask , xK_Escape ), spawn $ "xfce4-taskmanager")
-
-  --SCREENSHOTS
-
-  , ((0, xK_Print), spawn $ "scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")
-  , ((controlMask, xK_Print), spawn $ "xfce4-screenshooter" )
-  , ((controlMask .|. shiftMask , xK_Print ), spawn $ "gnome-screenshot -i")
-
-
-  --MULTIMEDIA KEYS
-
-  -- Mute volume
-  , ((0, xF86XK_AudioMute), spawn $ "amixer -q set Master toggle")
-
-  -- Decrease volume
-  , ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master 5%-")
-
-  -- Increase volume
-  , ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master 5%+")
-
-  -- Increase brightness
-  , ((0, xF86XK_MonBrightnessUp),  spawn $ "xbacklight -inc 5")
-
-  -- Decrease brightness
-  , ((0, xF86XK_MonBrightnessDown), spawn $ "xbacklight -dec 5")
-
---  , ((0, xF86XK_AudioPlay), spawn $ "mpc toggle")
---  , ((0, xF86XK_AudioNext), spawn $ "mpc next")
---  , ((0, xF86XK_AudioPrev), spawn $ "mpc prev")
---  , ((0, xF86XK_AudioStop), spawn $ "mpc stop")
-
-  , ((0, xF86XK_AudioPlay), spawn $ "playerctl play-pause")
-  , ((0, xF86XK_AudioNext), spawn $ "playerctl next")
-  , ((0, xF86XK_AudioPrev), spawn $ "playerctl previous")
-  , ((0, xF86XK_AudioStop), spawn $ "playerctl stop")
-
-
-  --------------------------------------------------------------------
-  --  XMONAD LAYOUT KEYS
   , ((modMask, xK_a), sendMessage ToggleStruts)
-
-  -- Cycle through the available layout algorithms.
-  , ((modMask, xK_space), sendMessage NextLayout)
-
-  --Focus selected desktop
-  , ((mod1Mask, xK_Tab), nextWS)
-  --Focus previous workspace
-  , ((modMask .|. shiftMask, xK_Tab), prevWS)
-
-  --Focus selected desktop
-  , ((modMask, xK_Tab), nextWS)
-
-  --Focus selected desktop
-  , ((controlMask .|. mod1Mask , xK_Left ), prevWS)
-
-  --Focus selected desktop
-  , ((controlMask .|. mod1Mask , xK_Right ), nextWS)
-
   --  Reset the layouts on the current workspace to default.
   , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
-
-  -- Move focus to the next window.
-  , ((modMask, xK_j), windows W.focusDown)
-
-  -- Move focus to the previous window.
-  , ((modMask, xK_k), windows W.focusUp  )
-
-  -- Move focus to the master window.
-  , ((modMask .|. shiftMask, xK_m), windows W.focusMaster  )
-
-  -- Swap the focused window with the next window.
-  , ((modMask .|. shiftMask, xK_j), windows W.swapDown  )
-
-  -- Swap the focused window with the next window.
-  , ((controlMask .|. modMask, xK_Down), windows W.swapDown  )
-
-  -- Swap the focused window with the previous window.
-  , ((modMask .|. shiftMask, xK_k), windows W.swapUp    )
-
-  -- Swap the focused window with the previous window.
-  , ((controlMask .|. modMask, xK_Up), windows W.swapUp  )
-
-  -- Shrink the master area.
-  , ((controlMask .|. shiftMask , xK_h), sendMessage Shrink)
-
-  -- Expand the master area.
-  , ((controlMask .|. shiftMask , xK_l), sendMessage Expand)
-
-  -- Push window back into tiling.
-  , ((controlMask .|. shiftMask , xK_t), withFocused $ windows . W.sink)
-
-  -- Increment the number of windows in the master area.
-  , ((controlMask .|. modMask, xK_Left), sendMessage (IncMasterN 1))
-
-  -- Decrement the number of windows in the master area.
-  , ((controlMask .|. modMask, xK_Right), sendMessage (IncMasterN (-1)))
-
   ]
   ++
 
@@ -366,12 +338,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)
       , (\i -> W.greedyView i . W.shift i, shiftMask)]]
 
-  -- ++
+  ++
   -- ctrl-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
   -- ctrl-shift-{w,e,r}, Move client to screen 1, 2, or 3
-  -- [((m .|. controlMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      -- | (key, sc) <- zip [xK_w, xK_e] [0..]
-      -- , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+  [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+      | (key, sc) <- zip [xK_w, xK_e] [0..]
+      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
@@ -392,7 +364,7 @@ main = do
         xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 2
         -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc" -- xmobar monitor 2
         xmonad $ ewmh $ mydefaults {
-        logHook =  dynamicLogWithPP $ def {
+        logHook =  dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ def {
         ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x
         , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
         , ppCurrent = xmobarColor myCurrentWSColor "" . wrap """"
