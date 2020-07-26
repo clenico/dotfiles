@@ -1,5 +1,3 @@
-
-
 Xft.dpi:       96
 Xft.antialias: true
 Xft.hinting:   true
@@ -22,7 +20,7 @@ XTerm*selectToClipboard: true
 ! special
 *.foreground: #93a1a1
 *.background: #141c21
-*.cursorColor: #afbfbf
+*.cursorColor: magenta
 
 ! black
 *.color0: #263640
@@ -33,6 +31,8 @@ XTerm*selectToClipboard: true
 *.color9: #fa3935
 
 ! green
+! *.color2: #6f852e
+
 *.color2: #819400
 *.color10: #a4bd00
 
@@ -41,7 +41,7 @@ XTerm*selectToClipboard: true
 *.color11: #d9a400
 
 ! blue
-*.color4: #2587cc
+*.color4: #153a8a
 *.color12: #2ca2f5
 
 ! magenta
