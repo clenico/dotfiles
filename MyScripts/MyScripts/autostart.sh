@@ -102,9 +102,9 @@ if have libinput-gestures-setup; then
     libinput-gestures-setup start
 fi
 
-if have zeal; then
-    zeal &
-fi
+# if have zeal; then
+#     zeal &
+# fi
 
 
 ~/MyScripts/RandomWallpaper.sh &
