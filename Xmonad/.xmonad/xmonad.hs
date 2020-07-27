@@ -1,6 +1,7 @@
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.Submap
+import XMonad.Actions.DynamicProjects
 import Data.Monoid
 
 import System.IO (Handle, hPutStrLn)
@@ -88,6 +89,14 @@ mydefaults = def {
 --     -- NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
 --                  ] where role = stringProperty "WM_WINDOW_ROLE"
 
+projects :: [Project]
+projects =
+  [ Project { projectName      = "3"
+            , projectDirectory = "~/Downloads"
+            , projectStartHook = Just $ do spawn "firefox"
+            }
+  ]
+
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manageTerm)
                  ,NS "pavucontrol" "pavucontrol" (resource =? "pavucontrol") (defaultFloating)
@@ -166,9 +175,12 @@ xmobarEscape = concatMap doubleLts
           doubleLts x = [x]
 
 myWorkspaces :: [String]
-myWorkspaces = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
-    where
-               clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave"] l, let n = i ]
+-- myWorkspaces = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
+--     where
+--                clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave"] l, let n = i ]
+myWorkspaces = (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
+    -- where
+               -- clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave"] l, let n = i ]
 
 
 
@@ -284,6 +296,8 @@ myKeymap = [
              ,("M-i", withFocused $ windows . W.sink)
              ,("M-<R>", sendMessage (IncMasterN 1))
              ,("M-<L>", sendMessage (IncMasterN (-1)))
+             ,("M-<F3>", switchProjectPrompt def)
+
 
 
 
@@ -363,7 +377,7 @@ main = do
         xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 1
         xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 2
         -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc" -- xmobar monitor 2
-        xmonad $ ewmh $ mydefaults {
+        xmonad $ dynamicProjects projects $ ewmh $ mydefaults {
         logHook =  dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ def {
         ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x
         , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
