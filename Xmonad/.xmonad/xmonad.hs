@@ -98,14 +98,14 @@ projects =
   ]
 
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manageTerm)
-                 ,NS "pavucontrol" "pavucontrol" (resource =? "pavucontrol") (defaultFloating)
+myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
+                 ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
                  ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
     findTerm   = resource =? "dropdown-terminal"
-    manageTerm = customFloating $ W.RationalRect l t w h
+    manage_dropdown = customFloating $ W.RationalRect l t w h
                where
                  h = 0.5
                  w = 1
@@ -117,6 +117,12 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                        w = 1
                        t = 0
                        l = 0
+    manageThirdscreen = customFloating $ W.RationalRect l t w h
+                     where
+                       h = 4/5
+                       w = 2/5
+                       t = (1-h)/2
+                       l = (1-w)/2
 
 
                  -- l = 0.95 -w
