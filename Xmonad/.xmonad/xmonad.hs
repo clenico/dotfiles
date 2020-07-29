@@ -58,7 +58,7 @@ myTerminal = "urxvt"
 myFileManager = "thunar"
 
 mydefaults = def {
-          normalBorderColor   = "#000000"
+          normalBorderColor   = "#0066B5"
         , focusedBorderColor  = "#00ff00"
         , focusFollowsMouse   = True
         , mouseBindings       = myMouseBindings
