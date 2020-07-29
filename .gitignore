@@ -57,3 +57,4 @@ bin/.local/bin/vorta
 /zsh/.#.zshrc
 /Xmonad/.xmonad/xmonad.errors
 xmonad-x86_64-linux
+prompt-history
