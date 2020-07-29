@@ -37,10 +37,9 @@ if have thunderbird;then
 fi
 
 
-# if have compton; then
-#     # compton &
-#     compton -b --config ~/.config/compton/compton.conf &
-# fi
+if have compton; then
+    compton -b --config ~/.config/compton/compton.conf &
+fi
 
 if pgrep i3 && have dunst; then
     dunst &
