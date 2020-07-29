@@ -192,8 +192,9 @@ myWorkspaces = (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
 
 -- window manipulations
 myManageHook = composeAll . concat $
-    [ [isFullscreen --> doFullFloat]
-    , [isDialog --> doCenterFloat]
+    [
+      -- [isFullscreen --> doFullFloat]
+      [isDialog --> doCenterFloat]
     , [className =? c --> doCenterFloat | c <- myCFloats]
     , [className =? c --> doFullFloat | c <- myCFullscreen]
     , [title =? t --> doFloat | t <- myTFloats]
