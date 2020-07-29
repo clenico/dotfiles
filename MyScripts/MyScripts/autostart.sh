@@ -7,6 +7,12 @@ have() { type "$1" > /dev/null 2>&1; }
 
 
 
+# Manage Wallpaper
+if have variety;then
+    variety &
+fi
+
+
 # Authentication agent
 if have lxpolkit;then
     lxpolkit &
