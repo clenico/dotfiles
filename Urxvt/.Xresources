@@ -93,6 +93,7 @@ URxvt.iso14755:                   false
 URxvt.iso14755_52:                false
 URxvt.keysym.Shift-Control-C:     perl:clipboard:copy
 URxvt.keysym.Shift-Control-V:     perl:clipboard:paste
+URxvt.keysym.Control-y:           perl:clipboard:paste
 URxvt.keysym.M-C-v:               perl:clipboard:paste_escaped
 
 
