@@ -63,6 +63,7 @@ Xcursor.size:                     0
 !!!!!!!!!
 ! URxvt !
 !!!!!!!!!
+URxvt.color12: rgb:5c/5c/ff
 
 URxvt*font: xft:TerminessTTFNerdFontMono:size=16
 URxvt.jumpScroll: true
