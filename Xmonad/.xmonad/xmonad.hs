@@ -271,7 +271,6 @@ myKeymap = [
              ,("M-p n", spawn myFileManager)
              ,("M-p w", spawn "kwrite")
              ,("M-<Return>", spawn myTerminal)
-             ,("M-C-m", spawn myTerminal)
              -- Xmonad
              ,("M-r", spawn "xmonad --restart")
              ,("M-S-r", spawn "xmonad --recompile")
@@ -291,6 +290,7 @@ myKeymap = [
              ,("M-f", sendMessage $ Toggle NBFULL)
              -- ,("M-<Esc>", spawn "xkill")
              ,("M-<Space>", sendMessage NextLayout )
+             ,("C-M-<Space>", sendMessage FirstLayout )
              ,("M-<Tab>", moveTo Next NonEmptyWS )
              ,("M-S-<Tab>", moveTo Prev NonEmptyWS )
              ,("M-j", windows W.focusDown )
@@ -298,13 +298,20 @@ myKeymap = [
              ,("M-S-j", windows W.swapDown  )
              ,("M-S-k", windows W.swapUp )
              ,("M-m", windows W.focusMaster )
+             ,("M-C-m", dwmpromote )
              ,("M-h", sendMessage Shrink)
              ,("M-l", sendMessage Expand)
              ,("M-i", withFocused $ windows . W.sink)
              ,("M-<R>", sendMessage (IncMasterN 1))
              ,("M-<L>", sendMessage (IncMasterN (-1)))
              ,("M-<F3>", switchProjectPrompt def)
-
+             ,("M-<U>", withLastMinimized maximizeWindowAndFocus )
+             ,("M-<D>", withFocused minimizeWindow )
+             ,("C-M-j", rotAllDown )
+             ,("C-M-k", rotAllUp )
+             ,("M-S-i", sinkAll )
+             ,("M3-S-q", killAll )
+             -- ,("M-a", sendMessage ToggleStruts )
 
 
 
