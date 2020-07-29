@@ -64,9 +64,9 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=t
                                                    -- discharging status
                                                    , "-o"	, "<left>%"
                                                    -- AC "on" status
-                                                   , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                                   , "-O"	, "<fc=#dAA520>Charging:<left>%</fc>"
                                                    -- charged status
-                                                   , "-i"	, "<fc=#006000>Charged</fc>"
+                                                   , "-i"	, "<fc=#006000>Charged:<left>%</fc>"
                                          ] 50
 
                       -- Disk space free
