@@ -1,53 +1,53 @@
-import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.NamedScratchpad
-import XMonad.Actions.Submap
-import XMonad.Actions.DynamicProjects
+import XMonad.Actions.WithAll
+import XMonad.Actions.RotSlaves
+import Control.Monad (liftM2)
 import Data.Monoid
-
-import System.IO (Handle, hPutStrLn)
+import Graphics.X11.ExtraTypes.XF86
 import System.Exit
+import System.IO (Handle, hPutStrLn)
 import XMonad
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.Minimize
-import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
-import XMonad.Config.Desktop
-import XMonad.Config.Azerty
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Actions.SpawnOn
-import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
-import XMonad.Util.SpawnOnce
 import XMonad.Actions.CycleWS
-import XMonad.Hooks.UrgencyHook
-import qualified Codec.Binary.UTF8.String as UTF8
-import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
+import XMonad.Actions.DwmPromote
+import XMonad.Actions.DynamicProjects
+import XMonad.Actions.Minimize
+import XMonad.Actions.SpawnOn
+import XMonad.Actions.Submap
+import XMonad.Config.Azerty
+import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
-
-import XMonad.Layout.Spacing
-import XMonad.Layout.Gaps
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Fullscreen (fullscreenFull)
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
+import XMonad.Hooks.Minimize
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.CenteredMaster(centerMaster)
 import XMonad.Layout.Cross(simpleCross)
-import XMonad.Layout.Spiral(spiral)
+import XMonad.Layout.Fullscreen (fullscreenFull)
+import XMonad.Layout.Gaps
 import XMonad.Layout.Grid
-import XMonad.Layout.ThreeColumns
-import XMonad.Layout.MultiToggle
-import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.Minimize
-import XMonad.Layout.CenteredMaster(centerMaster)
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.NoBorders
+import XMonad.Layout.ResizableTile
 import XMonad.Layout.SimpleFloat
-
-import Graphics.X11.ExtraTypes.XF86
-import qualified System.IO
-import qualified XMonad.StackSet as W
-import qualified Data.Map as M
+import XMonad.Layout.Spacing
+import XMonad.Layout.Spiral(spiral)
+import XMonad.Layout.ThreeColumns
+import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.NamedScratchpad
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.SpawnOnce
+import qualified Codec.Binary.UTF8.String as UTF8
 import qualified Data.ByteString as B
-
-import Control.Monad (liftM2)
+import qualified Data.Map as M
+import qualified System.IO
+import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
+import qualified XMonad.StackSet as W
 
 --mod4Mask= super key
 --mod1Mask= alt key
@@ -67,10 +67,14 @@ mydefaults = def {
         , modMask             = myModMask
         , borderWidth         = 3
         , layoutHook          = myLayoutHook
-        , manageHook          = ( isFullscreen --> doFullFloat ) <+> insertPosition Below Newer <+> myManageHook <+> manageDocks<+> manageSpawn <+> namedScratchpadManageHook myScratchPads
-        -- , manageHook = manageSpawn <+> myManageHook
+        , manageHook          = insertPosition Below Newer
+                                 <+> manageDocks
+                                 <+> myManageHook
+                                 <+> manageSpawn
+                                 <+> namedScratchpadManageHook myScratchPads
         , startupHook         = myStartupHook
-        , handleEventHook     = fullscreenEventHook <+> docksEventHook <+> minimizeEventHook
+        , handleEventHook     = docksEventHook
+                                <+> minimizeEventHook
         }`additionalKeysP` myKeymap
 
 
@@ -159,11 +163,13 @@ myVisibleWSColor = "#aaaaaa" -- color of inactive workspace
 myUrgentWSColor = "#ff0000" -- color of workspace with 'urgent' window
 myHiddenNoWindowsWSColor = "white"
 
--- myLayoutHook = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True
+
 myLayoutHook =
   -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
                 gaps [(U,0), (D,29), (R,0), (L,0)]
+               $ minimize
                $ avoidStrutsOn [U,L]
+               -- $ avoidStruts
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ smartBorders
                $ tiled ||| Grid ||| spiral (6/7) ||| ThreeColMid 1 (3/100) (1/2) ||| noBorders Full ||| simpleFloat
@@ -390,7 +396,11 @@ main = do
         xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 1
         xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 2
         -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc" -- xmobar monitor 2
-        xmonad $ dynamicProjects projects $ ewmh $ mydefaults {
+        xmonad
+          $ dynamicProjects projects
+          $ ewmh
+          -- $ XLF.fullscreenSupport
+          $ mydefaults {
         logHook =  dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ def {
         ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x
         , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
