@@ -330,10 +330,9 @@ myKeymap = [
              ,("M1-<Tab>", namedScratchpadAction myScratchPads "zeal")
 
              -- Design
-             ,("M-C-d", spawn "nitrogen --set-auto --head=0 --random /home/niccle27/Pictures/Wallpapers")
-             ,("M-C-p", spawn "variety -p")
-             ,("M-C-n", spawn "variety -n")
-             ,("M-C-j", spawn "variety -f")
+             ,("M-S-p", spawn "variety -p")
+             ,("M-S-n", spawn "variety -n")
+             ,("M-p w", spawn "variety -f")
              ]
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
