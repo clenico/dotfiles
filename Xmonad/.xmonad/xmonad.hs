@@ -338,7 +338,7 @@ myKeymap = [
              -- Design
              ,("M-S-p", spawn "variety -p")
              ,("M-S-n", spawn "variety -n")
-             ,("M-p w", spawn "variety -f")
+             -- ,("M-p w", spawn "variety -f")
              ]
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
