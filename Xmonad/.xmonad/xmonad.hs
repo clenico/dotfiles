@@ -1,3 +1,4 @@
+
 import XMonad.Actions.WithAll
 import XMonad.Actions.RotSlaves
 import Control.Monad (liftM2)
@@ -400,6 +401,7 @@ main = do
           $ dynamicProjects projects
           $ ewmh
           -- $ XLF.fullscreenSupport
+          $ docks
           $ mydefaults {
         logHook =  dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ def {
         ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x
