@@ -167,8 +167,7 @@ myHiddenNoWindowsWSColor = "white"
 
 myLayoutHook =
   -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
-                gaps [(U,0), (D,29), (R,0), (L,0)]
-               $ minimize
+               minimize
                $ avoidStrutsOn [U,L]
                -- $ avoidStruts
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
@@ -294,7 +293,8 @@ myKeymap = [
              -- Workspace shortcut
              ,("M1-<F4>", kill)
              ,("M-S-q", kill)
-             ,("M-f", sendMessage $ Toggle NBFULL)
+             ,("M-f", sequence_ [sendMessage $ Toggle NBFULL,
+                                 sendMessage ToggleStruts])
              -- ,("M-<Esc>", spawn "xkill")
              ,("M-<Space>", sendMessage NextLayout )
              ,("C-M-<Space>", sendMessage FirstLayout )
@@ -318,7 +318,7 @@ myKeymap = [
              ,("C-M-k", rotAllUp )
              ,("M-S-i", sinkAll )
              ,("M3-S-q", killAll )
-             -- ,("M-a", sendMessage ToggleStruts )
+             ,("M-a", sendMessage ToggleStruts )
 
 
 
@@ -400,7 +400,6 @@ main = do
         xmonad
           $ dynamicProjects projects
           $ ewmh
-          -- $ XLF.fullscreenSupport
           $ docks
           $ mydefaults {
         logHook =  dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ def {
