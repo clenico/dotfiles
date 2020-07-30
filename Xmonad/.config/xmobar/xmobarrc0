@@ -42,7 +42,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=t
                                          , "--high"     , "darkred"
                                          ] 10
                       -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=1>\xf108</fn> cpu: (<total>%)","-H","50","--high","red"] 20
+                    , Run Cpu ["-t", "<fn=1>\xf108</fn>: <total>%","-H","50","--high","red"] 20
 
 
                     , Run MultiCoreTemp ["-t", "<avg>°C",
