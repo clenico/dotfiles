@@ -278,6 +278,7 @@ myKeymap = [
              ,("M-p w", spawn "kwrite")
              ,("M-<Return>", spawn myTerminal)
              -- Xmonad
+             ,("M-S-s", spawn "flameshot gui")
              ,("M-r", spawn "xmonad --restart")
              ,("M-S-r", spawn "xmonad --recompile")
              ,("C-M-r", spawn "xmonad --recompile && xmonad --restart")
@@ -293,6 +294,7 @@ myKeymap = [
              -- Workspace shortcut
              ,("M1-<F4>", kill)
              ,("M-S-q", kill)
+             ,("M-S-<Esc>", spawn "xkill")
              ,("M-f", sequence_ [sendMessage $ Toggle NBFULL,
                                  sendMessage ToggleStruts])
              -- ,("M-<Esc>", spawn "xkill")
