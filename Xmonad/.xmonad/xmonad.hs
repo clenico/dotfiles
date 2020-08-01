@@ -106,6 +106,7 @@ myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
                  ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
+                 ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
@@ -336,6 +337,7 @@ myKeymap = [
              -- Scratchpad
              ,("M-~", namedScratchpadAction myScratchPads "dropdown-terminal")
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
+             ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
              ,("M1-<Tab>", namedScratchpadAction myScratchPads "zeal")
 
              -- Design
