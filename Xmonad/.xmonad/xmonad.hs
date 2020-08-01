@@ -359,7 +359,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- , ((modMask, xK_Return), spawn $ myTerminal )
 
-  , ((modMask, xK_a), sendMessage ToggleStruts)
   --  Reset the layouts on the current workspace to default.
   , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
   ]
