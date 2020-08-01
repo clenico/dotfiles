@@ -110,11 +110,19 @@ alias radoc="ranger ~/Documents"
 alias radow="ranger ~/Downloads/"
 alias rasch="ranger ~/School/"
 alias radrop="ranger ~/Dropbox/"
+
+# Location
 alias tmp="cd  /tmp/"
 alias opt="cd  /opt/"
 alias doc="cd  ~/Documents/"
 alias dow="cd  ~/Downloads/"
 alias dot="cd  ~/Dotfiles/"
+alias mnt="cd  /mnt/"
+alias proj="cd  ~/Documents/Projects/"
+alias td="cd  ~/Documents/Projects/Todo/"
+alias di="cd  ~/Documents/Projects/Doing/"
+alias dn="cd  ~/Documents/Projects/Done/"
+
 alias ranloc='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias rl='ranloc'
 alias python="python3"
