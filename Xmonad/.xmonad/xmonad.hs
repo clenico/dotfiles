@@ -358,7 +358,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle" )
 
   -- , ((modMask, xK_Return), spawn $ myTerminal )
-   ((controlMask .|. mod1Mask , xK_t ), spawn $ myTerminal)
 
   , ((modMask, xK_a), sendMessage ToggleStruts)
   --  Reset the layouts on the current workspace to default.
