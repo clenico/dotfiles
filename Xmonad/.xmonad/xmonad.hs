@@ -1,4 +1,3 @@
-
 import XMonad.Actions.WithAll
 import XMonad.Actions.RotSlaves
 import Control.Monad (liftM2)
@@ -169,8 +168,7 @@ myHiddenNoWindowsWSColor = "white"
 myLayoutHook =
   -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
                minimize
-               $ avoidStrutsOn [U,L]
-               -- $ avoidStruts
+               $ avoidStruts
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ smartBorders
                $ tiled ||| Grid ||| spiral (6/7) ||| ThreeColMid 1 (3/100) (1/2) ||| noBorders Full ||| simpleFloat
