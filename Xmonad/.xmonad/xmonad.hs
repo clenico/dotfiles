@@ -53,6 +53,9 @@ import qualified XMonad.StackSet as W
 --mod1Mask= alt key
 --controlMask= ctrl key
 --shiftMask= shift key
+
+
+-- Defaults
 myModMask = mod4Mask
 myTerminal = "urxvt"
 myFileManager = "thunar"
@@ -67,8 +70,8 @@ mydefaults = def {
         , modMask             = myModMask
         , borderWidth         = 3
         , layoutHook          = myLayoutHook
-        , manageHook          = insertPosition Below Newer
-                                 <+> manageDocks
+        , manageHook          =  manageDocks
+                                 <+>insertPosition Below Newer
                                  <+> myManageHook
                                  <+> manageSpawn
                                  <+> namedScratchpadManageHook myScratchPads
@@ -78,21 +81,7 @@ mydefaults = def {
         }`additionalKeysP` myKeymap
 
 
-
--- scratchpads = [
--- -- run htop in xterm, find it by title, use default floating window placement
---     -- NS "htop" "xterm -e htop" (title =? "htop") defaultFloating ,
-
--- -- run stardict, find it by class name, place it in the floating window
--- -- 1/6 of screen width from the left, 1/6 of screen height
--- -- from the top, 2/3 of screen width by 2/3 of screen height
---     NS "dropdown-terminal" myTerminal (className =? "URxvt" )
---         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
-
--- -- run gvim, find by role, don't float
---     -- NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
---                  ] where role = stringProperty "WM_WINDOW_ROLE"
-
+-- Projects
 projects :: [Project]
 projects =
   [ Project { projectName      = "3"
@@ -101,6 +90,7 @@ projects =
             }
   ]
 
+-- Named Scratchpad
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
@@ -129,22 +119,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                        t = (1-h)/2
                        l = (1-w)/2
 
-
-                 -- l = 0.95 -w
-    -- spawnMocp  = myTerminal ++ " -n mocp 'mocp'"
-    -- findMocp   = resource =? "mocp"
-    -- manageMocp = customFloating $ W.RationalRect l t w h
-    --            where
-    --              h = 0.9
-    --              w = 0.9
-    --              t = 0.95 -h
-    --              l = 0.95 -w
-
- -- , ((modm .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
- -- , ((modm .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
- -- , ((modm .|. controlMask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "notes")
-
--- Autostart
+-- Startup
 myStartupHook = do
     -- spawn "$HOME/.xmonad/scripts/autostart.sh"
     spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0"
@@ -152,19 +127,14 @@ myStartupHook = do
     -- spawnOn "3" "firefox"
     -- spawnOn "1" myTerminal
     -- spawnOn "1" myTerminal
-    -- spawnOn "3" "firefox"
+    spawnOnOnce "3" "firefox"
     setWMName "LG3D"
 
+-- IDK wth is that
 encodeCChar = map fromIntegral . B.unpack
 
-myTitleColor = "#00ff" -- color of window title
-myTitleLength = 80 -- truncate window title to this length
-myCurrentWSColor = "#00ff00" -- color of active workspace
-myVisibleWSColor = "#aaaaaa" -- color of inactive workspace
-myUrgentWSColor = "#ff0000" -- color of workspace with 'urgent' window
-myHiddenNoWindowsWSColor = "white"
 
-
+-- Layouts
 myLayoutHook =
   -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
                minimize
@@ -180,22 +150,13 @@ myLayoutHook =
 
 
 
---WORKSPACES
-xmobarEscape = concatMap doubleLts
-    where doubleLts '<' = "<<"
-          doubleLts x = [x]
-
+--Workspaces
 myWorkspaces :: [String]
--- myWorkspaces = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
---     where
---                clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave"] l, let n = i ]
-myWorkspaces = (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9","10"]
-    -- where
-               -- clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave"] l, let n = i ]
+myWorkspaces = ["1","2","3","4","5","6","7","8","9","10"]
 
 
 
--- window manipulations
+--Windows Hook
 myManageHook = composeAll . concat $
     [
       -- [isFullscreen --> doFullFloat]
@@ -217,16 +178,6 @@ myManageHook = composeAll . concat $
     , [className =? c --> doShift (myWorkspaces !! 7) | c <- my8Shifts]
     , [className =? c --> doShift (myWorkspaces !! 8) | c <- my9Shifts]
     , [className =? c --> doShift (myWorkspaces !! 9) | c <- my10Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 0) <+> viewShift (myWorkspaces !! 0)        | c <- my1Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 1) <+> viewShift (myWorkspaces !! 1)        | c <- my2Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 2) <+> viewShift (myWorkspaces !! 2)        | c <- my3Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 3) <+> viewShift (myWorkspaces !! 3)        | c <- my4Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 4) <+> viewShift (myWorkspaces !! 4)        | c <- my5Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 5) <+> viewShift (myWorkspaces !! 5)        | c <- my6Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 6) <+> viewShift (myWorkspaces !! 6)        | c <- my7Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 7) <+> viewShift (myWorkspaces !! 7)        | c <- my8Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 8) <+> viewShift (myWorkspaces !! 8)        | c <- my9Shifts]
-    -- , [className =? c --> doShift (myWorkspaces !! 9) <+> viewShift (myWorkspaces !! 9)        | c <- my10Shifts]
        ]
     where
 --    viewShift    = doF . liftM2 (.) W.greedyView W.shift
@@ -242,22 +193,12 @@ myManageHook = composeAll . concat $
     my4Shifts = []
     my5Shifts = []
     my6Shifts = ["Virtualbox"]
-    my7Shifts = []
+    my7Shifts = ["libreoffice-startcenter"]
     my8Shifts = ["Emacs"]
     my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
     my10Shifts = ["Thunderbird"]
-    -- my1ViewShifts = []
-    -- my2ViewShifts = []
-    -- my3ViewShifts = []
-    -- my4ViewShifts = []
-    -- my5ViewShifts = []
-    -- my6ViewShifts = ["Virtualbox"]
-    -- my7ViewShifts = ["libreoffice-startcenter"]
-    -- my8ViewShifts = []
-    -- my9ViewShifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
-    -- my1View0Shifts = []
 
--- keys config
+-- Keymap
 myKeymap :: [(String, X ())]
 myKeymap = [
              -- MENU shutdown (mod + n )
@@ -273,6 +214,7 @@ myKeymap = [
              ,("M-p c", spawn "colorpicker --short --one-shot --preview | xsel -b")
              ,("M-p e", spawn "emacs")
              ,("M-p f", spawn "firefox")
+             ,("M-p h", spawn "urxvt 'htop task manager' -e htop")
              ,("M-p m", spawn "gnome-system-monitor")
              ,("M-p n", spawn myFileManager)
              ,("M-p w", spawn "kwrite")
@@ -313,7 +255,7 @@ myKeymap = [
              ,("M-i", withFocused $ windows . W.sink)
              ,("M-<R>", sendMessage (IncMasterN 1))
              ,("M-<L>", sendMessage (IncMasterN (-1)))
-             ,("M-<F3>", switchProjectPrompt def)
+             ,("M--", switchProjectPrompt def)
              ,("M-<U>", withLastMinimized maximizeWindowAndFocus )
              ,("M-<D>", withFocused minimizeWindow )
              ,("C-M-j", rotAllDown )
@@ -350,14 +292,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- SUPER + FUNCTION KEYS
 
   [
-   -- ((modMask, xK_c), spawn $ "xfce4-appfinder" )
-  -- , ((modMask, xK_v), spawn $ "pavucontrol" )
-  -- , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
-  -- , ((modMask, xK_h), spawn $ "urxvt 'htop task manager' -e htop" )
-  -- , ((modMask, xK_y), spawn $ "polybar-msg cmd toggle" )
-
-  -- , ((modMask, xK_Return), spawn $ myTerminal )
-
   --  Reset the layouts on the current workspace to default.
    ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
   ]
@@ -394,6 +328,14 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     ]
 
 --XMOBAR
+myTitleColor = "#00ff" -- color of window title
+myTitleLength = 80 -- truncate window title to this length
+myCurrentWSColor = "#00ff00" -- color of active workspace
+myVisibleWSColor = "#aaaaaa" -- color of inactive workspace
+myUrgentWSColor = "#ff0000" -- color of workspace with 'urgent' window
+myHiddenNoWindowsWSColor = "white"
+
+
 main = do
         xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 1
         xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 2
@@ -411,8 +353,8 @@ main = do
         , ppHidden = wrap """"
         , ppHiddenNoWindows = xmobarColor myHiddenNoWindowsWSColor ""
         , ppUrgent = xmobarColor myUrgentWSColor ""
-        , ppSep = "  "
-        , ppWsSep = "  "
+        , ppSep = " | "
+        , ppWsSep = " "
         , ppLayout = (\ x -> case x of
            "Spacing Tall"                 -> "<fn=2>Tall</fn>"
            "Spacing Grid"                 -> "<fn=2>Grid</fn>"
