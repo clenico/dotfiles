@@ -99,6 +99,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
                  ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
                  ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
+                 ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
@@ -230,7 +231,7 @@ myKeymap = [
              ,("M-S-r", spawn "xmonad --recompile")
              ,("C-M-r", spawn "xmonad --recompile && xmonad --restart")
              -- launch app
-             ,("M-c", spawn "xfce4-appfinder")
+             -- ,("M-c", spawn "xfce4-appfinder")
              ,("M-d", spawn "rofi -show run")
              ,("M-e", spawn myFileManager)
              ,("M-u", spawn "urxvt")
@@ -294,6 +295,7 @@ myKeymap = [
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
              ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
              ,("M1-<Tab>", namedScratchpadAction myScratchPads "zeal")
+             ,("M-c", namedScratchpadAction myScratchPads "xfce4-appfinder")
 
              -- Design
              ,("M-S-p", spawn "variety -p")
