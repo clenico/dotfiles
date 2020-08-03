@@ -185,7 +185,7 @@ myManageHook = composeAll . concat $
     where
 --    viewShift    = doF . liftM2 (.) W.greedyView W.shift
     myCFullscreen = ["Xfce4-appfinder"]
-    myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish"]
+    myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"]
     myTFloats = ["Downloads", "Save As..."]
     myRFloats = []
     myCIgnores = ["trayer"]
