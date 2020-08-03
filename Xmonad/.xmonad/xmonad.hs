@@ -262,7 +262,8 @@ myKeymap = [
              ,("M--", switchProjectPrompt def)
              ,("M-<Delete>", removeWorkspace)
              ,("M-<U>", withLastMinimized maximizeWindowAndFocus )
-             ,("M-<D>", withFocused minimizeWindow )
+             ,("M-<D>", sequence_[withFocused minimizeWindow,
+                                  windows W.focusUp] )
              ,("C-M-j", rotAllDown )
              ,("C-M-k", rotAllUp )
              ,("M-S-i", sinkAll )
