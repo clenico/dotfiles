@@ -1,3 +1,4 @@
+import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.WithAll
 import XMonad.Actions.RotSlaves
 import Control.Monad (liftM2)
@@ -258,6 +259,7 @@ myKeymap = [
              ,("M--", switchProjectPrompt def)
              ,("M-<U>", withLastMinimized maximizeWindowAndFocus )
              ,("M-<D>", withFocused minimizeWindow )
+             ,("M-<Delete>", removeWorkspace)
              ,("C-M-j", rotAllDown )
              ,("C-M-k", rotAllUp )
              ,("M-S-i", sinkAll )
