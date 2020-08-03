@@ -1,3 +1,4 @@
+import XMonad.Actions.Navigation2D
 import XMonad.Layout.Circle
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.WithAll
@@ -246,26 +247,34 @@ myKeymap = [
              ,("C-M-<Space>", sendMessage FirstLayout )
              ,("M-<Tab>", moveTo Next NonEmptyWS )
              ,("M-S-<Tab>", moveTo Prev NonEmptyWS )
-             ,("M-j", windows W.focusDown )
-             ,("M-k", windows W.focusUp )
-             ,("M-S-j", windows W.swapDown  )
-             ,("M-S-k", windows W.swapUp )
+             -- ,("M-j", windows W.focusDown )
+             -- ,("M-k", windows W.focusUp )
+             -- ,("M-S-j", windows W.swapDown  )
+             -- ,("M-S-k", windows W.swapUp )
              ,("M-m", windows W.focusMaster )
              ,("M-C-m", dwmpromote )
-             ,("M-h", sendMessage Shrink)
-             ,("M-l", sendMessage Expand)
+             -- ,("M-h", sendMessage Shrink)
+             -- ,("M-l", sendMessage Expand)
              ,("M-i", withFocused $ windows . W.sink)
              ,("M-<R>", sendMessage (IncMasterN 1))
              ,("M-<L>", sendMessage (IncMasterN (-1)))
              ,("M--", switchProjectPrompt def)
+             ,("M-<Delete>", removeWorkspace)
              ,("M-<U>", withLastMinimized maximizeWindowAndFocus )
              ,("M-<D>", withFocused minimizeWindow )
-             ,("M-<Delete>", removeWorkspace)
              ,("C-M-j", rotAllDown )
              ,("C-M-k", rotAllUp )
              ,("M-S-i", sinkAll )
              ,("M3-S-q", killAll )
              ,("M-a", sendMessage ToggleStruts )
+             ,("M-l", windowGo R True )
+             ,("M-h", windowGo L True )
+             ,("M-k", windowGo U True )
+             ,("M-j", windowGo D True )
+             ,("M-S-l", windowSwap R False )
+             ,("M-S-h", windowSwap L False )
+             ,("M-S-k", windowSwap U False )
+             ,("M-S-j", windowSwap D False )
 
 
 
@@ -344,6 +353,7 @@ main = do
         xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 2
         -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc" -- xmobar monitor 2
         xmonad
+          $ withNavigation2DConfig def
           $ dynamicProjects projects
           $ ewmh
           $ docks
