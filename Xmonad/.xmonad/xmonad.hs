@@ -1,3 +1,4 @@
+import XMonad.Layout.Circle
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.WithAll
 import XMonad.Actions.RotSlaves
@@ -142,7 +143,7 @@ myLayoutHook =
                $ avoidStruts
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ smartBorders
-               $ tiled ||| Grid ||| spiral (6/7) ||| ThreeColMid 1 (3/100) (1/2) ||| noBorders Full ||| simpleFloat
+               $ tiled ||| ThreeColMid 1 (3/100) (1/2) ||| Grid ||| spiral (6/7) ||| Circle||| noBorders Full ||| simpleFloat
                     where
                     tiled   = Tall nmaster delta ratio
                     nmaster = 1
