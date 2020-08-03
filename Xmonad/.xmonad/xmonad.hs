@@ -222,6 +222,8 @@ myKeymap = [
              ,("M-p n", spawn myFileManager)
              ,("M-p w", spawn "kwrite")
              ,("M-<Return>", spawn myTerminal)
+             -- MENU copy
+             ,("M-y c", spawn "xprop -id $(xdotool getactivewindow) WM_CLASS| awk '{gsub(/[\",\"]/,\"\",$3);print $3}' | xsel -b")
              -- Xmonad
              ,("M-S-s", spawn "flameshot gui")
              ,("M-r", spawn "xmonad --restart")
