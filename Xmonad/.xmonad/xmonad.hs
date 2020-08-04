@@ -202,6 +202,36 @@ myManageHook = composeAll . concat $
     my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
     my10Shifts = ["Thunderbird"]
 
+
+centreRect = W.RationalRect 0.25 0.25 0.5 0.5
+
+-- If the window is floating then (f), if tiled then (n)
+floatOrNot f n = withFocused $ \windowId -> do
+    floats <- gets (W.floating . windowset)
+    if windowId `M.member` floats -- if the current window is floating...
+       then f
+       else n
+
+-- Centre and float a window (retain size)
+centreFloat win = do
+    (_, W.RationalRect x y w h) <- floatLocation win
+    windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
+    return ()
+
+-- Float a window in the centre
+centreFloat' w = windows $ W.float w centreRect
+
+-- Make a window my 'standard size' (half of the screen) keeping the centre of the window fixed
+standardSize win = do
+    (_, W.RationalRect x y w h) <- floatLocation win
+    windows $ W.float win (W.RationalRect x y 0.5 0.5)
+    return ()
+
+
+-- Float and centre a tiled window, sink a floating window
+toggleFloat = floatOrNot (withFocused $ windows . W.sink) (withFocused centreFloat')
+
+
 -- Keymap
 myKeymap :: [(String, X ())]
 myKeymap = [
@@ -257,6 +287,7 @@ myKeymap = [
              ,("M-C-h", sendMessage Shrink)
              ,("M-C-l", sendMessage Expand)
              ,("M-i", withFocused $ windows . W.sink)
+             ,("M-,", toggleFloat)
              ,("M-<R>", sendMessage (IncMasterN 1))
              ,("M-<L>", sendMessage (IncMasterN (-1)))
              ,("M--", switchProjectPrompt def)
