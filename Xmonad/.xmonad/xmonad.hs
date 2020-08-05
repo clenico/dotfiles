@@ -1,3 +1,4 @@
+import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.Navigation2D
 import XMonad.Layout.Circle
 import XMonad.Actions.DynamicWorkspaces
@@ -94,6 +95,13 @@ projects =
   ]
 
 -- Named Scratchpad
+nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
+        >>= \t -> (windows . W.view $ t)
+prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1
+        >>= \t -> (windows . W.view $ t)
+getSortByIndexNoSP =
+        fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
+
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
@@ -278,8 +286,8 @@ myKeymap = [
              -- ,("M-<Esc>", spawn "xkill")
              ,("M-<Space>", sendMessage NextLayout )
              ,("C-M-<Space>", sendMessage FirstLayout )
-             ,("M-<Tab>", moveTo Next NonEmptyWS )
-             ,("M-S-<Tab>", moveTo Prev NonEmptyWS )
+             ,("M-<Tab>", nextNonEmptyWS )
+             ,("M-S-<Tab>", prevNonEmptyWS)
              ,("C-M-p", windows W.focusDown )
              ,("C-M-n", windows W.focusUp )
              ,("M-m", windows W.focusMaster )
