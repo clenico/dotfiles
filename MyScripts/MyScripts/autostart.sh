@@ -22,15 +22,15 @@ fi
 #     zotero &
 # fi
 
-if have nautilus; then
-    nautilus &
-    nautilus &
+# if have nautilus; then
+#     nautilus &
+#     nautilus &
 
-elif have Thunar; then
-    # thunar --daemon &
-    Thunar &
-    Thunar &
-fi
+# elif have Thunar; then
+#     # thunar --daemon &
+#     Thunar &
+#     Thunar &
+# fi
 
 if have thunderbird;then
     thunderbird &
