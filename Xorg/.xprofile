@@ -33,8 +33,10 @@ fi
 # On i3 use qt5ct to set Qt5 theme
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 
-export EDITOR="emacsclient -a -c" # $EDITOR opens in terminal
-export VISUAL="emacsclient -a -c" # $VISUAL opens in GUI mode
+
+
+export EDITOR="emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . "scratchemacs-frame"))' " # $EDITOR opens in terminal
+export VISUAL="emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . "scratchemacs-frame"))' " # $VISUAL opens in GUI mode
 export PATH="${PATH}:/opt/OpenDrive"
 export QT_SCREEN_SCALE_FACTORS=1
 export SCREEN=$(xrandr | awk '($2 == "connected"){print $1}' | head -n 1)
