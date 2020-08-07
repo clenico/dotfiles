@@ -1,23 +1,27 @@
+import XMonad.Layout.ResizableTile
+import XMonad.Actions.WindowBringer
+import XMonad.Actions.FloatKeys
+import Data.Ratio ((%))
 import XMonad.Util.WorkspaceCompare
+import XMonad.Actions.CopyWindow
 import XMonad.Actions.Navigation2D
 import XMonad.Layout.Circle
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.WithAll
 import XMonad.Actions.RotSlaves
-import Control.Monad (liftM2)
-import Data.Monoid
-import Graphics.X11.ExtraTypes.XF86
+-- import Data.Monoid
+-- import Graphics.X11.ExtraTypes.XF86
 import System.Exit
-import System.IO (Handle, hPutStrLn)
+-- import System.IO (Handle, hPutStrLn)
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.Minimize
 import XMonad.Actions.SpawnOn
-import XMonad.Actions.Submap
-import XMonad.Config.Azerty
-import XMonad.Config.Desktop
+-- import XMonad.Actions.Submap
+-- import XMonad.Config.Azerty
+-- import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
@@ -25,23 +29,23 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
 import XMonad.Hooks.Minimize
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.UrgencyHook
-import XMonad.Layout.CenteredMaster(centerMaster)
-import XMonad.Layout.Cross(simpleCross)
-import XMonad.Layout.Fullscreen (fullscreenFull)
-import XMonad.Layout.Gaps
+-- import XMonad.Hooks.UrgencyHook
+-- import XMonad.Layout.CenteredMaster(centerMaster)
+-- import XMonad.Layout.Cross(simpleCross)
+-- import XMonad.Layout.Fullscreen (fullscreenFull)
+-- import XMonad.Layout.Gaps
 import XMonad.Layout.Grid
-import XMonad.Layout.IndependentScreens
+-- import XMonad.Layout.IndependentScreens
 import XMonad.Layout.Minimize
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
-import XMonad.Layout.ResizableTile
+-- import XMonad.Layout.ResizableTile
 import XMonad.Layout.SimpleFloat
-import XMonad.Layout.Spacing
+-- import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral(spiral)
 import XMonad.Layout.ThreeColumns
-import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
+-- import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run(spawnPipe)
@@ -63,6 +67,46 @@ import qualified XMonad.StackSet as W
 myModMask = mod4Mask
 myTerminal = "urxvt"
 myFileManager = "thunar"
+
+
+prompt      = 20
+
+
+base03  = "#002b36"
+base02  = "#073642"
+base01  = "#586e75"
+base00  = "#657b83"
+base0   = "#839496"
+base1   = "#93a1a1"
+base2   = "#eee8d5"
+base3   = "#fdf6e3"
+yellow  = "#b58900"
+orange  = "#cb4b16"
+red     = "#dc322f"
+magenta = "#d33682"
+violet  = "#6c71c4"
+blue    = "#268bd2"
+cyan    = "#2aa198"
+green   = "#859900"
+
+myPromptTheme = def
+    {
+      -- font                  = myFont
+      -- bgColor               = base03
+    -- , fgColor               = active
+    -- , fgHLight              = base03
+    -- , bgHLight              = active
+    -- , borderColor           = base03
+     promptBorderWidth     = 0
+    , height                = prompt
+    , position              = Top
+    }
+
+warmPromptTheme = myPromptTheme
+    { bgColor               = yellow
+    , fgColor               = base03
+    , position              = Top
+    }
 
 mydefaults = def {
           normalBorderColor   = "#0066B5"
@@ -137,8 +181,7 @@ myStartupHook = do
     spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0"
     spawnOnce "/home/niccle27/MyScripts/autostart.sh > ~/.output/autostart.sh"
     -- spawnOn "3" "firefox"
-    -- spawnOn "1" myTerminal
-    -- spawnOn "1" myTerminal
+    spawnOnOnce "2" myFileManager
     spawnOnOnce "3" "firefox"
     setWMName "LG3D"
 
@@ -149,13 +192,14 @@ encodeCChar = map fromIntegral . B.unpack
 -- Layouts
 myLayoutHook =
   -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
+
                minimize
                $ avoidStruts
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                $ smartBorders
                $ tiled ||| ThreeColMid 1 (3/100) (1/2) ||| Grid ||| spiral (6/7) ||| Circle||| noBorders Full ||| simpleFloat
                     where
-                    tiled   = Tall nmaster delta ratio
+                    tiled   = ResizableTall  nmaster delta ratio []
                     nmaster = 1
                     delta   = 3/100
                     ratio   = 1/2
@@ -187,7 +231,8 @@ myManageHook = composeAll . concat $
     , [className =? c --> doShift (myWorkspaces !! 4) | c <- my5Shifts]
     , [className =? c --> doShift (myWorkspaces !! 5) | c <- my6Shifts]
     , [className =? c --> doShift (myWorkspaces !! 6) | c <- my7Shifts]
-    , [className =? c --> doShift (myWorkspaces !! 7) | c <- my8Shifts]
+    -- , [className =? c --> doShift (myWorkspaces !! 7) | c <- my8ShiftsClass]
+    , [resource =? c --> doShift (myWorkspaces !! 7) | c <- my8ShiftsTitles]
     , [className =? c --> doShift (myWorkspaces !! 8) | c <- my9Shifts]
     , [className =? c --> doShift (myWorkspaces !! 9) | c <- my10Shifts]
        ]
@@ -204,9 +249,10 @@ myManageHook = composeAll . concat $
     my3Shifts = []
     my4Shifts = []
     my5Shifts = []
-    my6Shifts = ["Virtualbox"]
-    my7Shifts = ["libreoffice-startcenter"]
-    my8Shifts = ["Emacs"]
+    my6Shifts = ["VirtualBox","VirtualBox Manager"]
+    my7Shifts = ["libreoffice-startcenter","libreoffice-calc","libreoffice-writer","libreoffice-*"]
+    -- my8ShiftsClass = ["Emacs"]
+    my8ShiftsTitles = ["emacs"]
     my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
     my10Shifts = ["Thunderbird"]
 
@@ -236,109 +282,263 @@ standardSize win = do
     return ()
 
 
+thumbnailFloat_m win = do
+  (_, W.RationalRect x y w h) <- floatLocation win
+  windows $ W.float win (W.RationalRect (1 - 0.2-0.01) (0.01) 0.2 0.25)
+  return ()
+
+thumbnailFloat_M win = do
+  (_, W.RationalRect x y w h) <- floatLocation win
+  windows $ W.float win (W.RationalRect (1 - 0.3-0.01) (0.01) 0.3 0.35)
+  return ()
+
+thumbnailFloat_g win = do
+  (_, W.RationalRect x y w h) <- floatLocation win
+  windows $ W.float win (W.RationalRect (1 - 0.4-0.01) (0.01) 0.4 0.45)
+  return ()
+
+thumbnailFloat_G win = do
+  (_, W.RationalRect x y w h) <- floatLocation win
+  windows $ W.float win (W.RationalRect (1 - 0.5-0.01) (0.01) 0.5 0.55)
+  return ()
+
 -- Float and centre a tiled window, sink a floating window
-toggleFloat = floatOrNot (withFocused $ windows . W.sink) (withFocused centreFloat')
+toggleFloat = floatOrNot (withFocused $ windows . W.sink) (withFocused thumbnailFloat_G)
 
 
 -- Keymap
 myKeymap :: [(String, X ())]
 myKeymap = [
-             -- MENU shutdown (mod + n )
-              ("M-n l", spawn "i3lock && sleep 1")
-             ,("M-n e", io (exitWith ExitSuccess))
-             ,("M-S-e", io (exitWith ExitSuccess))
-             ,("M-n s", spawn "i3lock && sleep 1 && systemctl suspend")
-             ,("M-n h", spawn "i3lock && sleep 1 && systemctl hibernate")
-             ,("M-n r", spawn "systemctl reboot")
-             ,("M-n S-s", spawn "systemctl poweroff -i")
-             ,("M-n l", spawn "i3lock && sleep 1")
-             -- MENU launch app (mod + p)
-             ,("M-p c", spawn "colorpicker --short --one-shot --preview | xsel -b")
-             ,("M-p e", spawn "emacs")
-             ,("M-p f", spawn "firefox")
-             ,("M-p h", spawn "urxvt 'htop task manager' -e htop")
-             ,("M-p m", spawn "gnome-system-monitor")
-             ,("M-p n", spawn myFileManager)
-             ,("M-p w", spawn "kwrite")
-             ,("M-<Return>", spawn myTerminal)
-             -- MENU copy
-             ,("M-y c", spawn "xprop -id $(xdotool getactivewindow) WM_CLASS| awk '{gsub(/[\",\"]/,\"\",$3);print $3}' | xsel -b")
-             -- Xmonad
-             ,("M-S-s", spawn "flameshot gui")
-             ,("M-r", spawn "xmonad --restart")
-             ,("M-S-r", spawn "xmonad --recompile")
-             ,("C-M-r", spawn "xmonad --recompile && xmonad --restart")
-             -- launch app
-             -- ,("M-c", spawn "xfce4-appfinder")
-             ,("M-d", spawn "rofi -show run")
-             ,("M-e", spawn myFileManager)
-             ,("M-u", spawn "urxvt")
-             ,("M-w", spawn "rofi -show window")
-             -- ,("M-<F1>", spawn "pavucontrol")
-             ,("C-S-<Esc>", spawn "gnome-system-monitor")
+              -- MENU shutdown (mod + n )
+              ("M-v l", spawn "i3lock && sleep 1")
+             ,("M-v e", io (exitWith ExitSuccess))
+             ,("M-v s", spawn "i3lock && sleep 1 && systemctl suspend")
+             ,("M-v h", spawn "i3lock && sleep 1 && systemctl hibernate")
+             ,("M-v r", spawn "systemctl reboot")
+             ,("M-v S-s", spawn "systemctl poweroff -i")
+             ,("M-v l", spawn "i3lock && sleep 1")
 
-             -- Workspace shortcut
-             ,("M1-<F4>", kill)
-             ,("M-S-q", kill)
-             ,("M-S-<Esc>", spawn "xkill")
+              -- MENU launch app (mod + p)
+             ,("M-o  a", spawn "audacity")
+             ,("M-o  b", spawn "blender")
+             ,("M-o  c", spawn "cura")
+             -- ,("M-o  c", spawn "colorpicker --short --one-shot --preview | xsel -b")
+             ,("M-o  e", spawn "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"scratchemacs-frame\"))' ")
+             ,("M-o  E", spawn "emacs")
+             ,("M-o  f", spawn "firefox")
+             ,("M-o  S-f", spawn "gufw")
+             ,("M-o  g", spawn "gimp")
+             ,("M-o  S-g", spawn "gparted")
+             ,("M-o  i", spawn "inkscape")
+             ,("M-o  h", spawn "urxvt 'htop task manager' -e htop")
+             ,("M-o  k", spawn "krita")
+             ,("M-o  S-l", spawn "libreoffice")
+             ,("M-o  l b", spawn "libreoffice --base")
+             ,("M-o  l c", spawn "libreoffice --calc")
+             ,("M-o  l d", spawn "libreoffice --draw")
+             ,("M-o  l i", spawn "libreoffice --impress")
+             ,("M-o  l m", spawn "libreoffice --math")
+             ,("M-o  l w", spawn "libreoffice --writer")
+             ,("M-o  m", spawn "gnome-system-monitor")
+             ,("M-o  n", spawn myFileManager)
+             ,("M-o  t", spawn "thunderbird")
+             ,("M-o  S-t", spawn myTerminal)
+             ,("M-o  v", spawn "virtualbox")
+             ,("M-o  S-v", spawn "vlc")
+             ,("M-o  q", spawn "qbittorrent")
+             ,("M-o  S-q", spawn "qtcreator")
+             ,("M-o  w", spawn "kwrite")
+             ,("M-o  S-w", spawn "cheese")
+             ,("M-o  z", spawn "filezilla")
+
+              -- MENU copy
+             ,("M-y c", spawn "xprop -id $(xdotool getactivewindow) WM_CLASS| awk '{gsub(/[\",\"]/,\"\",$3);print $3}' | xsel -b")
+             ,("M-y s", spawn "colorpicker --short --one-shot --preview | xsel -b")
+
+              -- Direct Shortcuts
+             ,("M-a" , windows copyToAll ) -- Pin to all workspaces
+             ,("M-S-a" , kill1 ) -- remove window from current, kill if only one
+             ,("M-C-a" , killAllOtherCopies ) -- remove window from all but current
+
+             -- ,("M-b" ,  )
+             -- ,("M-S-b" ,  )
+             -- ,("M-C-b" ,  )
+
+
+             ,("M-c", namedScratchpadAction myScratchPads "xfce4-appfinder")
+             -- ,("M-S-c" ,  )
+             -- ,("M-C-c" ,  )
+
+             ,("M-d", spawn "rofi -show run")
+             -- ,("M-S-d" ,  )
+             -- ,("M-C-d" ,  )
+
+
+             ,("M-e", spawn myFileManager)
+             ,("M-S-e", io (exitWith ExitSuccess))
+             -- ,("M-C-e" ,  )
+
+
              ,("M-f", sequence_ [sendMessage $ Toggle NBFULL,
                                  sendMessage ToggleStruts])
-             -- ,("M-<Esc>", spawn "xkill")
+             -- ,("M-S-f" ,  )
+             -- ,("M-C-f" ,  )
+
+             -- ,("M-g" ,  )
+             -- ,("M-S-g" ,  )
+             -- ,("M-C-g" ,  )
+
+             ,("M-h", windowGo L True )
+             ,("M-S-h", windowSwap L False )
+             ,("M-C-h", sendMessage Shrink)
+
+
+             ,("M-S-i", sinkAll )
+             -- ,("M-S-i" ,  )
+             -- ,("M-C-i" ,  )
+
+             ,("M-j", windowGo D True )
+             ,("M-S-j", windowSwap D False )
+             -- ,("M-C-j" ,  )
+
+             ,("M-k", windowGo U True )
+             ,("M-S-k", windowSwap U False )
+             -- ,("M-C-i" ,  )
+
+             ,("M-l", windowGo R True )
+             ,("M-S-l", windowSwap R False )
+             ,("M-C-l", sendMessage Expand)
+
+             ,("M-m", windows W.focusMaster )
+             -- ,("M-S-m" ,  )
+             ,("M-C-m", dwmpromote )
+
+             -- ,("M-n" ,  )
+             ,("M-S-n", spawn "variety -n")
+             ,("M-C-n", windows W.focusDown )
+
+             -- PREFIX open app,("M-o" ,  )
+             -- ,("M-S-o" ,  )
+             -- ,("M-C-o" ,  )
+
+             -- ,("M-p" ,  )
+             ,("M-S-p", spawn "variety -p")
+             ,("M-C-p", windows W.focusUp )
+
+             -- ,("M-q" ,  )
+             ,("M-S-q", kill)
+             -- ,("M-C-q" ,  )
+
+             ,("M-r", rotAllDown )
+             ,("M-S-r", rotAllUp )
+             ,("M-C-r", spawn "xmonad --recompile && xmonad --restart")
+             ,("M1-S-r", spawn "xmonad --restart")
+
+             -- ,("M-s" ,  )
+             ,("M-S-s", spawn "flameshot gui")
+             -- ,("M-C-s" ,  )
+
+             -- ,("M-t" ,  )
+             -- ,("M-S-t" ,  )
+             -- ,("M-C-t" ,  )
+
+
+             ,("M-u", spawn "urxvt")
+             -- ,("M-S-u" ,  )
+             -- ,("M-C-u" ,  )
+
+             -- ,PREFIX systemctl ("M-v" ,  )
+             -- ,("M-S-v" ,  )
+             -- ,("M-C-v" ,  )
+
+             ,("M-w", spawn "rofi -show window")
+             -- ,("M-S-w" ,  )
+             -- ,("M-C-w" ,  )
+
+             -- ,("M-x" ,  )
+             -- ,("M-S-x" ,  )
+             -- ,("M-C-x" ,  )
+
+             -- ,PREFIX copy("M-y" ,  )
+             -- ,("M-S-y" ,  )
+             -- ,("M-C-y" ,  )
+
+             ,("M-z", sequence_[withFocused minimizeWindow, windows W.focusUp] )
+             ,("M-S-z", withLastMinimized maximizeWindowAndFocus )
+             -- ,("M-C-z" ,  )
+
+
+             ,("M-<Return>", spawn myTerminal)
+             -- ,("M-S-<Return>" ,  )
+             -- ,("M-C-<Return>" ,  )
+
+
+             ,("M-~", namedScratchpadAction myScratchPads "dropdown-terminal")
+             -- ,("M-S-~" ,  )
+             -- ,("M-C-~" ,  )
+
+
+             ,("M-,", toggleFloat)
+             -- ,("M-S-," ,  )
+             -- ,("M-C-," ,  )
+
+             -- ,("M-µ" ,  )
+             -- ,("M-S-µ" ,  )
+             ,("M-C-µ", spawn "variety -f")
+
+             -- ,("M-=" ,  )
+             -- ,("M-S-=" ,  )
+             ,("M-C-=", sendMessage MirrorShrink)
+
+             ,("M--", switchProjectPrompt def)
+             -- ,("M-S--" ,  )
+             ,("M-C--", sendMessage MirrorExpand)
+
+
              ,("M-<Space>", sendMessage NextLayout )
-             ,("C-M-<Space>", sendMessage FirstLayout )
+             -- ,("M-S-<Space>" ,  )
+             ,("M-C-<Space>", sendMessage FirstLayout )
+
+             ,("M-<Delete>", killAll )
+             ,("M-S-<Delete>", sequence_[killAll,removeWorkspace])
+             -- ,("M-C-<Delete>" ,  )
+
+             -- ,("M-<Esc>" ,  )
+             ,("M-S-<Esc>", spawn "xkill")
+             -- ,("M-C-<Esc>" ,  )
+             ,("C-S-<Esc>", spawn "gnome-system-monitor")
+
              ,("M-<Tab>", nextNonEmptyWS )
              ,("M-S-<Tab>", prevNonEmptyWS)
-             ,("C-M-p", windows W.focusDown )
-             ,("C-M-n", windows W.focusUp )
-             ,("M-m", windows W.focusMaster )
-             ,("M-C-m", dwmpromote )
-             ,("M-C-h", sendMessage Shrink)
-             ,("M-C-l", sendMessage Expand)
-             ,("M-i", withFocused $ windows . W.sink)
-             ,("M-,", toggleFloat)
-             ,("M-<R>", sendMessage (IncMasterN 1))
-             ,("M-<L>", sendMessage (IncMasterN (-1)))
-             ,("M--", switchProjectPrompt def)
-             ,("M-<Delete>", removeWorkspace)
-             ,("M-<U>", withLastMinimized maximizeWindowAndFocus )
-             ,("M-<D>", sequence_[withFocused minimizeWindow,
-                                  windows W.focusUp] )
-             ,("C-M-j", rotAllDown )
-             ,("C-M-k", rotAllUp )
-             ,("M-S-i", sinkAll )
-             ,("M3-S-q", killAll )
-             ,("M-a", sendMessage ToggleStruts )
-             ,("M-l", windowGo R True )
-             ,("M-h", windowGo L True )
-             ,("M-k", windowGo U True )
-             ,("M-j", windowGo D True )
-             ,("M-S-l", windowSwap R False )
-             ,("M-S-h", windowSwap L False )
-             ,("M-S-k", windowSwap U False )
-             ,("M-S-j", windowSwap D False )
+             -- ,("M-C-<Tab>" ,  )
 
 
 
-             -- sound and luminosity
+             ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
+             ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
+             ,("M1-<F4>", kill)
+             ,("M-<F11>", sendMessage (IncMasterN 1))
+             ,("M-<F12>", sendMessage (IncMasterN (-1)))
+
+              -- Move floating window
+             ,("M-<L>", withFocused (keysMoveWindow (-80, 0  )))
+             ,("M-<U>", withFocused (keysMoveWindow (0  , -80)))
+             ,("M-<D>", withFocused (keysMoveWindow (0  , 80 )))
+             ,("M-<R>", withFocused (keysMoveWindow (80 , 0  )))
+              -- Resize floating window
+             ,("M-S-<U>", withFocused (keysResizeWindow    (0  , -40) (0, 0)))
+             ,("M-S-<L>", withFocused (keysResizeWindow    (-40,   0) (0, 0)))
+             ,("M-S-<D>", withFocused (keysResizeWindow    (0  ,  40) (0, 0)))
+             ,("M-S-<R>", withFocused (keysResizeWindow    (40 ,   0) (0, 0)))
+             ,("M-<Page_Up>", withFocused (keysResizeWindow    ( 40 ,    40) (0, 0)))
+             ,("M-<Page_Down>", withFocused (keysResizeWindow  (-40 ,   -40) (0, 0)))
+
+               -- Sound And Luminosity
              ,("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
              ,("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
              ,("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
              ,("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5")
              ,("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5")
-
-             -- ,("M-S-<Space>", setLayout $ XMonad.layoutHook conf ) -- conf not available in ezconfig
-
-             -- Scratchpad
-             ,("M-~", namedScratchpadAction myScratchPads "dropdown-terminal")
-             ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
-             ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
-             ,("M1-<Tab>", namedScratchpadAction myScratchPads "zeal")
-             ,("M-c", namedScratchpadAction myScratchPads "xfce4-appfinder")
-
-             -- Design
-             ,("M-S-p", spawn "variety -p")
-             ,("M-S-n", spawn "variety -n")
-             -- ,("M-p w", spawn "variety -f")
              ]
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -347,7 +547,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   [
   --  Reset the layouts on the current workspace to default.
-   ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
+   -- ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
   ]
   ++
 
@@ -362,11 +562,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       , (\i -> W.greedyView i . W.shift i, shiftMask)]]
 
   ++
-  -- ctrl-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-  -- ctrl-shift-{w,e,r}, Move client to screen 1, 2, or 3
+  -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
+  -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
   [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_w, xK_e] [0..]
-      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+  | (key, sc) <- zip [xK_r, xK_e, xK_w] [0..]
+  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+  -- -- ctrl-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
+  -- -- ctrl-shift-{w,e,r}, Move client to screen 1, 2, or 3
+  -- [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+  --     | (key, sc) <- zip [xK_w, xK_e] [0..]
+  --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
@@ -411,7 +616,7 @@ main = do
         , ppSep = " | "
         , ppWsSep = " "
         , ppLayout = (\ x -> case x of
-           "Minimize Tall"                 -> "<fn=2>Tall</fn>"
+           "Minimize ResizableTall"        -> "<fn=2>Tall</fn>"
            "Minimize Grid"                 -> "<fn=2>Grid</fn>"
            "Minimize Spiral"               -> "<fn=2>spiral</fn>"
            "Minimize ThreeCol"             -> "<fn=2>ThreeColMid</fn>"
@@ -420,3 +625,11 @@ main = do
            _                               -> x )
  }
 }
+
+{-
+  TODO:
+          - XMonad.Actions.TagWindows
+          - https://rina-kawakita.tistory.com/entry/xmonadxmonadhs
+          - https://gist.github.com/mopemope/c13e8a10da2769c357ad78696ac640e9
+          - https://github.com/randomthought/xmonad-config/blob/master/xmonad.hs
+-}
