@@ -362,7 +362,12 @@ myKeymap = [
 
               -- MENU copy
              ,("M-y c", spawn "xprop -id $(xdotool getactivewindow) WM_CLASS| awk '{gsub(/[\",\"]/,\"\",$3);print $3}' | xsel -b")
+             ,("M-y d f", spawn "scrot '%Y-%m-%d-%H:%M:%S_F.png' -d 3 -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
+             ,("M-y d w", spawn "scrot '%Y-%m-%d-%H:%M:%S_W.png' -d 3l -u -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
              ,("M-y s", spawn "colorpicker --short --one-shot --preview | xsel -b")
+             ,("M-y f", spawn "scrot '%Y-%m-%d-%H:%M:%S_F.png' -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
+             ,("M-y w", spawn "scrot '%Y-%m-%d-%H:%M:%S_W.png' -u -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
+
 
               -- Direct Shortcuts
              ,("M-a" , windows copyToAll ) -- Pin to all workspaces
