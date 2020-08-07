@@ -513,7 +513,7 @@ myKeymap = [
              ,("M-C-=", sendMessage MirrorShrink)
 
              ,("M--", switchProjectPrompt myPromptTheme)
-             -- ,("M-S--" ,  )
+             ,("M-S--" ,shiftToProjectPrompt myPromptTheme)
              ,("M-C--", sendMessage MirrorExpand)
 
 
