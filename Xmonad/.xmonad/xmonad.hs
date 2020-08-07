@@ -161,6 +161,8 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
                  ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
                  ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
+                 ,NS "note-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"note-emacs\"))' "
+                  (resource =? "note-emacs") (nonFloating)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
@@ -499,6 +501,12 @@ myKeymap = [
              -- ,("M-µ" , )
              -- ,("M-S-µ" ,  )
              ,("M-C-µ", spawn "variety -f")
+
+
+             ,("M-$" ,  namedScratchpadAction myScratchPads "note-scratchpad")
+             -- ,("M-S-$" ,  )
+             -- ,("M-C-$", )
+
 
              -- ,("M-=" ,  )
              -- ,("M-S-=" ,  )
