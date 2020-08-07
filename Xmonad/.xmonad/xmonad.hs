@@ -446,7 +446,7 @@ myKeymap = [
              ,("M-r", rotAllDown )
              ,("M-S-r", rotAllUp )
              ,("M-C-r", spawn "xmonad --recompile && xmonad --restart")
-             ,("M1-S-r", spawn "xmonad --restart")
+             ,("M1-r", spawn "xmonad --restart")
 
              -- ,("M-s" ,  )
              ,("M-S-s", spawn "flameshot gui")
