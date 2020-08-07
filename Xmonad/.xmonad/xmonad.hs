@@ -427,17 +427,17 @@ myKeymap = [
              -- ,("M-S-m" ,  )
              ,("M-C-m", dwmpromote )
 
-             -- ,("M-n" ,  )
+             ,("M-n" , windows W.focusDown )
              ,("M-S-n", spawn "variety -n")
-             ,("M-C-n", windows W.focusDown )
+             -- ,("M-C-n",  )
 
              -- PREFIX open app,("M-o" ,  )
              -- ,("M-S-o" ,  )
              -- ,("M-C-o" ,  )
 
-             -- ,("M-p" ,  )
+             ,("M-p" , windows W.focusUp )
              ,("M-S-p", spawn "variety -p")
-             ,("M-C-p", windows W.focusUp )
+             -- ,("M-C-p",  )
 
              -- ,("M-q" ,  )
              ,("M-S-q", kill)
