@@ -1,3 +1,5 @@
+import XMonad.Prompt                        -- to get my old key bindings working
+-- import XMonad.Prompt.ConfirmPrompt          -- don't just hard quit
 import XMonad.Layout.ResizableTile
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.FloatKeys
@@ -89,17 +91,24 @@ blue    = "#268bd2"
 cyan    = "#2aa198"
 green   = "#859900"
 
+active      = blue
+activeWarn  = red
+inactive    = base02
+focusColor  = blue
+unfocusColor = base02
+
 myPromptTheme = def
     {
-      -- font                  = myFont
-      -- bgColor               = base03
-    -- , fgColor               = active
-    -- , fgHLight              = base03
-    -- , bgHLight              = active
-    -- , borderColor           = base03
-     promptBorderWidth     = 0
-    , height                = prompt
+      font                  = "xft:Mononoki Nerd Font:pixelsize=20:antialias=true:hinting=true"
+    , bgColor               = base03
+    , fgColor               = active
+    , fgHLight              = base03
+    , bgHLight              = active
+    , borderColor           = active
+    , promptBorderWidth     = 3
+    , height                = 30
     , position              = Top
+    , showCompletionOnTab   = True
     }
 
 warmPromptTheme = myPromptTheme
@@ -490,7 +499,7 @@ myKeymap = [
              -- ,("M-S-=" ,  )
              ,("M-C-=", sendMessage MirrorShrink)
 
-             ,("M--", switchProjectPrompt def)
+             ,("M--", switchProjectPrompt myPromptTheme)
              -- ,("M-S--" ,  )
              ,("M-C--", sendMessage MirrorExpand)
 
