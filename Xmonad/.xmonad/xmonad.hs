@@ -356,6 +356,7 @@ myKeymap = [
              ,("M-o  l w", spawn "libreoffice --writer")
              ,("M-o  m", spawn "gnome-system-monitor")
              ,("M-o  n", spawn myFileManager)
+             ,("M-o  p", spawn "gnome-power-statistics")
              ,("M-o  t", spawn "thunderbird")
              ,("M-o  S-t", spawn myTerminal)
              ,("M-o  v", spawn "virtualbox")
