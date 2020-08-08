@@ -505,7 +505,7 @@ myKeymap = [
 
              -- ,("M-µ" , )
              -- ,("M-S-µ" ,  )
-             ,("M-C-µ", spawn "variety -f")
+             ,("M-C-µ", spawn "variety -f && notify-send -t 1000 \"Wallpaper saved\"")
 
 
              ,("M-$" ,  namedScratchpadAction myScratchPads "note-scratchpad")
