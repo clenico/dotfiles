@@ -7,6 +7,11 @@ have() { type "$1" > /dev/null 2>&1; }
 
 
 
+# Manage kdeconnect
+if have kdeconnect-indicator;then
+    kdeconnect-indicator &
+fi
+
 
 # Manage Bluetooth
 if have blueman-applet;then
