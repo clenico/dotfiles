@@ -335,7 +335,7 @@ myKeymap = [
              ,("M-o  c", spawn "cura")
              -- ,("M-o  c", spawn "colorpicker --short --one-shot --preview | xsel -b")
              ,("M-o  e", spawn "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"scratchemacs-frame\"))' ")
-             ,("M-o  E", spawn "emacs")
+             ,("M-o  S-e", spawn "emacs")
              ,("M-o  f", spawn "firefox")
              ,("M-o  S-f", spawn "gufw")
              ,("M-o  g", spawn "gimp")
