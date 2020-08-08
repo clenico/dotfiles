@@ -574,7 +574,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   [
   --  Reset the layouts on the current workspace to default.
-   -- ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
+   ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
   ]
   ++
 
