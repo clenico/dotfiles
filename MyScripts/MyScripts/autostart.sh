@@ -7,6 +7,13 @@ have() { type "$1" > /dev/null 2>&1; }
 
 
 
+
+# Manage Bluetooth
+if have blueman-applet;then
+    blueman-applet &
+fi
+
+
 # Manage Wallpaper
 if have variety;then
     variety &
