@@ -623,8 +623,8 @@ myHiddenNoWindowsWSColor = "white"
 
 
 main = do
-        xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 1
-        xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0" -- xmobar monitor 2
+        xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc0.hs" -- xmobar monitor 1
+        xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0.hs" -- xmobar monitor 2
         -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc" -- xmobar monitor 2
         xmonad
           $ withNavigation2DConfig def

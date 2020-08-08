@@ -31,7 +31,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=t
                                , "-C", "#C0E550", "-c", "#E55C50"]
 
                       -- Time and date
-                    ,  Run Date "%b %d %Y (%H:%M)" "date" 50
+                    ,  Run Date "%d %m %Y %H:%M" "date" 50
                       -- Network up and down
                               -- network activity monitor (dynamic interface resolution)
                     , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
