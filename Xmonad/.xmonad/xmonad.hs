@@ -342,7 +342,11 @@ myKeymap = [
              ,("M-o  S-g", spawn "gparted")
              ,("M-o  i", spawn "inkscape")
              ,("M-o  h", spawn "urxvt 'htop task manager' -e htop")
-             ,("M-o  k", spawn "krita")
+             ,("M-o  k r", spawn "krita")
+             ,("M-o  k k", spawn "killall screenkey &>/dev/null || screenkey &")
+             ,("M-o  k S-k", spawn "killall screenkey &>/dev/null")
+             ,("M-o  k s", spawn "screenkey --show-settings")
+
              ,("M-o  S-l", spawn "libreoffice")
              ,("M-o  l b", spawn "libreoffice --base")
              ,("M-o  l c", spawn "libreoffice --calc")
