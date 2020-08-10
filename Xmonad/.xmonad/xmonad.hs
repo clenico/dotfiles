@@ -588,7 +588,7 @@ myKeymap = [
              -- ,("M-S-v" ,  )
              -- ,("M-C-v" ,  )
 
-             ,("M-w", spawn "rofi -show window")
+             -- ,("M-w", )
              -- ,("M-S-w" ,  )
              -- ,("M-C-w" ,  )
 
