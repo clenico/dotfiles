@@ -604,6 +604,11 @@ myKeymap = [
              -- ,("M-S-z", )
              -- ,("M-C-z" ,  ) -- USED for multi screen
 
+             ,("M-;", sequence_[toggleScreenSpacingEnabled,
+                               toggleWindowSpacingEnabled])
+             -- ,("M-S-;", )
+             -- ,("M-C-;" ,  )
+
 
              ,("M-<Return>", spawn myTerminal)
              -- ,("M-S-<Return>" ,  )
