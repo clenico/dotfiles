@@ -190,24 +190,25 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
     findTerm   = resource =? "dropdown-terminal"
-    manage_dropdown = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.5
-                 w = 1
-                 t = 0
-                 l = 0
-    manageFullscreen = customFloating $ W.RationalRect l t w h
-                     where
-                       h = 1
-                       w = 1
-                       t = 0
-                       l = 0
-    manageThirdscreen = customFloating $ W.RationalRect l t w h
-                     where
-                       h = 4/5
-                       w = 2/5
-                       t = (1-h)/2
-                       l = (1-w)/2
+
+manage_dropdown = customFloating $ W.RationalRect l t w h
+           where
+             h = 0.5
+             w = 1
+             t = 0
+             l = 0
+manageFullscreen = customFloating $ W.RationalRect l t w h
+                 where
+                   h = 1
+                   w = 1
+                   t = 0
+                   l = 0
+manageThirdscreen = customFloating $ W.RationalRect l t w h
+                 where
+                   h = 4/5
+                   w = 2/5
+                   t = (1-h)/2
+                   l = (1-w)/2
 
 -- Startup
 myStartupHook = do
