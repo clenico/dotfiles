@@ -333,8 +333,9 @@ myWorkspaces = ["1","2","3","4","5","6","7","8","9","10"]
 --Windows Hook
 myManageHook = composeAll . concat $
     [
-      -- [isFullscreen --> doFullFloat]
-      [isDialog --> doCenterFloat]
+      -- [isDialog --> sequence_ [doCenterFloat,doF W.swapUp]]
+      [isFullscreen --> doFullFloat]
+    -- , [isDialog --> doCenterFloat]
     , [isDialog --> doF W.swapUp]
     , [className =? c --> doCenterFloat | c <- myCFloats]
     , [className =? c --> doFullFloat | c <- myCFullscreen]
