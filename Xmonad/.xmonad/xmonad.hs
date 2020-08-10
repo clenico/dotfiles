@@ -547,7 +547,7 @@ myKeymap = [
              ,("M-C-l", sendMessage Expand)
 
              ,("M-m", windows W.focusMaster )
-             -- ,("M-S-m" ,  )
+             ,("M-S-m" , sendMessage $ Toggle MIRROR)
              ,("M-C-m", dwmpromote )
 
              ,("M-n" , windows W.focusDown )
