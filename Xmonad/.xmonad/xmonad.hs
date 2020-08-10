@@ -401,8 +401,12 @@ myKeymap = [
              -- ,("M-C-e" ,  )
 
 
-             ,("M-f", sequence_ [sendMessage $ Toggle NBFULL,
+             ,("M-f", sequence_ [withFocused $ windows . W.sink,
+                                 sendMessage $ Toggle NBFULL,
                                  sendMessage ToggleStruts])
+             -- ,("M-f", sequence_ [sendMessage (JumpToLayout "Full" ),
+                                 -- sendMessage ToggleStruts])
+
              -- ,("M-S-f" ,  )
              -- ,("M-C-f" ,  )
 
