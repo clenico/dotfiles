@@ -504,7 +504,7 @@ myKeymap = [
 
              ,("M-d", spawn "rofi -show run")
              -- ,("M-S-d" ,  )
-             -- ,("M-C-d" ,  )
+             ,("M-C-d" ,  spawn "rofi -show window")
 
 
              ,("M-e", spawn myFileManager)
