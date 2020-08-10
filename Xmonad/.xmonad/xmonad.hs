@@ -145,6 +145,18 @@ projects =
             , projectDirectory = "~/Downloads"
             , projectStartHook = Just $ do spawn "firefox"
             }
+  , Project { projectName      = "bl"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do
+                spawn "blender"
+            }
+  , Project { projectName      = "ve"
+            , projectDirectory = "~/Videos/"
+            , projectStartHook = Just $ do
+                sendMessage (JumpToLayout "Tall_little" )
+                spawn myFileManager
+                spawn "kdenlive"
+            }
   ]
 
 -- Named Scratchpad
