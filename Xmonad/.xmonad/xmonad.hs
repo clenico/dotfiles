@@ -135,6 +135,7 @@ mydefaults = def {
         , startupHook         = myStartupHook
         , handleEventHook     = docksEventHook
                                 <+> minimizeEventHook
+                                <+> myHandleEventHook
         }`additionalKeysP` myKeymap
 
 
