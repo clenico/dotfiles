@@ -58,3 +58,4 @@ bin/.local/bin/vorta
 /Xmonad/.xmonad/xmonad.errors
 xmonad-x86_64-linux
 prompt-history
+/Xmonad/.xmonad/*.rej
