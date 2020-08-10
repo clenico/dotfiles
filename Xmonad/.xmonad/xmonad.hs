@@ -507,9 +507,9 @@ myKeymap = [
              ,("M-C-d" ,  spawn "rofi -show window")
 
 
-             ,("M-e", spawn myFileManager)
+             -- ,("M-e", ) -- USED for multi screen
              ,("M-S-e", io (exitWith ExitSuccess))
-             -- ,("M-C-e" ,  )
+             -- ,("M-C-e" ,  ) -- USED for multi screen
 
 
              ,("M-f", sequence_ [withFocused $ windows . W.sink,
