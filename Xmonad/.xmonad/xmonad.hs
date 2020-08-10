@@ -167,6 +167,14 @@ prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1
 getSortByIndexNoSP =
         fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
 
+
+
+myHandleEventHook :: Event -> X All
+myHandleEventHook = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> manageThirdscreen)
+  -- <+> dynamicPropertyChange "WM_NAME" (className =? "URxvt" --> manageThirdscreen)
+
+
+
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
@@ -176,6 +184,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "note-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"note-emacs\"))' "
                   (resource =? "note-emacs") (nonFloating)
                  ,NS "whatsapp" "whatsapp-nativefier" (className =? "whatsapp-nativefier-d40211") (nonFloating)
+                 ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
@@ -561,6 +570,7 @@ myKeymap = [
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
              ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
              ,("M-<F3>", sequence_[namedScratchpadAction myScratchPads "whatsapp"])
+             ,("M-<F4>", namedScratchpadAction myScratchPads "spotify")
              ,("M1-<F4>", kill)
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
