@@ -489,13 +489,13 @@ myKeymap = [
 
 
               -- Direct Shortcuts
-             ,("M-a" , windows copyToAll ) -- Pin to all workspaces
-             ,("M-S-a" , kill1 ) -- remove window from current, kill if only one
-             ,("M-C-a" , killAllOtherCopies ) -- remove window from all but current
+             -- ,("M-a" ,  ) -- USED for multi screen
+             -- ,("M-S-a" ,  )
+             -- ,("M-C-a" ,  )-- USED for multi screen
 
-             -- ,("M-b" ,  )
-             -- ,("M-S-b" ,  )
-             -- ,("M-C-b" ,  )
+             ,("M-b" , windows copyToAll ) -- Pin to all workspaces
+             ,("M-S-b" , kill1 ) -- remove window from current, kill if only one
+             ,("M-C-b" , killAllOtherCopies ) -- remove window from all but current
 
 
              ,("M-c", namedScratchpadAction myScratchPads "xfce4-appfinder")
@@ -600,9 +600,9 @@ myKeymap = [
              -- ,("M-S-y" ,  )
              -- ,("M-C-y" ,  )
 
-             ,("M-z", sequence_[withFocused minimizeWindow, windows W.focusUp] )
-             ,("M-S-z", withLastMinimized maximizeWindowAndFocus )
-             -- ,("M-C-z" ,  )
+             -- ,("M-z",  ) -- USED for multi screen
+             -- ,("M-S-z", )
+             -- ,("M-C-z" ,  ) -- USED for multi screen
 
 
              ,("M-<Return>", spawn myTerminal)
@@ -663,6 +663,9 @@ myKeymap = [
              ,("M-S-<Tab>", prevNonEmptyWS)
              -- ,("M-C-<Tab>" ,  )
 
+             ,("M3-<", sequence_[withFocused minimizeWindow, windows W.focusUp] )
+             ,("M3-S-<", withLastMinimized maximizeWindowAndFocus )
+
 
 
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
@@ -710,21 +713,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   --Belgian Azerty users use this line
     | (i, k) <- zip (XMonad.workspaces conf) [xK_ampersand, xK_eacute, xK_quotedbl, xK_apostrophe, xK_parenleft, xK_section, xK_egrave, xK_exclam, xK_ccedilla, xK_agrave]
-
       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)
-      , (\i -> W.greedyView i . W.shift i, shiftMask)]]
+                  , (\i -> W.greedyView i . W.shift i, shiftMask)]]
+
 
   ++
   -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
   -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
   [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  | (key, sc) <- zip [xK_r, xK_e, xK_w] [0..]
-  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-  -- -- ctrl-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-  -- -- ctrl-shift-{w,e,r}, Move client to screen 1, 2, or 3
-  -- [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  --     | (key, sc) <- zip [xK_w, xK_e] [0..]
-  --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+  | (key, sc) <- zip [xK_a, xK_z, xK_e] [0..]
+  , (f, m) <- [(W.view, 0), (W.shift, controlMask)]]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
