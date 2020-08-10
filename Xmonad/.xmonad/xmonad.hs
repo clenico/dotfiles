@@ -357,14 +357,17 @@ myManageHook = composeAll . concat $
        ]
     where
 --    viewShift    = doF . liftM2 (.) W.greedyView W.shift
+
     myCFullscreen = ["Xfce4-appfinder"]
-    myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"]
+    myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"
+                ,"Blueman-manager","Spotify","spotify"]
     myTFloats = ["Downloads", "Save As..."]
     myRFloats = []
     myCIgnores = ["trayer"]
     myIgnores = ["desktop_window"]
     my1Shifts = []
-    my2Shifts = ["Org.gnome.Nautilus","Thunar"]
+    my2Shifts = []
+    -- my2Shifts = ["Org.gnome.Nautilus","Thunar"]
     my3Shifts = []
     my4Shifts = []
     my5Shifts = []
@@ -372,7 +375,8 @@ myManageHook = composeAll . concat $
     my7Shifts = ["libreoffice-startcenter","libreoffice-calc","libreoffice-writer","libreoffice-*"]
     -- my8ShiftsClass = ["Emacs"]
     my8ShiftsTitles = ["emacs"]
-    my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
+    -- my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
+    my9Shifts = []
     my10Shifts = ["Thunderbird"]
 
 
