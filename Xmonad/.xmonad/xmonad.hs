@@ -100,21 +100,15 @@ unfocusColor = base02
 myPromptTheme = def
     {
       font                  = "xft:Mononoki Nerd Font:pixelsize=20:antialias=true:hinting=true"
-    , bgColor               = base03
-    , fgColor               = active
-    , fgHLight              = base03
-    , bgHLight              = active
-    , borderColor           = active
+    , bgColor               = "#292D3E"
+    , fgColor               = "#ebd82f"
+    , fgHLight              = "#292D3E"
+    , bgHLight              = "#ebd82f"
+    , borderColor           = "#ebd82f"
     , promptBorderWidth     = 3
     , height                = 30
     , position              = Top
     , showCompletionOnTab   = True
-    }
-
-warmPromptTheme = myPromptTheme
-    { bgColor               = yellow
-    , fgColor               = base03
-    , position              = Top
     }
 
 mydefaults = def {
