@@ -237,8 +237,14 @@ encodeCChar = map fromIntegral . B.unpack
 
 
 -- Layouts
-myLayoutHook =
-  -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
+myTabConfig = def { fontName            = "xft:Mononoki Nerd Font:regular:pixelsize=11"
+                  , activeColor         = "#292d3e"
+                  , inactiveColor       = "#3e445e"
+                  , activeBorderColor   = "#292d3e"
+                  , inactiveBorderColor = "#292d3e"
+                  , activeTextColor     = "#ffffff"
+                  , inactiveTextColor   = "#d0d0d0"
+                  }
 
 -- mTabs     = renamed [Replace "tabs"]
 --            -- I cannot add spacing to this layout because it will
