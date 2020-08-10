@@ -1,3 +1,19 @@
+import Data.Monoid
+import XMonad.Hooks.DynamicProperty
+import XMonad.Layout.Gaps
+import XMonad.Layout.Named (named)
+-- import XMonad.Layout.LayoutCombinators hiding ( (|||) )
+import XMonad.Layout.FixedColumn
+import XMonad.Layout.Dishes
+import XMonad.Layout.TwoPane
+import XMonad.Layout.Combo
+import XMonad.Layout.DragPane
+import XMonad.Layout.Spacing
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.Tabbed
+import XMonad.Layout.LimitWindows
+import XMonad.Layout.Renamed (renamed, Rename(Replace))
+import XMonad.Layout.Magnifier(magnifier)
 import XMonad.Prompt                        -- to get my old key bindings working
 -- import XMonad.Prompt.ConfirmPrompt          -- don't just hard quit
 import XMonad.Layout.ResizableTile
@@ -15,7 +31,9 @@ import XMonad.Actions.RotSlaves
 -- import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 -- import System.IO (Handle, hPutStrLn)
-import XMonad
+import XMonad hiding ( (|||) )
+import XMonad.Layout.LayoutCombinators
+-- import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.DynamicProjects
