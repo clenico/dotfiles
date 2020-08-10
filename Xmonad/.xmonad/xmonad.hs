@@ -163,6 +163,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
                  ,NS "note-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"note-emacs\"))' "
                   (resource =? "note-emacs") (nonFloating)
+                 ,NS "whatsapp" "whatsapp-nativefier" (className =? "whatsapp-nativefier-d40211") (nonFloating)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
@@ -543,6 +544,7 @@ myKeymap = [
 
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
              ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
+             ,("M-<F3>", sequence_[namedScratchpadAction myScratchPads "whatsapp"])
              ,("M1-<F4>", kill)
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
