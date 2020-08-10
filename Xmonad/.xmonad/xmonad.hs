@@ -222,16 +222,81 @@ encodeCChar = map fromIntegral . B.unpack
 myLayoutHook =
   -- spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True
 
-               minimize
-               $ avoidStruts
-               $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
+-- mTabs     = renamed [Replace "tabs"]
+--            -- I cannot add spacing to this layout because it will
+--            -- add spacing between window and tabs which looks bad.
+--            $ tabbed shrinkText myTabConfig
+
+
+
+mFixedColumn = named "Split" (FixedColumn 1 20 30 10)
+
+
+-- Makes setting the spacingRaw simpler to write. The spacingRaw
+-- module adds a configurable amount of space around windows.
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing i = spacingRaw False (Border i i i i) False (Border i i i i) True
+
+mySpacingValue = 5
+
+-- Below is a variation of the above except no borders are applied
+-- if fewer than two windows. So a single window has no gaps.
+mySpacing' :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing' i = spacingRaw False (Border i i i i) False (Border i i i i) False
+
+
+
+mTall = named "Tall" (minimize
+                     $ mySpacing' mySpacingValue
+                     -- $ smartBorders
+                     -- $ avoidStruts
+                     $ ResizableTall 1 (3/100) (1/2) [])
+
+mTall_little = named "Tall_little" (minimize
+                                   $ mySpacing' mySpacingValue
+                     -- $ smartBorders
+                     -- $ avoidStruts
+                     $ ResizableTall 1 (3/100) (1/4) [])
+
+mDishes = named "Dishes" (minimize
+                         $ mySpacing' mySpacingValue
+                          $ Dishes 2 (1/6))
+
+mThreeColMid = named "ThreeColMid" (minimize
+                                   $ mySpacing' mySpacingValue
+                                    $ ThreeColMid 1 (3/100) (1/2))
+
+mGrid = named "Grid" (minimize
+                      $ Grid)
+
+mSpiral = named "Spiral" (minimize
+                          $ mySpacing' mySpacingValue
+                          $ spiral (3/4))
+
+mFull = named "Full" (noBorders Full)
+
+mFloat = named "Float" (minimize
+                        $ mySpacing' mySpacingValue
+                        $ simpleFloat)
+
+mTabs = named "Tabs"(minimize
+                     $ mySpacing' mySpacingValue
+                     $ tabbed shrinkText myTabConfig)
+
+myLayoutHook = avoidStruts
                $ smartBorders
-               $ tiled ||| ThreeColMid 1 (3/100) (1/2) ||| Grid ||| spiral (6/7) ||| Circle||| noBorders Full ||| simpleFloat
-                    where
-                    tiled   = ResizableTall  nmaster delta ratio []
-                    nmaster = 1
-                    delta   = 3/100
-                    ratio   = 1/2
+               $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
+               $ mkToggle (single MIRROR)
+               $   mTall
+               ||| mTall_little
+               ||| mDishes
+               ||| mThreeColMid
+               ||| mGrid
+               ||| mSpiral
+               ||| Circle
+               -- ||| mFull
+               ||| mTabs
+               ||| mFloat
 
 
 
@@ -544,9 +609,17 @@ myKeymap = [
              ,("M-C--", sendMessage MirrorExpand)
 
 
-             ,("M-<Space>", sendMessage NextLayout )
-             -- ,("M-S-<Space>" ,  )
-             ,("M-C-<Space>", sendMessage FirstLayout )
+             ,("M-<Space> a" , sendMessage (JumpToLayout "Tall" ))
+             ,("M-<Space> c" , sendMessage (JumpToLayout "ThreeColMid" ))
+             ,("M-<Space> d" , sendMessage (JumpToLayout "Dishes" ))
+             ,("M-<Space> f" , sendMessage (JumpToLayout "Float" ))
+             ,("M-<Space> S-f" , sendMessage (JumpToLayout "Full" ))
+             ,("M-<Space> g" , sendMessage (JumpToLayout "Grid" ))
+             ,("M-<Space> k" , sendMessage (JumpToLayout "Tall_little" ))
+             ,("M-<Space> s" , sendMessage (JumpToLayout "Spiral" ))
+             ,("M-<Space> t" , sendMessage (JumpToLayout "Tabs" ))
+             ,("M-S-<Space>", sendMessage (JumpToLayout "Tall" ))
+             ,("M-C-<Space>" , sendMessage NextLayout)
 
              ,("M-<Delete>", killAll )
              ,("M-S-<Delete>", sequence_[killAll,removeWorkspace])
@@ -666,14 +739,6 @@ main = do
         , ppUrgent = xmobarColor myUrgentWSColor ""
         , ppSep = " | "
         , ppWsSep = " "
-        , ppLayout = (\ x -> case x of
-           "Minimize ResizableTall"        -> "<fn=2>Tall</fn>"
-           "Minimize Grid"                 -> "<fn=2>Grid</fn>"
-           "Minimize Spiral"               -> "<fn=2>spiral</fn>"
-           "Minimize ThreeCol"             -> "<fn=2>ThreeColMid</fn>"
-           "Minimize Full"                 -> "<fn=2>Full</fn>"
-           "Minimize Circle"               -> "<fn=2>Circle</fn>"
-           _                               -> x )
  }
 }
 
