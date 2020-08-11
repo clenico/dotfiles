@@ -1,3 +1,4 @@
+import XMonad.Actions.UpdatePointer
 import Data.Monoid
 import XMonad.Hooks.DynamicProperty
 import XMonad.Layout.Gaps
@@ -763,18 +764,22 @@ main = do
           $ ewmh
           $ docks
           $ mydefaults {
-        logHook =  dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ def {
+        logHook =  dynamicLogWithPP def {
         ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x
         , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
         , ppCurrent = xmobarColor myCurrentWSColor "" . wrap """"
         , ppVisible = xmobarColor myVisibleWSColor "" . wrap """"
-        , ppHidden = wrap """"
+        , ppHidden = noScratchpad
+        -- , ppHidden = wrap """"
         -- , ppHiddenNoWindows = xmobarColor myHiddenNoWindowsWSColor ""
+        -- ,ppHiddenNoWindows = noScratchpad
         , ppUrgent = xmobarColor myUrgentWSColor ""
         , ppSep = " | "
         , ppWsSep = " "
- }
+ }>> updatePointer (0.5, 0.5) (0, 0)
 }
+
+noScratchpad ws = if ws == "NSP" then "" else ws
 
 {-
   TODO:
@@ -782,4 +787,5 @@ main = do
           - https://rina-kawakita.tistory.com/entry/xmonadxmonadhs
           - https://gist.github.com/mopemope/c13e8a10da2769c357ad78696ac640e9
           - https://github.com/randomthought/xmonad-config/blob/master/xmonad.hs
+          - https://gist.github.com/sboehler/5f48017a6b53805485180a9a6d81196b
 -}
