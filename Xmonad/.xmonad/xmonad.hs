@@ -719,16 +719,17 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   --Belgian Azerty users use this line
     | (i, k) <- zip (XMonad.workspaces conf) [xK_ampersand, xK_eacute, xK_quotedbl, xK_apostrophe, xK_parenleft, xK_section, xK_egrave, xK_exclam, xK_ccedilla, xK_agrave]
-      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)
-                  , (\i -> W.greedyView i . W.shift i, shiftMask)]]
+      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)
+                  , (\i -> W.view i . W.shift i, shiftMask)
+                  , (\i -> W.greedyView i, controlMask)]]
 
 
   ++
-  -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
-  -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
-  [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  | (key, sc) <- zip [xK_a, xK_z, xK_e] [0..]
-  , (f, m) <- [(W.view, 0), (W.shift, controlMask)]]
+-- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
+-- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+  [((m .|. modMask, key), f sc)
+    | (key, sc) <- zip [xK_a, xK_z, xK_e] [0..]
+    , (f, m) <- [(viewScreen def, 0), (sendToScreen def, shiftMask)]]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
