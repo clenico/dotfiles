@@ -795,11 +795,9 @@ myHiddenNoWindowsWSColor = "white"
 
 
 main = do
-        xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc0.hs" -- xmobar monitor 1
-        xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc0.hs" -- xmobar monitor 2
-        xmproc2 <- spawnPipe "xmobar -x 2 /home/niccle27/.config/xmobar/xmobarrc0.hs" -- xmobar monitor 3
-        xmproc3 <- spawnPipe "xmobar -x 3 /home/niccle27/.config/xmobar/xmobarrc0.hs" -- xmobar monitor 4
-        -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc" -- xmobar monitor 2
+        xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc.hs" -- xmobar monitor 1
+        xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc.hs" -- xmobar monitor 2
+        xmproc2 <- spawnPipe "xmobar -x 2 /home/niccle27/.config/xmobar/xmobarrc.hs" -- xmobar monitor 3
         xmonad
           $ withNavigation2DConfig def
           $ dynamicProjects projects
@@ -807,7 +805,7 @@ main = do
           $ docks
           $ mydefaults {
         logHook =  dynamicLogWithPP def {
-        ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x
+        ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x >> System.IO.hPutStrLn xmproc2 x
         , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
         , ppCurrent = xmobarColor myCurrentWSColor "" . wrap """"
         , ppVisible = xmobarColor myVisibleWSColor "" . wrap """"
