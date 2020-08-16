@@ -515,12 +515,14 @@ myKeymap = [
              ,("M-o  z", spawn "filezilla")
 
               -- MENU copy
-             ,("M-y c", spawn "xprop -id $(xdotool getactivewindow) WM_CLASS| awk '{gsub(/[\",\"]/,\"\",$3);print $3}' | xsel -b")
-             ,("M-y d f", spawn "scrot '%Y-%m-%d-%H:%M:%S_F.png' -d 3 -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
-             ,("M-y d w", spawn "scrot '%Y-%m-%d-%H:%M:%S_W.png' -d 3l -u -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
-             ,("M-y s", spawn "colorpicker --short --one-shot --preview | xsel -b")
-             ,("M-y f", spawn "scrot '%Y-%m-%d-%H:%M:%S_F.png' -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
-             ,("M-y w", spawn "scrot '%Y-%m-%d-%H:%M:%S_W.png' -u -e 'mv $f ~/Pictures/Screenshots/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/'" )
+             ,("M-y c", spawn "colorpicker --short --one-shot --preview | xsel -b")
+             ,("M-y S-c", spawn "xprop -id $(xdotool getactivewindow) WM_CLASS| awk '{gsub(/[\",\"]/,\"\",$3);print $3}' | xsel -b")
+             ,("M-y d f", spawn "scrot '%Y-%m-%d-%H:%M:%S.png' -d 3 -e 'mv $f ~/Pictures/Screenshots/Full/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Full/'" )
+             ,("M-y d s", spawn "flameshot screen -d 3000 -p ~/Pictures/Screenshots/Screen")
+             ,("M-y d w", spawn "scrot '%Y-%m-%d-%H-%M-%S.png' -d 3l -u -e 'mv $f ~/Pictures/Screenshots/Windows/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Windows/'" )
+             ,("M-y s", spawn "flameshot screen -p ~/Pictures/Screenshots/Screen")
+             ,("M-y f", spawn "scrot '%Y-%m-%d-%H:%M:%S.png' -e 'mv $f ~/Pictures/Screenshots/Full/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Full/'" )
+             ,("M-y w", spawn "scrot '%Y-%m-%d-%H-%M-%S.png' -u -e 'mv $f ~/Pictures/Screenshots/Windows/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Windows/'" )
 
 
               -- Direct Shortcuts
@@ -606,9 +608,8 @@ myKeymap = [
              ,("M-C-r", spawn "xmonad --recompile && xmonad --restart")
              ,("M1-r", spawn "xmonad --restart")
 
-             -- ,("M-s" ,  )
-             ,("M-S-s", spawn "flameshot gui")
              ,("M-s" , spawn "albert toggle")
+             ,("M-S-s", spawn "flameshot gui -p ~/Pictures/Screenshots/Zone/")
              -- ,("M-C-s" ,  )
 
              -- ,("M-t" ,  )
