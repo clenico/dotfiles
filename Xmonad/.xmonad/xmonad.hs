@@ -154,7 +154,14 @@ mydefaults = def {
 -- Projects
 projects :: [Project]
 projects =
-  [ Project { projectName      = "3"
+  [
+    Project { projectName      = "1"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do
+                spawn myTerminal
+                spawn myTerminal
+            }
+  , Project { projectName      = "3"
             , projectDirectory = "~/Downloads"
             , projectStartHook = Just $ do spawn "firefox"
             }
@@ -163,6 +170,26 @@ projects =
             , projectStartHook = Just $ do
                 spawn "blender"
             }
+
+  , Project { projectName      = "gi"
+            , projectDirectory = "~/Pictures/"
+            , projectStartHook = Just $ do
+                spawn "gimp"
+            }
+
+    , Project { projectName      = "in"
+            , projectDirectory = "~/Pictures/"
+            , projectStartHook = Just $ do
+                spawn "inkscape"
+            }
+
+
+  , Project { projectName      = "ob"
+            , projectDirectory = "~/Videos/"
+            , projectStartHook = Just $ do
+                spawn "obs"
+            }
+
   , Project { projectName      = "ve"
             , projectDirectory = "~/Videos/"
             , projectStartHook = Just $ do
