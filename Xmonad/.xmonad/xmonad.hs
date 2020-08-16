@@ -222,9 +222,15 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
                  ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
                  ,NS "note-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"note-emacs\"))' "
-                  (resource =? "note-emacs") (nonFloating)
-                 ,NS "whatsapp" "whatsapp-nativefier" (className =? "whatsapp-nativefier-d40211") (nonFloating)
+                   (resource =? "note-emacs") (nonFloating)
+                 ,NS "todo-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"TODO-emacs\"))' ~/Documents/todolist.org"
+                  (resource =? "TODO-emacs") (manageThirdscreen)
+                 -- ,NS "whatsapp" "whatsapp-nativefier" (className =? "whatsapp-nativefier-d40211") (nonFloating)
+                 ,NS "whatsapp" "surf https://web.whatsapp.com/" (className =? "Surf") (manageThirdscreen)
+                 -- ,NS "spotify" " firefox --no-remote -P Music  --class music" (className =? "music") (manageThirdscreen)
                  ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
+                 ,NS "discord" "discord" (className =? "discord") (manageThirdscreen)
+                 ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
                 ]
   where
     spawnTerm  = myTerminal ++ " -name dropdown-terminal"
@@ -364,6 +370,7 @@ myManageHook = composeAll . concat $
       [isFullscreen --> doFullFloat]
     -- , [isDialog --> doCenterFloat]
     , [isDialog --> doF W.swapUp]
+    , [title =? c --> hasBorder False | c <- myNoBorderW]
     , [className =? c --> doCenterFloat | c <- myCFloats]
     , [className =? c --> doFullFloat | c <- myCFullscreen]
     , [title =? t --> doFloat | t <- myTFloats]
@@ -385,6 +392,7 @@ myManageHook = composeAll . concat $
     where
 --    viewShift    = doF . liftM2 (.) W.greedyView W.shift
 
+    myNoBorderW = ["albert — Albert"]
     myCFullscreen = ["Xfce4-appfinder"]
     myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"
                 ,"Blueman-manager","Spotify","spotify"]
@@ -600,6 +608,7 @@ myKeymap = [
 
              -- ,("M-s" ,  )
              ,("M-S-s", spawn "flameshot gui")
+             ,("M-s" , spawn "albert toggle")
              -- ,("M-C-s" ,  )
 
              -- ,("M-t" ,  )
