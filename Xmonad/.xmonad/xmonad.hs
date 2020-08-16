@@ -88,11 +88,9 @@ import qualified XMonad.StackSet as W
 -- Defaults
 myModMask = mod4Mask
 myTerminal = "urxvt"
-myFileManager = "thunar"
-
+myFileManager = "nautilus"
 
 prompt      = 20
-
 
 base03  = "#002b36"
 base02  = "#073642"
