@@ -21,12 +21,10 @@ if have kdeconnect-indicator;then
     kdeconnect-indicator &
 fi
 
-
 # Manage Bluetooth
 if have blueman-applet;then
     blueman-applet &
 fi
-
 
 # Manage Wallpaper
 if have variety;then
