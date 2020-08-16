@@ -671,7 +671,7 @@ myKeymap = [
 
              ,("M-$" ,  namedScratchpadAction myScratchPads "note-scratchpad")
              -- ,("M-S-$" ,  )
-             -- ,("M-C-$", )
+             ,("M-C-$", namedScratchpadAction myScratchPads "todo-scratchpad")
 
 
              -- ,("M-=" ,  )
@@ -716,8 +716,10 @@ myKeymap = [
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
              ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
              ,("M-<F3>", sequence_[namedScratchpadAction myScratchPads "whatsapp"])
+             ,("M-S-<F3>", namedScratchpadAction myScratchPads "messenger")
              ,("M-<F4>", namedScratchpadAction myScratchPads "spotify")
-             ,("M1-<F4>", kill)
+             ,("M-<F5>", namedScratchpadAction myScratchPads "discord")
+             -- ,("M1-<F4>", kill)
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
 
