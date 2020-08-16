@@ -1,3 +1,4 @@
+import XMonad.Actions.PhysicalScreens
 import XMonad.Actions.UpdatePointer
 import Data.Monoid
 import XMonad.Hooks.DynamicProperty
