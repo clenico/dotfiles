@@ -5,6 +5,10 @@
 
 have() { type "$1" > /dev/null 2>&1; }
 
+# Manage albert
+if have albert;then
+    albert &
+fi
 
 
 # Manage kdeconnect
