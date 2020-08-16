@@ -10,6 +10,11 @@ if have albert;then
     albert &
 fi
 
+# Launch evolution-alarm-notify
+# Needed for notification from gnome-calendar
+if have evolution-alarm-notify;then
+    evolution-alarm-notify &
+fi
 
 # Manage kdeconnect
 if have kdeconnect-indicator;then
