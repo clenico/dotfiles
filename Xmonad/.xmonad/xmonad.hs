@@ -504,6 +504,7 @@ myKeymap = [
              ,("M-o  m", spawn "gnome-system-monitor")
              ,("M-o  n", spawn myFileManager)
              ,("M-o  p", spawn "gnome-power-statistics")
+             ,("M-o  s", spawn "~/MyScripts/rofi-screenlayout.sh")
              ,("M-o  t", spawn "thunderbird")
              ,("M-o  S-t", spawn myTerminal)
              ,("M-o  v", spawn "virtualbox")
@@ -512,6 +513,8 @@ myKeymap = [
              ,("M-o  S-q", spawn "qtcreator")
              ,("M-o  w", spawn "kwrite")
              ,("M-o  S-w", spawn "cheese")
+             -- ,("M-o  x", )
+             -- ,("M-o  y", )
              ,("M-o  z", spawn "filezilla")
 
               -- MENU copy
