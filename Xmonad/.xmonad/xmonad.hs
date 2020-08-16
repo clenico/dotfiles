@@ -480,7 +480,7 @@ myKeymap = [
              ,("M-o  a", spawn "audacity")
              ,("M-o  b", spawn "blender")
              ,("M-o  c", spawn "cura")
-             -- ,("M-o  c", spawn "colorpicker --short --one-shot --preview | xsel -b")
+             ,("M-o  d", spawn "discord")
              ,("M-o  e", spawn "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"scratchemacs-frame\"))' ")
              ,("M-o  S-e", spawn "emacs")
              ,("M-o  f", spawn "firefox")
