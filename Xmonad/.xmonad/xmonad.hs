@@ -261,7 +261,11 @@ myStartupHook = do
     -- spawn "$HOME/.xmonad/scripts/autostart.sh"
     spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0 --monitor  \"primary\""
     spawnOnce "/home/niccle27/MyScripts/autostart.sh > ~/.output/autostart.sh"
-    -- spawnOn "3" "firefox"
+    spawnOnOnce "NSP" "gnome-calendar"
+    spawnOnOnce "NSP" "surf https://web.whatsapp.com/"
+    spawnOnOnce "NSP" "messenger-nativefier"
+    spawnOnOnce "NSP" "discord"
+    spawnOnOnce "NSP" "skypeforlinux"
     spawnOnOnce "2" myFileManager
     spawnOnOnce "3" "firefox"
     setWMName "LG3D"
