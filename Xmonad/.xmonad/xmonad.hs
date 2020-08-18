@@ -230,6 +230,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  -- ,NS "spotify" " firefox --no-remote -P Music  --class music" (className =? "music") (manageThirdscreen)
                  ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
                  ,NS "discord" "discord" (className =? "discord") (manageThirdscreen)
+                 ,NS "skype" "skypeforlinux" (className =? "Skype") (manageFullscreen)
                  ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
                 ]
   where
@@ -719,6 +720,7 @@ myKeymap = [
              ,("M-S-<F3>", namedScratchpadAction myScratchPads "messenger")
              ,("M-<F4>", namedScratchpadAction myScratchPads "spotify")
              ,("M-<F5>", namedScratchpadAction myScratchPads "discord")
+             ,("M-S-<F5>", namedScratchpadAction myScratchPads "skype")
              -- ,("M1-<F4>", kill)
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
