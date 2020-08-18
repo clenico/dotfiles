@@ -359,8 +359,10 @@ myLayoutHook = avoidStruts
 
 
 --Workspaces
-myWorkspaces :: [String]
-myWorkspaces = ["1","2","3","4","5","6","7","8","9","10"]
+-- myWorkspaces :: [String]
+myExtraWorkspaces = ["NSP"]
+myKbWorkspaces = ["1","2","3","4","5","6","7","8","9","10"]
+myWorkspaces = myKbWorkspaces ++ myExtraWorkspaces
 
 
 
