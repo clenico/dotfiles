@@ -610,7 +610,7 @@ myKeymap = [
              ,("M-r", rotAllDown )
              ,("M-S-r", rotAllUp )
              ,("M-C-r", spawn "xmonad --recompile && xmonad --restart")
-             ,("M1-r", spawn "xmonad --restart")
+             ,("M3-r", spawn "xmonad --restart")
 
              ,("M-s" , spawn "albert toggle")
              ,("M-S-s", spawn "flameshot gui -p ~/Pictures/Screenshots/Zone/")
