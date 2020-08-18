@@ -829,4 +829,5 @@ noScratchpad ws = if ws == "NSP" then "" else ws
           - https://github.com/randomthought/xmonad-config/blob/master/xmonad.hs
           - https://gist.github.com/sboehler/5f48017a6b53805485180a9a6d81196b
           - https://github.com/davama/dotfiles/blob/master/xmonad/xmonad.hs
+          - https://git.iiens.net/martin2018/xmonad/-/blob/master/xmonad.hs
 -}
