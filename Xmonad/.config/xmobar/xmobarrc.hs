@@ -51,7 +51,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=t
                                          "--", "--mintemp", "20", "--maxtemp", "100"] 50
 
                       -- Ram used number and percent
-                    , Run Memory ["-t", " <used>M (<usedratio>%)"] 20
+                    , Run Memory ["-t", "<usedratio>%"] 20
                     -- battery monitor
                     , Run Battery        [ "--template" , ": <acstatus>"
                                          , "--Low"      , "10"        -- units: %
@@ -64,9 +64,9 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=t
                                                    -- discharging status
                                                    , "-o"	, "<left>%"
                                                    -- AC "on" status
-                                                   , "-O"	, "<fc=#dAA520>Charging:<left>%</fc>"
+                                                   , "-O"	, "<fc=#dAA520>c:<left>%</fc>"
                                                    -- charged status
-                                                   , "-i"	, "<fc=#006000>Charged:<left>%</fc>"
+                                                   , "-i"	, "<fc=#006000>C:<left>%</fc>"
                                          ] 50
 
                       -- Disk space free
