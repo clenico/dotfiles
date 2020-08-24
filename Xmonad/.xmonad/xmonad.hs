@@ -745,6 +745,11 @@ myKeymap = [
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
 
+              -- Hamster
+              ,("M-<Home>", spawn "hamster")
+              ,("M-<End>", spawn "hamster stop")
+              ,("M-<Insert>", spawn "hamster add")
+
               -- Move floating window
              ,("M-<L>", withFocused (keysMoveWindow (-80, 0  )))
              ,("M-<U>", withFocused (keysMoveWindow (0  , -80)))
