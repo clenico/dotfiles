@@ -64,9 +64,9 @@ if pgrep i3 && have dunst; then
     dunst &
 fi
 
-if have emacs; then
-    emacs &
-fi
+# if have emacs; then
+#     emacs &
+# fi
 
 if have feh; then
     feh --no-fehbg --bg-center `wallpaper.py` &
