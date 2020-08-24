@@ -177,10 +177,16 @@ projects =
                 spawn "gimp"
             }
 
-    , Project { projectName      = "in"
+  , Project { projectName      = "in"
             , projectDirectory = "~/Pictures/"
             , projectStartHook = Just $ do
                 spawn "inkscape"
+            }
+
+  , Project { projectName      = "lo"
+            , projectDirectory = "~/Documents/"
+            , projectStartHook = Just $ do
+                spawn "libreoffice"
             }
 
 
