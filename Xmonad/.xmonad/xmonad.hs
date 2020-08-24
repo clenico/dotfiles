@@ -225,15 +225,15 @@ myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
                  ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
-                 ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
+                 -- ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
                  ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
                  ,NS "note-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"note-emacs\"))' "
-                   (resource =? "note-emacs") (nonFloating)
-                 ,NS "todo-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"TODO-emacs\"))' ~/Documents/todolist.org"
-                  (resource =? "TODO-emacs") (manageThirdscreen)
-                 -- ,NS "whatsapp" "whatsapp-nativefier" (className =? "whatsapp-nativefier-d40211") (nonFloating)
+                   (title =? "note-emacs") (nonFloating)
+                 ,NS "agenda-emacs" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"agenda-emacs\"))' --eval \"(org-agenda-list)\" \"(org-agenda-day-view)\" \"(delete-other-windows)\""
+                  (title =? "agenda-emacs") (manageThirdscreen)
+                 ,NS "todo-list" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"todo-list\"))' --eval \"(org-todo-list)\" \"(delete-other-windows)\""
+                  (resource =? "todo-list") (manageThirdscreen)
                  ,NS "whatsapp" "surf https://web.whatsapp.com/" (className =? "Surf") (manageThirdscreen)
-                 -- ,NS "spotify" " firefox --no-remote -P Music  --class music" (className =? "music") (manageThirdscreen)
                  ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
                  ,NS "discord" "discord" (className =? "discord") (manageThirdscreen)
                  ,NS "skype" "skypeforlinux" (className =? "Skype") (manageFullscreen)
@@ -382,6 +382,7 @@ myManageHook = composeAll . concat $
       -- [isDialog --> sequence_ [doCenterFloat,doF W.swapUp]]
       [isFullscreen --> doFullFloat]
     -- , [isDialog --> doCenterFloat]
+
     , [isDialog --> doF W.swapUp]
     , [title =? c --> hasBorder False | c <- myNoBorderW]
     , [className =? c --> doCenterFloat | c <- myCFloats]
@@ -684,7 +685,12 @@ myKeymap = [
 
              ,("M-$" ,  namedScratchpadAction myScratchPads "note-scratchpad")
              -- ,("M-S-$" ,  )
-             ,("M-C-$", namedScratchpadAction myScratchPads "todo-scratchpad")
+             -- ,("M-C-$", namedScratchpadAction myScratchPads "todo-scratchpad")
+             ,("M-C-$", namedScratchpadAction myScratchPads "agenda-emacs")
+
+             ,("M-:" ,  namedScratchpadAction myScratchPads "todo-list")
+             -- ,("M-S-:" ,  )
+             ,("M-C-:", spawn "emacsclient --create-frame --alternate-editor='' --frame-parameters='(quote (name . \"capture\"))' --no-wait --eval \"(my/org-capture-frame)\"")
 
 
              -- ,("M-=" ,  )
@@ -727,7 +733,7 @@ myKeymap = [
 
 
              ,("M-<F1>", namedScratchpadAction myScratchPads "pavucontrol")
-             ,("M-<F2>", namedScratchpadAction myScratchPads "gnome-calendar")
+             -- ,("M-<F2>", )
              ,("M-<F3>", sequence_[namedScratchpadAction myScratchPads "whatsapp"])
              ,("M-S-<F3>", namedScratchpadAction myScratchPads "messenger")
              ,("M-<F4>", namedScratchpadAction myScratchPads "spotify")
