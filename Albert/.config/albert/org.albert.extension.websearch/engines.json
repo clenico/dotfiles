@@ -1,74 +1,74 @@
 [
-  {
-    "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{61608040-4706-4fd0-9152-34889aaa343a}.",
-    "name": "libgen",
-    "trigger": "lg ",
-    "url": "https://libgen.lc/search.php?req=%s"
-  },
-  {
-    "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{4d6759a0-cf8f-4968-95e0-0aaf418d9938}.",
-    "name": "Piratebay",
-    "trigger": "pb ",
-    "url": "https://www1.thepiratebay3.to/s/?q=%s"
-  },
-  {
-    "iconPath": ":google",
-    "name": "Google",
-    "trigger": "gg ",
-    "url": "https://www.google.com/search?q=%s"
-  },
-  {
-    "iconPath": ":youtube",
-    "name": "Youtube",
-    "trigger": "yt ",
-    "url": "https://www.youtube.com/results?search_query=%s"
-  },
-  {
-    "iconPath": ":amazon",
-    "name": "Amazon",
-    "trigger": "ama ",
-    "url": "http://www.amazon.com/s/?field-keywords=%s"
-  },
-  {
-    "iconPath": ":ebay",
-    "name": "Ebay",
-    "trigger": "eb ",
-    "url": "http://www.ebay.com/sch/i.html?_nkw=%s"
-  },
-  {
-    "iconPath": ":github",
-    "name": "GitHub",
-    "trigger": "gh ",
-    "url": "https://github.com/search?utf8=✓&q=%s"
-  },
-  {
-    "iconPath": ":wolfram",
-    "name": "Wolfram Alpha",
-    "trigger": "=",
-    "url": "https://www.wolframalpha.com/input/?i=%s"
-  },
-  {
-    "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{e7c4e7a7-05fd-453e-af41-90143780bbf6}.",
-    "name": "Searchcode",
-    "trigger": "sc ",
-    "url": "https://searchcode.com/?q=%s"
-  },
-  {
-    "iconPath": ":duckduckgo",
-    "name": "DuckDuckGo",
-    "trigger": "dd ",
-    "url": "https://duckduckgo.com/?q=%s"
-  },
-  {
-    "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{fd173c98-6b09-4754-883a-1f328fe8ec4d}.",
-    "name": "Archlinux",
-    "trigger": "ar ",
-    "url": "https://www.archlinux.org/packages/?q=%s"
-  },
-  {
-    "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{32d43b54-aa65-4398-87f8-6ba5acbda618}.",
-    "name": "Aur",
-    "trigger": "au ",
-    "url": "https://aur.archlinux.org/packages/?K=%s"
-  }
+    {
+        "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{61608040-4706-4fd0-9152-34889aaa343a}.",
+        "name": "libgen",
+        "trigger": "lg ",
+        "url": "https://libgen.lc/search.php?req=%s"
+    },
+    {
+        "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{4d6759a0-cf8f-4968-95e0-0aaf418d9938}.",
+        "name": "Piratebay",
+        "trigger": "pb ",
+        "url": "https://www1.thepiratebay3.to/s/?q=%s"
+    },
+    {
+        "iconPath": ":google",
+        "name": "Google",
+        "trigger": "gg ",
+        "url": "https://www.google.com/search?q=%s"
+    },
+    {
+        "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{10d8edfb-f871-40a2-8318-331047a939f8}.",
+        "name": "Youtube",
+        "trigger": "y ",
+        "url": "https://www.youtube.com/results?search_query=%s"
+    },
+    {
+        "iconPath": ":amazon",
+        "name": "Amazon",
+        "trigger": "ama ",
+        "url": "http://www.amazon.com/s/?field-keywords=%s"
+    },
+    {
+        "iconPath": ":ebay",
+        "name": "Ebay",
+        "trigger": "eb ",
+        "url": "http://www.ebay.com/sch/i.html?_nkw=%s"
+    },
+    {
+        "iconPath": ":github",
+        "name": "GitHub",
+        "trigger": "gh ",
+        "url": "https://github.com/search?utf8=✓&q=%s"
+    },
+    {
+        "iconPath": ":wolfram",
+        "name": "Wolfram Alpha",
+        "trigger": "=",
+        "url": "https://www.wolframalpha.com/input/?i=%s"
+    },
+    {
+        "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{e7c4e7a7-05fd-453e-af41-90143780bbf6}.",
+        "name": "Searchcode",
+        "trigger": "sc ",
+        "url": "https://searchcode.com/?q=%s"
+    },
+    {
+        "iconPath": ":duckduckgo",
+        "name": "DuckDuckGo",
+        "trigger": "dd ",
+        "url": "https://duckduckgo.com/?q=%s"
+    },
+    {
+        "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{fd173c98-6b09-4754-883a-1f328fe8ec4d}.",
+        "name": "Archlinux",
+        "trigger": "ar ",
+        "url": "https://www.archlinux.org/packages/?q=%s"
+    },
+    {
+        "iconPath": "/home/niccle27/.config/albert/org.albert.extension.websearch/{32d43b54-aa65-4398-87f8-6ba5acbda618}.",
+        "name": "Aur",
+        "trigger": "au ",
+        "url": "https://aur.archlinux.org/packages/?K=%s"
+    }
 ]
