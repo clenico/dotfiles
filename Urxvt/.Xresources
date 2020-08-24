@@ -68,7 +68,7 @@ URxvt.color12: rgb:5c/5c/ff
 URxvt*font: xft:TerminessTTFNerdFontMono:size=16
 URxvt.jumpScroll: true
 URxvt.perl-ext: reactivity
-URxvt.perl-ext-common: keyboard-select,clipboard,url-select
+URxvt.perl-ext-common: keyboard-select,clipboard,url-select,matcher
 
 URxvt.keysym.M-m: perl:reactivity:mon
 URXVT.keysym.M-0: perl:reactivity:resetfont
@@ -86,6 +86,8 @@ URxvt.url-select.launcher:  firefox
 URxvt.url-select.underline: true
 
 URxvt.keyboard-select.clipboard: true
+
+URxvt.matcher.rend.0: Uline Bold fg6
 
 URxvt.depth:                      32
 URxvt.background:                 [95]#222D31
