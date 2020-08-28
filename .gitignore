@@ -60,3 +60,4 @@ xmonad-x86_64-linux
 prompt-history
 /Xmonad/.xmonad/*.rej
 /Xmonad/.xmonad/xmonad_exclusive_sp.hs
+Albert/.config/albert/core.db
