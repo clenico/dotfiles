@@ -232,7 +232,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "agenda-emacs" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"agenda-emacs\"))' --eval \"(org-agenda-list)\" \"(org-agenda-day-view)\" \"(delete-other-windows)\""
                   (title =? "agenda-emacs") (manageThirdscreen)
                  ,NS "todo-list" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"todo-list\"))' --eval \"(org-todo-list)\" \"(delete-other-windows)\""
-                  (resource =? "todo-list") (manageThirdscreen)
+                  (title =? "todo-list") (manageThirdscreen)
                  ,NS "whatsapp" "surf https://web.whatsapp.com/" (className =? "Surf") (manageThirdscreen)
                  ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
                  ,NS "discord" "discord" (className =? "discord") (manageThirdscreen)
