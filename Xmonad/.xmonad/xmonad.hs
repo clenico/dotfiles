@@ -403,10 +403,10 @@ myManageHook = composeAll . concat $
     , [resource =? c --> doShift (myWorkspaces !! 7) | c <- my8ShiftsTitles]
     , [className =? c --> doShift (myWorkspaces !! 8) | c <- my9Shifts]
     , [className =? c --> doShift (myWorkspaces !! 9) | c <- my10Shifts]
+    , [ className =? c --> doShift "NSP" | c <- myNSPShifts]
        ]
     where
 --    viewShift    = doF . liftM2 (.) W.greedyView W.shift
-
     myNoBorderW = ["albert — Albert"]
     myCFullscreen = ["Xfce4-appfinder"]
     myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"
@@ -415,6 +415,7 @@ myManageHook = composeAll . concat $
     myRFloats = []
     myCIgnores = ["trayer"]
     myIgnores = ["desktop_window"]
+    myNSPShifts=["Skype"]
     my1Shifts = []
     my2Shifts = []
     -- my2Shifts = ["Org.gnome.Nautilus","Thunar"]
