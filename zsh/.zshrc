@@ -138,6 +138,7 @@ alias mm="mkdir build && cd build && cmake .. && make"
 alias da="deactivate"
 alias jn="jupyter notebook"
 alias dtp="cd ~/Documents/Tmp/"
+alias hist="history"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
