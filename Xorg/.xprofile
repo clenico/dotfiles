@@ -22,8 +22,6 @@ get_model                       # get the laptop model
 if [[ $model == "VivoBook_ASUSLaptop X580GD_N580GD 1.0" ]];then # config only on asus vivobook (15 inch)
     :
     # xinput set-prop 13 "libinput Accel Speed" 1
-elif [[ $model == "TP300LAB" ]];then # config only on asus tp300la (13 inch)
-    xinput -disable "Atmel"
 elif [[ $model == "20JGS03D01" ]];then # config only on thinkpad x1 yoga (14 inch)
     xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 0
     xset -b
