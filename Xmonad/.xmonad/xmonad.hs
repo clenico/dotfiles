@@ -269,14 +269,14 @@ myStartupHook = do
     spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0 --monitor  \"primary\""
     spawnOnce "$HOME/MyScripts/autostart.sh > ~/.output/autostart.sh"
     spawnOnOnce "7" "korganizer"
-    spawnOnOnce "NSP" "surf https://web.whatsapp.com/"
-    spawnOnOnce "NSP" "messenger-nativefier"
-    spawnOnOnce "NSP" "discord"
-    spawnOnOnce "NSP" "skypeforlinux"
-    spawnOnOnce "NSP" "gnome-pomodoro"
     spawnOnOnce "2" myFileManager
     spawnOnOnce "3" "firefox"
     spawnOnOnce "8" "emacs"
+    spawnOnOnce "NSP" "surf https://web.whatsapp.com/"
+    spawnOnOnce "NSP" "messenger-nativefier"
+    spawnOnOnce "NSP" "discord"
+    spawnOnOnce "NSP" "gnome-pomodoro"
+    spawnOnOnce "NSP" "skypeforlinux"
 
     setWMName "LG3D"
 

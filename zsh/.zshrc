@@ -140,6 +140,7 @@ alias mm="mkdir build && cd build && cmake .. && make"
 alias da="deactivate"
 alias jn="jupyter notebook"
 alias dtp="cd ~/Documents/Tmp/"
+alias hist="history"
 
 alias auu="sudo apt-get -y update && sudo apt-get -y upgrade "
 alias au="sudo apt-get -y update "
