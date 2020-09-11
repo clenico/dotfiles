@@ -125,6 +125,7 @@ alias dn="cd  ~/Documents/Projects/Done/"
 
 alias ranloc='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias rl='ranloc'
+alias hist="history"
 alias python="python3"
 alias pip="pip3"
 alias pip2="/usr/bin/pip"
@@ -133,11 +134,21 @@ alias r="ranger"
 alias ubuntu="docker run -it --rm mubuntu"
 alias centos="docker run -it --rm centos bash"
 alias gc="git clone "
+alias tt="touch "
 alias psg="ps -aux | grep"
 alias mm="mkdir build && cd build && cmake .. && make"
 alias da="deactivate"
 alias jn="jupyter notebook"
 alias dtp="cd ~/Documents/Tmp/"
+
+alias auu="sudo apt-get -y update && sudo apt-get -y upgrade "
+alias au="sudo apt-get -y update "
+alias ai="sudo apt-get install "
+alias arm="sudo apt remove "
+alias aarm="sudo apt autoremove "
+alias pwc="pwd | xclip -selection c"
+
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
