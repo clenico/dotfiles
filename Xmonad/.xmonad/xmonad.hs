@@ -823,9 +823,9 @@ myHiddenNoWindowsWSColor = "white"
 
 
 main = do
-        xmproc0 <- spawnPipe "xmobar -x 0 /home/niccle27/.config/xmobar/xmobarrc.hs" -- xmobar monitor 1
-        xmproc1 <- spawnPipe "xmobar -x 1 /home/niccle27/.config/xmobar/xmobarrc.hs" -- xmobar monitor 2
-        xmproc2 <- spawnPipe "xmobar -x 2 /home/niccle27/.config/xmobar/xmobarrc.hs" -- xmobar monitor 3
+        xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 1
+        xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 2
+        xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 3
         xmonad
           $ withNavigation2DConfig def
           $ dynamicProjects projects
