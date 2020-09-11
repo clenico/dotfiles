@@ -18,6 +18,9 @@ fi
 }
 get_model                       # get the laptop model
 
+# desktop_session="env | grep DESKTOP_SESSION= | awk ' {split($0,a,\"=\"); print a[2]}'"
+
+xsetroot -cursor_name left_ptr
 
 if [[ $model == "VivoBook_ASUSLaptop X580GD_N580GD 1.0" ]];then # config only on asus vivobook (15 inch)
     :
