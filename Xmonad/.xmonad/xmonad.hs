@@ -237,6 +237,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
                  ,NS "discord" "discord" (className =? "discord") (manageThirdscreen)
                  ,NS "skype" "skypeforlinux" (className =? "Skype") (manageFullscreen)
+                 ,NS "pomodoro" "gnome-pomodoro" (className =? "Gnome-pomodoro") (manageThirdscreen)
                  ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
                 ]
   where
@@ -272,9 +273,11 @@ myStartupHook = do
     spawnOnOnce "NSP" "messenger-nativefier"
     spawnOnOnce "NSP" "discord"
     spawnOnOnce "NSP" "skypeforlinux"
+    spawnOnOnce "NSP" "gnome-pomodoro"
     spawnOnOnce "2" myFileManager
     spawnOnOnce "3" "firefox"
     spawnOnOnce "8" "emacs"
+
     setWMName "LG3D"
 
 -- IDK wth is that
@@ -743,6 +746,7 @@ myKeymap = [
              ,("M-<F5>", namedScratchpadAction myScratchPads "discord")
              ,("M-S-<F5>", namedScratchpadAction myScratchPads "skype")
              -- ,("M1-<F4>", kill)
+             ,("M-<F8>", namedScratchpadAction myScratchPads "pomodoro")
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
 
