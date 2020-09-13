@@ -18,6 +18,9 @@ fi
 }
 get_model                       # get the laptop model
 
+# desktop_session="env | grep DESKTOP_SESSION= | awk ' {split($0,a,\"=\"); print a[2]}'"
+
+xsetroot -cursor_name left_ptr
 
 if [[ $model == "VivoBook_ASUSLaptop X580GD_N580GD 1.0" ]];then # config only on asus vivobook (15 inch)
     :
@@ -33,18 +36,20 @@ fi
 
 
 
+
 # export EDITOR="emacsclient --alternate-editor='' --no-wait --create-frame" # $EDITOR opens in terminal
 # export VISUAL="emacsclient --alternate-editor='' --no-wait --create-frame" # $VISUAL opens in GUI mode
 
 export EDITOR="emacsclient --nw" # $EDITOR opens in terminal
 export VISUAL="emacsclient --nw" # $VISUAL opens in GUI mode
 
-
 # export EDITOR="emacsclient --no-wait --create-frame --frame-parameters='(quote (name . \"scratchemacs-frame\"))'" # $EDITOR opens in terminal
 # export VISUAL="emacsclient --no-wait --create-frame --frame-parameters='(quote (name . \"scratchemacs-frame\"))'" # $VISUAL opens in GUI mode
-
 # export EDITOR="emacsclient -a -c" # $EDITOR opens in terminal
 # export VISUAL="emacsclient -a -c" # $VISUAL opens in GUI mode
+# export EDITOR="emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . "scratchemacs-frame"))' " # $EDITOR opens in terminal
+# export VISUAL="emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . "scratchemacs-frame"))' " # $VISUAL opens in GUI mode
+
 
 export PATH="${PATH}:/opt/OpenDrive"
 export QT_SCREEN_SCALE_FACTORS=1

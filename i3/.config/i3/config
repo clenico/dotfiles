@@ -22,6 +22,8 @@ set $Locker i3lock && sleep 1
 # set $Locker i3exit lock
 # set $Locker gnome-screensaver-command --lock && sleep 1
 
+set $terminal "urxvt"
+set $file_manager "nautilus"
 # Set Workspaces
 
 set $ws1 "1"
@@ -76,6 +78,7 @@ workspace_auto_back_and_forth no
 # start a terminal
 # bindsym $mod+Return exec termite
 bindsym $mod+Return exec i3-sensible-terminal #execute the terminal describe by $TERMINAL
+bindsym $mod+u exec i3-sensible-terminal #execute the terminal describe by $TERMINAL
 bindsym $mod+c exec xfce4-appfinder
 # bindsym Print exec --no-startup-id i3-scrot
 # bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
@@ -322,7 +325,7 @@ mode "$mode_launch" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_launch"
+bindsym $mod+o mode "$mode_launch"
 
 ############
 # Graphics #
@@ -359,6 +362,7 @@ for_window [title="Led_*"] floating enable resize set 80 80
 for_window [class="matplotlib"] floating enable resize set 800 600
 for_window [class="Matplotlib"] floating enable resize set 800 600
 for_window [class="SimpleScreenRecorder"] floating enable resize set 800 600
+
 
 
 # disable floating windows
@@ -410,5 +414,10 @@ client.background       #ffffff
 # Start up #
 ############
 
-exec --no-startup-id exec "termite" --name scratchpad
-exec --no-startup-id "/home/niccle27/MyScripts/autostart.sh > ~/.output/autostart.sh"
+exec --no-startup-id exec "$terminal" --name scratchpad
+exec --no-startup-id exec "emacs"
+exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal exec $terminal'
+exec --no-startup-id i3-msg 'workspace $ws2; exec $file_manager'
+exec --no-startup-id i3-msg 'workspace $ws3; exec firefox'
+
+exec --no-startup-id "$HOME/MyScripts/autostart.sh > ~/.output/autostart.sh"

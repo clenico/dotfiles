@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/niccle27/.oh-my-zsh"
+  export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -125,6 +125,7 @@ alias dn="cd  ~/Documents/Projects/Done/"
 
 alias ranloc='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias rl='ranloc'
+alias hist="history"
 alias python="python3"
 alias pip="pip3"
 alias pip2="/usr/bin/pip"
@@ -133,6 +134,7 @@ alias r="ranger"
 alias ubuntu="docker run -it --rm mubuntu"
 alias centos="docker run -it --rm centos bash"
 alias gc="git clone "
+alias tt="touch "
 alias psg="ps -aux | grep"
 alias mm="mkdir build && cd build && cmake .. && make"
 alias da="deactivate"
@@ -140,17 +142,26 @@ alias jn="jupyter notebook"
 alias dtp="cd ~/Documents/Tmp/"
 alias hist="history"
 
+alias auu="sudo apt-get -y update && sudo apt-get -y upgrade "
+alias au="sudo apt-get -y update "
+alias ai="sudo apt-get install "
+alias arm="sudo apt remove "
+alias aarm="sudo apt autoremove "
+alias pwc="pwd | xclip -selection c"
+
+
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib6
 export PATH=$PATH:/usr/local/cuda/bin
-export PATH=$PATH:"/home/niccle27/MyScripts/"
+export PATH=$PATH:"$HOME/MyScripts/"
 # Fix completion git and docker
 autoload -Uz compinit
 compinit
 
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /home/niccle27/.local/bin/virtualenvwrapper.sh
+source $HOME/.local/bin/virtualenvwrapper.sh
 
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
