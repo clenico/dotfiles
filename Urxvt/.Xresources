@@ -41,8 +41,8 @@ XTerm*selectToClipboard: true
 *.color11: #d9a400
 
 ! blue
-*.color4: #153a8a
-*.color12: #2ca2f5
+*.color4: #2ca2f5
+*.color12: #6cbcf5
 
 ! magenta
 *.color5: #696ebf
