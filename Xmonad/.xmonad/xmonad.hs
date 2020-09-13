@@ -613,7 +613,7 @@ myKeymap = [
 
              -- PREFIX open app,("M-o" ,  )
              -- ,("M-S-o" ,  )
-             -- ,("M-C-o" ,  )
+             ,("M-C-o" ,  toggleWS)
 
              ,("M-p" , windows W.focusUp )
              ,("M-S-p", spawn "variety -p")
