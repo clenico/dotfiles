@@ -195,6 +195,11 @@ projects =
             , projectStartHook = Just $ do
                 spawn "obs"
             }
+  , Project { projectName      = "py"
+            , projectDirectory = "~/Documents/Programming/Python/"
+            , projectStartHook = Just $ do
+                spawn "pycharm"
+            }
 
   , Project { projectName      = "ve"
             , projectDirectory = "~/Videos/"
