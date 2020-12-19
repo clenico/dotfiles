@@ -548,9 +548,9 @@ myKeymap = [
              ,("M-y d f", spawn "scrot '%Y-%m-%d-%H:%M:%S.png' -d 3 -e 'mv $f ~/Pictures/Screenshots/Full/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Full/'" )
              ,("M-y d s", spawn "flameshot screen -d 3000 -p ~/Pictures/Screenshots/Screen")
              ,("M-y d w", spawn "scrot '%Y-%m-%d-%H-%M-%S.png' -d 3l -u -e 'mv $f ~/Pictures/Screenshots/Windows/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Windows/'" )
-             ,("M-y s", spawn "flameshot screen -p ~/Pictures/Screenshots/Screen")
-             ,("M-y f", spawn "scrot '%Y-%m-%d-%H:%M:%S.png' -e 'mv $f ~/Pictures/Screenshots/Full/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Full/'" )
-             ,("M-y w", spawn "scrot '%Y-%m-%d-%H-%M-%S.png' -u -e 'mv $f ~/Pictures/Screenshots/Windows/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Windows/'" )
+             ,("M-y s", spawn "~/MyScripts/makeScreenshot.sh screen yes ~/Pictures/Screenshots/Screen")
+             ,("M-y f", spawn "~/MyScripts/makeScreenshot.sh full yes ~/Pictures/Screenshots/Full" )
+             ,("M-y w", spawn "~/MyScripts/makeScreenshot.sh window yes ~/Pictures/Screenshots/Windows" )
 
 
               -- Direct Shortcuts
@@ -637,7 +637,7 @@ myKeymap = [
              ,("M3-r", spawn "xmonad --restart")
 
              ,("M-s" , spawn "albert toggle")
-             ,("M-S-s", spawn "flameshot gui -p ~/Pictures/Screenshots/Zone/")
+             ,("M-S-s", spawn "~/MyScripts/makeScreenshot.sh zone yes ~/Pictures/Screenshots/Zone")
              -- ,("M-C-s" ,  )
 
              -- ,("M-t" ,  )
