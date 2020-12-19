@@ -9,8 +9,7 @@ isEditName=$2
 location=$3
 
 date=$(date "+%Y-%m-%d-%H:%M:%S")
-
-tmp="/tmp/imgTmp";
+tmp="/tmp/imgTmp.png"
 
 if [[ $location == "" ]];
 then
@@ -19,43 +18,36 @@ fi
 
 
 if [[ $screenshot_type == "zone" ]];then
-    if [[ $isEditName == "yes" ]];then
-            flameshot gui -r > $tmp
-            content=$(cat $tmp)
-            if [[ $content == "screenshot failed" ]];then
-                echo "succeed"
-            else
-                name=$(zenity --entry --text "Save as" --entry-text "$date") && cp $tmp $location/$name.png
-            fi
-    elif [[ $isEditName == "no" ]];then
-        flameshot gui -p $location
-    fi
+    flameshot gui -r > $tmp
 
 elif [[ $screenshot_type == "screen" ]];then
-    if [[ $isEditName == "yes" ]];then
-        flameshot screen -r > $tmp
-        if [[ $content == "screenshot failed" ]];then
-            echo "screenshot failed"
-        else
-            name=$(zenity --entry --text "Save as" --entry-text "$date") && cp $tmp $location/$name.png
-        fi
-    elif [[ $isEditName == "no" ]];then
-        flameshot screen -p $location
-    fi
+    flameshot screen -r > $tmp
 
 elif [[ $screenshot_type == "full" ]];then
-    if [[ $isEditName == "yes" ]];then
-        scrot '%Y-%m-%d-%H:%M:%S.png' -e 'mv $f /tmp/imgTmp'
-        name=$(zenity --entry --text "Save as" --entry-text "$date") && cp $tmp $location/$name.png
-    elif [[ $isEditName == "no" ]];then
-        scrot '%Y-%m-%d-%H:%M:%S.png' -e 'mv $f ~/Pictures/Screenshots/Full/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Full/'
-    fi
+    scrot $tmp
 
 elif [[ $screenshot_type == "window" ]];then
+    scrot $tmp -u
+fi
+
+
+content=$(cat $tmp)
+if [[ $content == "screenshot failed" ]];then
+    echo "succeed"
+    exit
+else
     if [[ $isEditName == "yes" ]];then
-        scrot '%Y-%m-%d-%H:%M:%S.png' -e 'mv $f /tmp/imgTmp'
-        name=$(zenity --entry --text "Save as" --entry-text "$date") && cp $tmp $location/$name.png
+        name=$(zenity --entry --text "Save as" --entry-text "$date")
     elif [[ $isEditName == "no" ]];then
-        scrot '%Y-%m-%d-%H-%M-%S.png' -u -e 'mv $f ~/Pictures/Screenshots/Windows/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Windows/':
+        name=$date
     fi
+fi
+
+if [ "$name" != "" -a -f $tmp ];then
+    destination=$location/$name.png
+    cp $tmp $destination
+    notify-send -t 2000 'Screenshot saved at $destination'
+    rm $tmp
+else
+    echo "No temporary screenshot found at $tmp"
 fi
