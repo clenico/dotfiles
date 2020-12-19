@@ -229,7 +229,7 @@ myHandleEventHook = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> mana
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
-                 ,NS "zeal" "zeal" (resource =? "zeal") (manageFullscreen)
+                 ,NS "zeal" "zeal" (resource =? "zeal") (nonFloating)
                  -- ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
                  ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
                  ,NS "note-scratchpad" "emacsclient --alternate-editor='' --no-wait --create-frame --frame-parameters='(quote (name . \"note-emacs\"))' "
