@@ -418,7 +418,7 @@ myManageHook = composeAll . concat $
     myNoBorderW = ["albert — Albert"]
     myCFullscreen = ["Xfce4-appfinder"]
     myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"
-                ,"Blueman-manager","Spotify","spotify","Hamster"]
+                ,"Blueman-manager","Spotify","spotify","Hamster","Zenity"]
     myTFloats = ["Downloads", "Save As...","capture"]
     myRFloats = []
     myCIgnores = ["trayer"]
