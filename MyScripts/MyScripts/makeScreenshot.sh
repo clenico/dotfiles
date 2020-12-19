@@ -11,6 +11,11 @@ location=$3
 date=$(date "+%Y-%m-%d-%H:%M:%S")
 tmp="/tmp/imgTmp.png"
 
+if [ -f $tmp ];then
+    rm $tmp
+fi
+
+
 if [[ $location == "" ]];
 then
     location="."
@@ -31,9 +36,17 @@ elif [[ $screenshot_type == "window" ]];then
 fi
 
 
-content=$(cat $tmp)
-if [[ $content == "screenshot failed" ]];then
-    echo "succeed"
+if [ -f $tmp ];then
+    :
+else
+    echo "$tmp file couldn't be found"
+    exit
+fi
+
+
+content=$(tr -d '\0' < $tmp)
+if [ "$content" = "screenshot failed" -o "$content" = "screenshot aborted" ];then
+    echo "$content"
     exit
 else
     if [[ $isEditName == "yes" ]];then
@@ -46,8 +59,8 @@ fi
 if [ "$name" != "" -a -f $tmp ];then
     destination=$location/$name.png
     cp $tmp $destination
-    notify-send -t 2000 'Screenshot saved at $destination'
-    rm $tmp
+    notify-send "Screenshot saved at $destination" -t 2000
+
 else
     echo "No temporary screenshot found at $tmp"
 fi
