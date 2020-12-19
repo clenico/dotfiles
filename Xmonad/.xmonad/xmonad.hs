@@ -242,6 +242,7 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "spotify" "spotify" (className =? "Spotify") (defaultFloating)
                  ,NS "discord" "discord" (className =? "discord") (manageThirdscreen)
                  ,NS "skype" "skypeforlinux" (className =? "Skype") (manageFullscreen)
+                 ,NS "pomodoro" "gnome-pomodoro" (className =? "Gnome-pomodoro") (manageThirdscreen)
                  ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
                 ]
   where
