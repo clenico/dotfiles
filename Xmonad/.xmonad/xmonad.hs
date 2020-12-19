@@ -751,6 +751,7 @@ myKeymap = [
              ,("M-<F5>", namedScratchpadAction myScratchPads "discord")
              ,("M-S-<F5>", namedScratchpadAction myScratchPads "skype")
              -- ,("M1-<F4>", kill)
+             ,("M-<F8>", namedScratchpadAction myScratchPads "pomodoro")
              ,("M-<F11>", sendMessage (IncMasterN 1))
              ,("M-<F12>", sendMessage (IncMasterN (-1)))
 
