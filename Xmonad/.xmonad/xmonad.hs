@@ -392,7 +392,7 @@ myManageHook = composeAll . concat $
       [isFullscreen --> doFullFloat]
     -- , [isDialog --> doCenterFloat]
 
-    , [isDialog --> doF W.swapUp]
+    , [isDialog --> doF W.swapMaster]
     , [title =? c --> hasBorder False | c <- myNoBorderW]
     , [className =? c --> doCenterFloat | c <- myCFloats]
     , [className =? c --> doFullFloat | c <- myCFullscreen]
