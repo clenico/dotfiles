@@ -595,9 +595,9 @@ myKeymap = [
              ,("M-C-h", sendMessage Shrink)
 
 
+             -- ,("M-i" ,  )
              ,("M-S-i", sinkAll )
-             -- ,("M-S-i" ,  )
-             -- ,("M-C-i" ,  )
+             ,("M-C-i" , namedScratchpadAction myScratchPads "zeal")
 
              ,("M-j", windowGo D True )
              ,("M-S-j", windowSwap D False )
