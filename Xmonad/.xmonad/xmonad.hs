@@ -280,7 +280,9 @@ myStartupHook = do
     spawnOnOnce "NSP" "surf https://web.whatsapp.com/"
     spawnOnOnce "NSP" "messenger-nativefier"
     spawnOnOnce "NSP" "discord"
+    spawnOnOnce "NSP" "gnome-pomodoro"
     spawnOnOnce "NSP" "skypeforlinux"
+
     setWMName "LG3D"
 
 -- IDK wth is that
