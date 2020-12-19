@@ -854,7 +854,7 @@ main = do
         , ppSep = " | "
         , ppWsSep = " "
  }
->> updatePointer (0.5, 0.5) (0, 0)
+-- >> updatePointer (0.5, 0.5) (0, 0)
 }
 
 noScratchpad ws = if ws == "NSP" then "" else ws
