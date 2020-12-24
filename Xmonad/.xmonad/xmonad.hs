@@ -567,8 +567,9 @@ myKeymap = [
              -- ,("M-S-c" ,  )
              -- ,("M-C-c" ,  )
 
-             ,("M-d", spawn "rofi -show run")
-             -- ,("M-S-d" ,  )
+
+             ,("M-d", spawn "rofi -no-lazy-grab -show drun -modi drun -theme ~/.config/rofi/config_launchpad.rasi")
+             ,("M-S-d" , spawn "rofi -show run -theme monokai" )
              ,("M-C-d" ,  spawn "rofi -show window")
 
 

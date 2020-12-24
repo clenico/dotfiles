@@ -1,4 +1,6 @@
+configuration {
 rofi.combi-modi:    window,drun,ssh
 rofi.theme:         Monokai
 rofi.font:          hack 14
 rofi.modi:          combi
+ }
