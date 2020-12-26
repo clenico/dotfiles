@@ -539,6 +539,7 @@ myKeymap = [
              ,("M-o  S-q", spawn "qtcreator")
              ,("M-o  w", spawn "kwrite")
              ,("M-o  S-w", spawn "cheese")
+             ,("M-o x", spawn "a=$(zenity --file-selection --directory) && echo $a > /tmp/location")
              -- ,("M-o  x", )
              -- ,("M-o  y", )
              ,("M-o  z", spawn "filezilla")
@@ -549,9 +550,16 @@ myKeymap = [
              ,("M-y d f", spawn "scrot '%Y-%m-%d-%H:%M:%S.png' -d 3 -e 'mv $f ~/Pictures/Screenshots/Full/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Full/'" )
              ,("M-y d s", spawn "flameshot screen -d 3000 -p ~/Pictures/Screenshots/Screen")
              ,("M-y d w", spawn "scrot '%Y-%m-%d-%H-%M-%S.png' -d 3l -u -e 'mv $f ~/Pictures/Screenshots/Windows/' && notify-send -t 2000 'Screenshot saved at ~/Pictures/Screenshots/Windows/'" )
+
              ,("M-y s", spawn "~/MyScripts/makeScreenshot.sh screen yes ~/Pictures/Screenshots/Screen")
              ,("M-y f", spawn "~/MyScripts/makeScreenshot.sh full yes ~/Pictures/Screenshots/Full" )
              ,("M-y w", spawn "~/MyScripts/makeScreenshot.sh window yes ~/Pictures/Screenshots/Windows" )
+             ,("M-y z", spawn "~/MyScripts/makeScreenshot.sh zone yes ~/Pictures/Screenshots/Zone" )
+
+             ,("M-y S-s", spawn "~/MyScripts/makeScreenshot.sh screen yes $(cat /tmp/location)n")
+             ,("M-y S-f", spawn "~/MyScripts/makeScreenshot.sh full yes $(cat /tmp/location)" )
+             ,("M-y S-w", spawn "~/MyScripts/makeScreenshot.sh window yes $(cat /tmp/location)" )
+             ,("M-y S-z", spawn "~/MyScripts/makeScreenshot.sh zone yes $(cat /tmp/location)" )
 
 
               -- Direct Shortcuts
