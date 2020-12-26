@@ -59,7 +59,7 @@ fi
 if [ "$name" != "" -a -f $tmp ];then
     destination=$location/$name.png
     cp $tmp $destination
-    notify-send "Screenshot saved at $destination" -t 2000
+    notify-send "Screenshot saved at $destination"
 
 else
     echo "No temporary screenshot found at $tmp"
