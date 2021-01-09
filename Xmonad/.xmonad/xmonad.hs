@@ -1,8 +1,9 @@
 import XMonad.Actions.PhysicalScreens
+-- import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.UpdatePointer
 import Data.Monoid
 import XMonad.Hooks.DynamicProperty
-import XMonad.Layout.Gaps
+-- import XMonad.Layout.Gaps
 import XMonad.Layout.Named (named)
 -- import XMonad.Layout.LayoutCombinators hiding ( (|||) )
 import XMonad.Layout.FixedColumn
@@ -132,7 +133,7 @@ myPromptTheme = def
 mydefaults = def {
           normalBorderColor   = "#0066B5"
         , focusedBorderColor  = "#00ff00"
-        , focusFollowsMouse   = False
+        , focusFollowsMouse   = True
         , mouseBindings       = myMouseBindings
         , workspaces          = myWorkspaces
         , keys                = myKeys
@@ -140,14 +141,14 @@ mydefaults = def {
         , borderWidth         = 3
         , layoutHook          = myLayoutHook
         , manageHook          =  manageDocks
-                                 <+>insertPosition Below Newer
+                                 -- <+>insertPosition Below Newer
                                  <+> myManageHook
                                  <+> manageSpawn
                                  <+> namedScratchpadManageHook myScratchPads
         , startupHook         = myStartupHook
         , handleEventHook     = docksEventHook
                                 <+> minimizeEventHook
-                                <+> myHandleEventHook
+                                -- <+> myHandleEventHook
         }`additionalKeysP` myKeymap
 
 
@@ -189,6 +190,11 @@ projects =
                 spawn "libreoffice"
             }
 
+  , Project { projectName      = "nf"
+            , projectDirectory = "~/Videos/"
+            , projectStartHook = Just $ do
+                spawn "firefox -new-window http://netflix.com"
+            }
 
   , Project { projectName      = "ob"
             , projectDirectory = "~/Videos/"
@@ -201,6 +207,13 @@ projects =
                 spawn "pycharm"
             }
 
+  , Project { projectName      = "sp"
+            , projectDirectory = "~/Videos/"
+            , projectStartHook = Just $ do
+                spawn "firefox -new-window http://netflix.com"
+                spawn "libreoffice"
+            }
+
   , Project { projectName      = "ve"
             , projectDirectory = "~/Videos/"
             , projectStartHook = Just $ do
@@ -208,6 +221,7 @@ projects =
                 spawn myFileManager
                 spawn "kdenlive"
             }
+
   ]
 
 -- Named Scratchpad
@@ -220,14 +234,15 @@ getSortByIndexNoSP =
 
 
 
-myHandleEventHook :: Event -> X All
-myHandleEventHook = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> manageThirdscreen)
-  -- <+> dynamicPropertyChange "WM_NAME" (className =? "URxvt" --> manageThirdscreen)
+-- myHandleEventHook :: Event -> X All
+-- myHandleEventHook = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> manageThirdscreen)
+--   -- <+> dynamicPropertyChange "WM_NAME" (className =? "URxvt" --> manageThirdscreen)
 
 
 
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-terminal") (manage_dropdown)
+myScratchPads = [ NS "dropdown-terminal" spawnTerm_dropdown (resource =? "dropdown-terminal") (manage_dropdown)
+                 ,NS "floating-terminal" spawnTerm_floating (resource =? "floating-terminal") (manageThirdscreen)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
                  ,NS "zeal" "zeal" (resource =? "zeal") (nonFloating)
                  ,NS "translate" "crow" (className =? "Crow Translate") (nonFloating)
@@ -247,8 +262,8 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm (resource =? "dropdown-termin
                  ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
                 ]
   where
-    spawnTerm  = myTerminal ++ " -name dropdown-terminal"
-    findTerm   = resource =? "dropdown-terminal"
+    spawnTerm_dropdown  = myTerminal ++ " -name dropdown-terminal"
+    spawnTerm_floating  = myTerminal ++ " -name floating-terminal"
 
 manage_dropdown = customFloating $ W.RationalRect l t w h
            where
@@ -444,6 +459,7 @@ myManageHook = composeAll . concat $
 centreRect = W.RationalRect 0.25 0.25 0.5 0.5
 
 -- If the window is floating then (f), if tiled then (n)
+
 floatOrNot f n = withFocused $ \windowId -> do
     floats <- gets (W.floating . windowset)
     if windowId `M.member` floats -- if the current window is floating...
@@ -714,8 +730,7 @@ myKeymap = [
              -- ,("M-S-:" ,  )
              ,("M-C-:", spawn "emacsclient --create-frame --alternate-editor='' --frame-parameters='(quote (name . \"capture\"))' --no-wait --eval \"(my/org-capture-frame)\"")
 
-
-             -- ,("M-=" ,  )
+             ,("M-=" ,  namedScratchpadAction myScratchPads "floating-terminal")
              -- ,("M-S-=" ,  )
              ,("M-C-=", sendMessage MirrorShrink)
 
@@ -865,7 +880,7 @@ main = do
         , ppSep = " | "
         , ppWsSep = " "
  }
--- >> updatePointer (0.5, 0.5) (0, 0)
+>> updatePointer (0.5, 0.5) (0, 0)
 }
 
 noScratchpad ws = if ws == "NSP" then "" else ws
