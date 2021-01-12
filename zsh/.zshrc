@@ -149,6 +149,7 @@ alias arm="sudo apt remove "
 alias aarm="sudo apt autoremove "
 alias pwc="pwd | xclip -selection c"
 
+alias rdox="docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd "
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
