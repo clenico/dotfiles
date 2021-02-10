@@ -157,6 +157,7 @@ alias rdox="docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib6
 export PATH=$PATH:/usr/local/cuda/bin
 export PATH=$PATH:"$HOME/MyScripts/"
+export PATH=$PATH:"$HOME/.local/bin/"
 # Fix completion git and docker
 autoload -Uz compinit
 compinit
