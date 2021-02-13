@@ -148,6 +148,7 @@ alias ai="sudo apt-get install "
 alias arm="sudo apt remove "
 alias aarm="sudo apt autoremove "
 alias pwc="pwd | xclip -selection c"
+alias n="notify-send \"Work is done\""
 
 alias rdox="docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd "
 
@@ -157,6 +158,7 @@ alias rdox="docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib6
 export PATH=$PATH:/usr/local/cuda/bin
 export PATH=$PATH:"$HOME/MyScripts/"
+export PATH=$PATH:"$HOME/.local/bin/"
 # Fix completion git and docker
 autoload -Uz compinit
 compinit
@@ -166,3 +168,4 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
+PATH=${PATH}:/home/imagedpt/.local/bin
