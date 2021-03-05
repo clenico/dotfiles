@@ -81,10 +81,11 @@ URxvt.keysym.Shift-Control-V:     perl:clipboard:paste
 URxvt.keysym.Control-y:           perl:clipboard:paste
 URxvt.keysym.M-C-v:               perl:clipboard:paste_escaped
 
-
 URxvt.url-select.launcher:  firefox
 URxvt.url-select.underline: true
-
+URxvt.clipboard.autocopy: true
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 URxvt.keyboard-select.clipboard: true
 
 URxvt.matcher.rend.0: Uline Bold fg6
