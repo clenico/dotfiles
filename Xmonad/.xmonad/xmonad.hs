@@ -1,3 +1,4 @@
+import XMonad.Util.Cursor
 import XMonad.Actions.PhysicalScreens
 -- import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.UpdatePointer
@@ -166,6 +167,10 @@ projects =
             , projectDirectory = "~/Downloads"
             , projectStartHook = Just $ do spawn "firefox"
             }
+  , Project { projectName      = "10"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn "thunderbird"
+            }
   , Project { projectName      = "bl"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do
@@ -262,8 +267,8 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm_dropdown (resource =? "dropdo
                  ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
                 ]
   where
-    spawnTerm_dropdown  = myTerminal ++ " -name dropdown-terminal"
-    spawnTerm_floating  = myTerminal ++ " -name floating-terminal"
+    spawnTerm_dropdown  = myTerminal ++ " -name dropdown-terminal -e tmux"
+    spawnTerm_floating  = myTerminal ++ " -name floating-terminal -e tmux"
 
 manage_dropdown = customFloating $ W.RationalRect l t w h
            where
@@ -298,7 +303,7 @@ myStartupHook = do
     spawnOnOnce "NSP" "discord"
     spawnOnOnce "NSP" "gnome-pomodoro"
     spawnOnOnce "NSP" "skypeforlinux"
-
+    setDefaultCursor xC_left_ptr
     setWMName "LG3D"
 
 -- IDK wth is that
@@ -435,7 +440,7 @@ myManageHook = composeAll . concat $
     myCFullscreen = ["Xfce4-appfinder"]
     myCFloats = ["Arandr", "Arcolinux-tweak-tool.py", "Arcolinux-welcome-app.py", "Galculator", "feh", "mpv", "Xfce4-terminal","Pavucontrol","Catfish","qt5ct"
                 ,"Blueman-manager","Spotify","spotify","Hamster","Zenity"]
-    myTFloats = ["Downloads", "Save As...","capture"]
+    myTFloats = ["Downloads", "Save As...","capture","1 Reminder"]
     myRFloats = []
     myCIgnores = ["trayer"]
     myIgnores = ["desktop_window"]
@@ -453,7 +458,7 @@ myManageHook = composeAll . concat $
     my8ShiftsTitles = []
     -- my9Shifts = ["Gimp","Inkscape","krita","Shotcut","Blender"]
     my9Shifts = []
-    my10Shifts = ["Thunderbird"]
+    my10Shifts = []
 
 
 centreRect = W.RationalRect 0.25 0.25 0.5 0.5
@@ -579,7 +584,7 @@ myKeymap = [
 
 
               -- Direct Shortcuts
-             -- ,("M-a" ,  ) -- USED for multi screen
+             -- ,("M-a" ,  ) -- USED or multi screen
              -- ,("M-S-a" ,  )
              -- ,("M-C-a" ,  )-- USED for multi screen
 
@@ -593,8 +598,9 @@ myKeymap = [
              -- ,("M-C-c" ,  )
 
 
-             ,("M-d" , spawn "rofi -show run" )
+             ,("M-d" , spawn "rofi -show run -modi run -theme ~/.config/rofi/config_monokai.rasi" )
              ,("M-S-d", spawn "rofi -no-lazy-grab -show drun -modi drun -theme ~/.config/rofi/config_launchpad.rasi")
+
              ,("M-C-d" ,  spawn "rofi -show window")
 
 
