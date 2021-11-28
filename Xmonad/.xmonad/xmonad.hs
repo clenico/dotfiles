@@ -249,7 +249,7 @@ myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "dropdown-terminal" spawnTerm_dropdown (resource =? "dropdown-terminal") (manage_dropdown)
                  ,NS "floating-terminal" spawnTerm_floating (resource =? "floating-terminal") (manageThirdscreen)
                  ,NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol") (manageThirdscreen)
-                 ,NS "zeal" "zeal" (resource =? "zeal") (nonFloating)
+                 -- ,NS "zeal" "zeal" (resource =? "zeal") (nonFloating)
                  ,NS "translate" "crow" (className =? "Crow Translate") (nonFloating)
                  -- ,NS "gnome-calendar" "gnome-calendar" (resource =? "gnome-calendar") (manageFullscreen)
                  ,NS "xfce4-appfinder" "xfce4-appfinder" (className =? "xfce4-appfinder") (manageFullscreen)
@@ -630,7 +630,7 @@ myKeymap = [
              -- ,("M-i" ,  )
              ,("M-i" , namedScratchpadAction myScratchPads "translate")
              ,("M-S-i", sinkAll )
-             ,("M-C-i" , namedScratchpadAction myScratchPads "zeal")
+             -- ,("M-C-i" , namedScratchpadAction myScratchPads "zeal")
 
              ,("M-j", windowGo D True )
              ,("M-S-j", windowSwap D False )
