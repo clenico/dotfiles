@@ -227,6 +227,12 @@ projects =
                 spawn "kdenlive"
             }
 
+  , Project { projectName      = "xo"
+            , projectDirectory = "~/Documents/Shared/Notes/"
+            , projectStartHook = Just $ do
+                spawn "xournalpp"
+            }
+
   ]
 
 -- Named Scratchpad
@@ -265,9 +271,11 @@ myScratchPads = [ NS "dropdown-terminal" spawnTerm_dropdown (resource =? "dropdo
                  ,NS "skype" "skypeforlinux" (className =? "Skype") (manageFullscreen)
                  ,NS "pomodoro" "gnome-pomodoro" (className =? "Gnome-pomodoro") (manageThirdscreen)
                  ,NS "messenger" "messenger-nativefier" (className =? "facebookmessenger-nativefier-7ab88e") (manageThirdscreen)
+                 ,NS "obsidian" "obsidian" (className =? "obsidian") (manageFullscreen)
                 ]
   where
     spawnTerm_dropdown  = myTerminal ++ " -name dropdown-terminal -e tmux"
+    -- spawnTerm_dropdown  = myTerminal ++ " -name dropdown-terminal"
     spawnTerm_floating  = myTerminal ++ " -name floating-terminal -e tmux"
 
 manage_dropdown = customFloating $ W.RationalRect l t w h
@@ -294,7 +302,7 @@ myStartupHook = do
     -- spawn "$HOME/.xmonad/scripts/autostart.sh"
     spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0 --monitor  \"primary\""
     spawnOnce "$HOME/MyScripts/autostart.sh > ~/.output/autostart.sh"
-    spawnOnOnce "7" "korganizer"
+    -- spawnOnOnce "7" "korganizer"
     spawnOnOnce "2" myFileManager
     spawnOnOnce "3" "firefox"
     spawnOnOnce "8" "emacs"
@@ -577,10 +585,16 @@ myKeymap = [
              ,("M-y w", spawn "~/MyScripts/makeScreenshot.sh window yes ~/Pictures/Screenshots/Windows" )
              ,("M-y z", spawn "~/MyScripts/makeScreenshot.sh zone yes ~/Pictures/Screenshots/Zone" )
 
-             ,("M-y S-s", spawn "~/MyScripts/makeScreenshot.sh screen yes $(cat /tmp/location)n")
+             ,("M-y S-s", spawn "~/MyScripts/makeScreenshot.sh screen yes $(cat /tmp/location)")
              ,("M-y S-f", spawn "~/MyScripts/makeScreenshot.sh full yes $(cat /tmp/location)" )
              ,("M-y S-w", spawn "~/MyScripts/makeScreenshot.sh window yes $(cat /tmp/location)" )
              ,("M-y S-z", spawn "~/MyScripts/makeScreenshot.sh zone yes $(cat /tmp/location)" )
+
+             ,("M3-<Space>", spawn "dunstctl close" )
+             ,("C-M1-<Space>", spawn "dunstctl close-all" )
+             ,("M-y h", spawn "dunstctl history-pop" )
+
+
 
 
               -- Direct Shortcuts
@@ -595,7 +609,7 @@ myKeymap = [
 
              ,("M-c", namedScratchpadAction myScratchPads "xfce4-appfinder")
              -- ,("M-S-c" ,  )
-             -- ,("M-C-c" ,  )
+             -- ,("M-C-c" ,  spawn "~/MyScripts/nsp-manager --key firefox_calendar")
 
 
              ,("M-d" , spawn "rofi -show run -modi run -theme ~/.config/rofi/config_monokai.rasi" )
@@ -625,6 +639,7 @@ myKeymap = [
              ,("M-h", windowGo L True )
              ,("M-S-h", windowSwap L False )
              ,("M-C-h", sendMessage Shrink)
+             ,("M1-C-h", spawn "diodon")
 
 
              -- ,("M-i" ,  )
@@ -679,8 +694,10 @@ myKeymap = [
 
 
              ,("M-u", spawn "urxvt")
+             ,("M-ù", namedScratchpadAction myScratchPads "obsidian")
              -- ,("M-S-u" ,  )
              -- ,("M-C-u" ,  )
+
 
              -- ,PREFIX systemctl ("M-v" ,  )
              -- ,("M-S-v" ,  )
@@ -692,7 +709,7 @@ myKeymap = [
 
              -- ,("M-x" ,  )
              -- ,("M-S-x" ,  )
-             -- ,("M-C-x" ,  )
+             ,("M-C-x" ,  spawn "~/MyScripts/nsp-manager --key firefox_calendar")
 
              -- ,PREFIX copy("M-y" ,  )
              -- ,("M-S-y" ,  )

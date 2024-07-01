@@ -5,10 +5,10 @@
 
 have() { type "$1" > /dev/null 2>&1; }
 
-# Manage albert
-if have syncthing;then
-    syncthing &
-fi
+# # Manage albert
+# if have syncthing;then
+#     syncthing &
+# fi
 
 
 # Manage albert
@@ -145,4 +145,8 @@ if have dropbox; then
     # HOME=~/.clouds/Dropbox/School dropbox start -i &
     # sleep 5
     # ~/MyScripts/launchDropbox.sh
+fi
+
+if have nextcloud; then
+    nextcloud &
 fi
