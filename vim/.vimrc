@@ -85,3 +85,81 @@ autocmd BufWinEnter *.* silent loadview"
      source ~/.vimrc.plug
  endif
 :imap jj <Esc>
+
+call plug#begin()
+
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'rust-lang/rust.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugins' }
+
+call plug#end()
+" NERDTree setup
+map <C-n> :NERDTreeToggle<CR>
+
+" fzf and fzf.vim settings
+" Uses Ripgrep if available for faster searching
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m
+endif
+
+" coc.nvim settings
+" Recommended coc.nvim configuration from the project README
+filetype plugin indent on
+syntax on
+set hidden
+set nowrap
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nu
+set showmatch
+set cursorline
+set background=dark
+" Use <tab> for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Airline configuration
+" Basic configuration, for more see :help airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='dark'
+
+" Syntastic configuration
+" Basic syntastic setup
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" vim-gitgutter configuration
+" Enable gitgutter
+let g:gitgutter_enabled = 1
+
+" vim-surround setup is automatic, no configuration needed
+
+" Telescope setup for Neovim (requires Neovim)
+" Basic keybindings for launching Telescope pickers
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>

@@ -2,15 +2,26 @@
 -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
 -- you can find weather location codes here: http://weather.noaa.gov/index.html
 
-Config { font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=true"
-       , additionalFonts = [ "xft:FontAwesome:pixelsize=20",
-                             "xft:Mononoki Nerd Font:pixelsize=20:antialias=true:hinting=true",
-                             "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
-                           ]
+Config {
+  font =         "Ubuntu Bold 16"
+  -- font    = "xft:Ubuntu:weight=bold:pixelsize=20:antialias=true:hinting=true"
+  -- font    = "xft:TerminessTTFNerdFontMono:size=16:weight=bold:pixelsize=20:antialias=true:hinting=true"
+  , additionalFonts = ["Font Awesome 20",
+                      "Monoki Nert 20"]
+       -- , additionalFonts = [ "xft:FontAwesome:pixelsize=20",
+       --                       "xft:Mononoki Nerd Font:pixelsize=20:antialias=true:hinting=true",
+       --                       "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
+       --                     ]
+       -- , additionalFonts = [ "xft:FontAwesome:pixelsize=20",
+       --                       "xft:Mononoki Nerd Font:pixelsize=20:antialias=true:hinting=true",
+       --                       "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
+       --                     ]
+
        , bgColor = "#292d3e"
        , fgColor = "#f07178"
        -- , position = Static { xpos = 0 , ypos = 1080, width = 1920, height = 35 }
-       , position = Bottom
+       -- , position = Bottom
+       , position = BottomH 30
        -- , position = BottomW 100 10
        , border = TopB
        , sepChar =  "%"   -- delineator between plugin names and straight text
