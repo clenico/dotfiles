@@ -3,9 +3,9 @@ import XMonad.Actions.PhysicalScreens
 -- import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.UpdatePointer
 import Data.Monoid
-import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.OnPropertyChange
 -- import XMonad.Layout.Gaps
-import XMonad.Layout.Named (named)
+-- import XMonad.Layout.Named (named)
 -- import XMonad.Layout.LayoutCombinators hiding ( (|||) )
 import XMonad.Layout.FixedColumn
 import XMonad.Layout.Dishes
@@ -300,7 +300,7 @@ manageThirdscreen = customFloating $ W.RationalRect l t w h
 -- Startup
 myStartupHook = do
     -- spawn "$HOME/.xmonad/scripts/autostart.sh"
-    spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0 --monitor  \"primary\""
+    -- spawnOnce "exec trayer --align right --widthtype request --padding 0 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x292d3e --height 26 --margin 5 --edge bottom --distance 0 --monitor  \"primary\""
     spawnOnce "$HOME/MyScripts/autostart.sh > ~/.output/autostart.sh"
     -- spawnOnOnce "7" "korganizer"
     spawnOnOnce "2" myFileManager
@@ -335,7 +335,7 @@ myTabConfig = def { fontName            = "xft:Mononoki Nerd Font:regular:pixels
 
 
 
-mFixedColumn = named "Split" (FixedColumn 1 20 30 10)
+mFixedColumn = renamed [Replace "Split"] (FixedColumn 1 20 30 10)
 
 
 -- Makes setting the spacingRaw simpler to write. The spacingRaw
@@ -352,40 +352,40 @@ mySpacing' i = spacingRaw False (Border i i i i) False (Border i i i i) False
 
 
 
-mTall = named "Tall" (minimize
+mTall = renamed [Replace "Tall"] (minimize
                      $ mySpacing' mySpacingValue
                      -- $ smartBorders
                      -- $ avoidStruts
                      $ ResizableTall 1 (3/100) (1/2) [])
 
-mTall_little = named "Tall_little" (minimize
+mTall_little = renamed [Replace "Tall_little"] (minimize
                                    $ mySpacing' mySpacingValue
                      -- $ smartBorders
                      -- $ avoidStruts
                      $ ResizableTall 1 (3/100) (1/4) [])
 
-mDishes = named "Dishes" (minimize
+mDishes = renamed [Replace "Dishes"] (minimize
                          $ mySpacing' mySpacingValue
                           $ Dishes 2 (1/6))
 
-mThreeColMid = named "ThreeColMid" (minimize
+mThreeColMid = renamed [Replace "ThreeColMid"] (minimize
                                    $ mySpacing' mySpacingValue
                                     $ ThreeColMid 1 (3/100) (1/2))
 
-mGrid = named "Grid" (minimize
+mGrid = renamed [Replace "Grid"] (minimize
                       $ Grid)
 
-mSpiral = named "Spiral" (minimize
+mSpiral = renamed [Replace "Spiral"] (minimize
                           $ mySpacing' mySpacingValue
                           $ spiral (3/4))
 
-mFull = named "Full" (noBorders Full)
+mFull = renamed [Replace "Full"] (noBorders Full)
 
-mFloat = named "Float" (minimize
+mFloat = renamed [Replace "Float"] (minimize
                         $ mySpacing' mySpacingValue
                         $ simpleFloat)
 
-mTabs = named "Tabs"(minimize
+mTabs = renamed [Replace "Tabs"](minimize
                      $ mySpacing' mySpacingValue
                      $ tabbed shrinkText myTabConfig)
 
@@ -526,7 +526,7 @@ myKeymap = [
               ("M-v l", spawn "i3lock && sleep 1")
              ,("M-v e", io (exitWith ExitSuccess))
              ,("M-v s", spawn "i3lock && sleep 1 && systemctl suspend")
-             ,("M-v h", spawn "i3lock && sleep 1 && systemctl hibernate")
+             ,("M-v h", spawn "pkexec systemctl hibernate")
              ,("M-v r", spawn "systemctl reboot")
              ,("M-v S-s", spawn "systemctl poweroff -i")
              ,("M-v l", spawn "i3lock && sleep 1")
@@ -882,9 +882,12 @@ myHiddenNoWindowsWSColor = "white"
 
 
 main = do
-        xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 1
-        xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 2
-        xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 3
+        -- xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 1
+        -- xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 2
+        -- xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc.hs" -- xmobar monitor 3
+        xmproc0 <- spawnPipe "MONITOR=eDP-1 polybar mainbar-xmonad" -- polybar monitor 1
+        xmproc1 <- spawnPipe "MONITOR=HDMI-1 polybar mainbar-xmonad" -- polybar monitor 1
+        xmproc2 <- spawnPipe "MONITOR=DP-2 polybar mainbar-xmonad" -- polybar monitor 1
         xmonad
           $ withNavigation2DConfig def
           $ dynamicProjects projects
