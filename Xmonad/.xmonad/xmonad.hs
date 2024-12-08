@@ -38,7 +38,7 @@ import System.Exit
 import XMonad hiding ( (|||) )
 import XMonad.Layout.LayoutCombinators
 -- import XMonad
-import XMonad.Actions.CycleWS
+import XMonad.Actions.CycleWS(hiddenWS, emptyWS, findWorkspace, WSType(Not), WSType((:&:)), toggleWS)
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.Minimize
@@ -228,10 +228,12 @@ projects =
 
   ]
 
+hiddenNonEmptyWS = (hiddenWS :&: Not emptyWS)
+
 -- Named Scratchpad
-nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
+nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next hiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
-prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1
+prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev hiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
 getSortByIndexNoSP =
         fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
