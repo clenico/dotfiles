@@ -140,15 +140,8 @@ mydefaults = def {
         , keys                = myKeys
         , modMask             = myModMask
         , borderWidth         = 3
-        , layoutHook          = myLayoutHook
-        , manageHook          =  manageDocks
-                                 -- <+>insertPosition Below Newer
-                                 <+> myManageHook
-                                 <+> manageSpawn
-                                 <+> namedScratchpadManageHook myScratchPads
         , startupHook         = myStartupHook
-        , handleEventHook     = docksEventHook
-                                <+> minimizeEventHook
+        , handleEventHook     = minimizeEventHook
                                 -- <+> myHandleEventHook
         }`additionalKeysP` myKeymap
 
@@ -897,19 +890,25 @@ main = do
           $ docks
           $ mydefaults {
         logHook =  dynamicLogWithPP def {
-        ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x >> System.IO.hPutStrLn xmproc2 x
-        , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
-        , ppCurrent = xmobarColor myCurrentWSColor "" . wrap """"
-        , ppVisible = xmobarColor myVisibleWSColor "" . wrap """"
-        , ppHidden = noScratchpad
-        -- , ppHidden = wrap """"
-        -- , ppHiddenNoWindows = xmobarColor myHiddenNoWindowsWSColor ""
-        -- ,ppHiddenNoWindows = noScratchpad
-        , ppUrgent = xmobarColor myUrgentWSColor ""
-        , ppSep = " | "
-        , ppWsSep = " "
- }
->> updatePointer (0.5, 0.5) (0, 0)
+          ppOutput = \x -> System.IO.hPutStrLn xmproc0 x  >> System.IO.hPutStrLn xmproc1 x >> System.IO.hPutStrLn xmproc2 x
+          , ppTitle = xmobarColor myTitleColor "" . ( \ str -> "")
+          , ppCurrent = xmobarColor myCurrentWSColor "" . wrap """"
+          , ppVisible = xmobarColor myVisibleWSColor "" . wrap """"
+          , ppHidden = noScratchpad
+          -- , ppHidden = wrap """"
+          -- , ppHiddenNoWindows = xmobarColor myHiddenNoWindowsWSColor ""
+          -- ,ppHiddenNoWindows = noScratchpad
+          , ppUrgent = xmobarColor myUrgentWSColor ""
+          , ppSep = " | "
+          , ppWsSep = " "} >> updatePointer (0.5, 0.5) (0, 0)
+        , layoutHook          = myLayoutHook
+        , manageHook          =  manageDocks
+                                 -- <+>insertPosition Below Newer
+                                 <+> myManageHook
+                                 <+> manageSpawn
+                                 <+> namedScratchpadManageHook myScratchPads
+
+
 }
 
 noScratchpad ws = if ws == "NSP" then "" else ws
