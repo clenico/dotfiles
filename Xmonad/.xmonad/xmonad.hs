@@ -24,7 +24,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.FloatKeys
 import Data.Ratio ((%))
-import XMonad.Util.WorkspaceCompare
+import XMonad.Util.WorkspaceCompare (filterOutWs, getSortByIndex)
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.Navigation2D
 import XMonad.Layout.CircleEx
@@ -236,7 +236,7 @@ nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next hiddenNonEmptyWS 1
 prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev hiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
 getSortByIndexNoSP =
-        fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
+        fmap (. filterOutWs [scratchpadWorkspaceTag]) getSortByIndex
 
 
 
