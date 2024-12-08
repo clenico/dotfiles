@@ -27,7 +27,7 @@ import Data.Ratio ((%))
 import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.Navigation2D
-import XMonad.Layout.Circle
+import XMonad.Layout.CircleEx
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.WithAll
 import XMonad.Actions.RotSlaves
@@ -389,6 +389,8 @@ mTabs = renamed [Replace "Tabs"](minimize
                      $ mySpacing' mySpacingValue
                      $ tabbed shrinkText myTabConfig)
 
+myCircle = circleEx {cDelta = -3*pi/4}
+
 myLayoutHook = avoidStruts
                $ smartBorders
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
@@ -399,7 +401,7 @@ myLayoutHook = avoidStruts
                ||| mThreeColMid
                ||| mGrid
                ||| mSpiral
-               ||| Circle
+               ||| myCircle
                -- ||| mFull
                ||| mTabs
                ||| mFloat
