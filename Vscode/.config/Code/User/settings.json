@@ -1,0 +1,93 @@
+{
+    "workbench.colorTheme": "One Monokai",
+    "workbench.iconTheme": "Monokai Pro Icons",
+    "files.autoSave": "off",
+    "editor.renderWhitespace": "all",
+    "C_Cpp.updateChannel": "Insiders",
+    "cmake.configureOnOpen": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "todo-tree.tree.showScanModeButton": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "kite.showWelcomeNotificationOnStartup": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "terminal.integrated.inheritEnv": false,
+    "python.languageServer": "Pylance",
+    "[python]": {
+        "gitlens.codeLens.symbolScopes": [
+            "!Module"
+        ],
+        "editor.wordBasedSuggestions": "off",
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "diffEditor.ignoreTrimWhitespace": false
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.analysis.extraPaths": [],
+    "extensions.autoCheckUpdates": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": false,
+        "markdown": true
+    },
+    "window.zoomLevel": 2,
+    "git.autofetch": true,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorCustomizations": {},
+    "cmake.options.statusBarVisibility": "visible",
+    "C_Cpp.autocompleteAddParentheses": true,
+    "C_Cpp.intelliSenseEngineFallback": "enabled",
+    "gitlens.advanced.messages": {
+        "suppressCreatePullRequestPrompt": true
+    },
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "vim.handleKeys": {
+        "<C-d>": true,
+        "<C-k>": false,
+        "<C-c>": true,
+        "<C-v>": true,
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-h>": false
+    },
+    "python.defaultInterpreterPath": "/home/imagedpt/.virtualenvs/zenml_0.55.4/bin/python",
+    "codeium.enableConfig": {
+        "*": true,
+        "ansible": true
+    },
+    "remote.autoForwardPortsSource": "hybrid",
+    "cSpell.userWords": [
+        "viewset"
+    ],
+    "zenml.activeStackId": "adedaf0a-6bca-4759-89f0-1258cdab6c9a",
+    "zenml.serverUrl": "http://deepthought1.multitel.be:10539",
+    "zenml.accessToken": "",
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "ruff.path": [
+        "/home/imagedpt/miniconda3/bin/ruff"
+    ],
+    // "coverage-gutters.coverageFileNames": [
+    //     "lcov.info",
+    //     "cov.xml",
+    //     "coverage.xml",
+    //     "jacoco.xml",
+    //     "coverage.cobertura.xml"
+    // ]
+}
