@@ -27,7 +27,7 @@ Config {
        , sepChar =  "%"   -- delineator between plugin names and straight text
        , alignSep = "}{"  -- separator between left-right alignment
        -- , template = "  %UnsafeStdinReader% }{ <fc=#666666><fn=3>|</fn> </fc><fc=#b3afc2><fn=1></fn>  %Battery% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FFB86C> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FF5555> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#82AAFF> %disku% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#c3e88d> %enp6s0% </fc><fc=#666666> </fc> <fc=#666666> <fn=2>|</fn></fc> <fc=#8BE9FD> %date%  </fc>"
-       , template = "  %UnsafeStdinReader% <fc=#666666><fn=2> | </fn></fc> <fc=#b3afc2>%alsa:default:Master% </fc><fc=#666666><fn=2> | </fn></fc><fc=#b3afc2><fn=1></fn>%battery% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FFB86C> %cpu% %multicoretemp% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FF5555> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#82AAFF> %disku% </fc> <fc=#666666><fn=2>|</fn></fc> <fc=#8BE9FD> %date%  </fc>"
+       , template = "  %UnsafeStdinReader% <fc=#666666><fn=2> | </fn></fc> <fc=#b3afc2>%alsa:default:Master% </fc><fc=#666666><fn=2> | </fn></fc><fc=#b3afc2><fn=1>[B]</fn>%battery% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FFB86C> %cpu% %multicoretemp% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FF5555> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#82AAFF> %disku% </fc> <fc=#666666><fn=2>|</fn></fc> <fc=#8BE9FD> %date%  </fc>"
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
@@ -53,7 +53,7 @@ Config {
                                          , "--high"     , "darkred"
                                          ] 10
                       -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=1>\xf108</fn>: <total>%","-H","50","--high","red"] 20
+                    , Run Cpu ["-t", "[C]: <total>%","-H","50","--high","red"] 20
 
 
                     , Run MultiCoreTemp ["-t", "<avg>°C",
