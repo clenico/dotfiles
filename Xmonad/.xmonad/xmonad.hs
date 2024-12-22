@@ -287,8 +287,8 @@ manageFullscreen = customFloating $ W.RationalRect l t w h
                    l = 0
 manageThirdscreen = customFloating $ W.RationalRect l t w h
                  where
-                   h = 4/5
-                   w = 2/5
+                   h = 9/10
+                   w = 9/10
                    t = (1-h)/2
                    l = (1-w)/2
 
