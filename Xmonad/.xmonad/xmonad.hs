@@ -706,7 +706,7 @@ myKeymap = [
 
              -- ,("M-x" ,  )
              -- ,("M-S-x" ,  )
-             ,("M-C-x" ,  spawn "~/MyScripts/nsp-manager --key firefox_calendar")
+             ,("M-C-x" ,  spawn "~/MyScripts/nsp_manager.py --key firefox_calendar")
 
              -- ,PREFIX copy("M-y" ,  )
              -- ,("M-S-y" ,  )
