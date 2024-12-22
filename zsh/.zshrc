@@ -66,9 +66,9 @@ plugins=(
     git
     zsh-syntax-highlighting
   	zsh-autosuggestions
+    kubectl
     docker
     docker-compose
-    kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -157,11 +157,16 @@ alias n="notify-send \"Work is done\""
 alias dc="docker compose"
 alias lsa="ls -1d $(pwd)/*"
 alias nvtop="docker run -it --rm --pid host --gpus=all morosow/nvtop"
-magit() {
-  docker run -it --rm -v $(pwd):/gitrepo -v $HOME/.gitconfig:/root/.gitconfig -v $HOME/.ssh:/root/.ssh vlandeiro/magit:latest
-}
-
 alias rdox="docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd "
+alias vim="nvim"
+alias rdox="docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd "
+alias dcd="docker compose -f docker-compose.dev.yml"
+alias dcp="docker compose -f docker-compose.prod.yml"
+alias udc="GID=$GID UID=$UID docker compose"
+alias dockviz="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz"
+
+
+# Multitel
 alias sd1="ssh imagedpt@signaldeep1"
 alias sd2="ssh imagedpt@signaldeep2"
 alias sd3="ssh imagedpt@signaldeep3"
@@ -170,7 +175,7 @@ alias sd5="ssh imagedpt@signaldeep5"
 alias sd6="ssh imagedpt@signaldeep6"
 alias sd7="ssh imagedpt@signaldeep7"
 alias sd8="ssh imagedpt@signaldeep8"
-# alias sd9="ssh imagedpt@signaldeep9"
+alias sd9="ssh imagedpt@signaldeep9"
 alias sd9="ssh imagedpt@172.16.20.29"
 alias sd10="ssh -X imagedpt@192.168.1.224"
 alias xsd1="ssh -X imagedpt@signaldeep1"
@@ -193,29 +198,34 @@ alias xdt2="ssh -X nicolas@172.16.4.11"
 alias xdt3="ssh -X nicolas@172.16.4.12"
 alias xdt4="ssh -X nicolas@172.16.4.13"
 alias xdt5="ssh -X nicolas@172.16.4.14"
-
-
 alias pai="ssh nicolas@powerai.signal.multitel.be"
-# alias pocmons="ssh -X multitel@172.16.100.90"
-# alias pocmons="ssh -X multitel@172.16.100.125"
 alias pocmons="ssh -X multitel@172.16.101.173"
-alias dcd="docker compose -f docker-compose.dev.yml"
-alias dcp="docker compose -f docker-compose.prod.yml"
-alias udc="GID=$GID UID=$UID docker compose"
-alias k="kubectl"
+
+# home
+alias prod="ssh niccle27@192.168.1.55"
+alias km="ssh k8s@192.168.1.27"
+alias kw1="ssh k8s@192.168.1.28"
+alias kw2="ssh k8s@192.168.1.29"
+
+# kubernetes
+alias swn="kubectl config set-context --current --namespace"
 alias kda='f() { kubectl delete -f "$1" && kubectl apply -f "$1"}; f'
+export kf="--grace-period 0 --force"
+alias k="kubectl"
+
+magit() {
+  docker run -it --rm -v $(pwd):/gitrepo -v $HOME/.gitconfig:/root/.gitconfig -v $HOME/.ssh:/root/.ssh vlandeiro/magit:latest
+}
 
 
-alias dockviz="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib6
 export PATH=$PATH:/usr/local/cuda/bin
 export PATH=$PATH:"$HOME/MyScripts/"
 export PATH=$PATH:"$HOME/.local/bin/"
-# Fix completion git and docker
-autoload -Uz compinit
-compinit
+export KUBECONFIG="$HOME/.kube/config"
+
 
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
@@ -226,28 +236,7 @@ export PATH="$PATH:$HOME/miniconda3/bin"
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
 PATH=${PATH}:/home/imagedpt/.local/bin:/home/imagedpt/anaconda3/bin
 
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/imagedpt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/imagedpt/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/imagedpt/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/imagedpt/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda initialize <<<
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 source <(kubectl completion zsh)
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-
 
 __conda_setup="$('/home/imagedpt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then

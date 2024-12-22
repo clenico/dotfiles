@@ -26,7 +26,6 @@ Config {
        , border = TopB
        , sepChar =  "%"   -- delineator between plugin names and straight text
        , alignSep = "}{"  -- separator between left-right alignment
-       -- , template = "  %UnsafeStdinReader% }{ <fc=#666666><fn=3>|</fn> </fc><fc=#b3afc2><fn=1></fn>  %Battery% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FFB86C> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FF5555> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#82AAFF> %disku% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#c3e88d> %enp6s0% </fc><fc=#666666> </fc> <fc=#666666> <fn=2>|</fn></fc> <fc=#8BE9FD> %date%  </fc>"
        , template = "  %UnsafeStdinReader% <fc=#666666><fn=2> | </fn></fc> <fc=#b3afc2>%alsa:default:Master% </fc><fc=#666666><fn=2> | </fn></fc><fc=#b3afc2><fn=1>[B]</fn>%battery% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FFB86C> %cpu% %multicoretemp% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FF5555> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#82AAFF> %disku% </fc> <fc=#666666><fn=2>|</fn></fc> <fc=#8BE9FD> %date%  </fc>"
        , lowerOnStart = True
        , hideOnStart = False
@@ -36,13 +35,13 @@ Config {
        , commands = [
 
                      -- volume indicator
-                     Run Alsa "default" "Master"
-                               [ "-t", "<fn=1>\xf028</fn>:<volumestatus>"
-                               , "--"
-                               , "-C", "#C0E550", "-c", "#E55C50"]
+                     -- Run Alsa "default" "Master"
+                     --           [ "-t", "<fn=1>\xf028</fn>:<volumestatus>"
+                     --           , "--"
+                     --           , "-C", "#C0E550", "-c", "#E55C50"]
 
                       -- Time and date
-                    ,  Run Date "%d %m %Y %H:%M" "date" 50
+                    Run Date "%d %m %Y %H:%M" "date" 50
                       -- Network up and down
                               -- network activity monitor (dynamic interface resolution)
                     , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
@@ -64,7 +63,7 @@ Config {
                       -- Ram used number and percent
                     , Run Memory ["-t", "<usedratio>%"] 20
                     -- battery monitor
-                    , Run Battery        [ "--template" , ": <acstatus>"
+                    , Run Battery        [ "--template" , "<acstatus>"
                                          , "--Low"      , "10"        -- units: %
                                          , "--High"     , "80"        -- units: %
                                          , "--low"      , "darkred"
@@ -83,7 +82,7 @@ Config {
                       -- Disk space free
                     , Run DiskU [("/", "r: <used>/<size>"),
                                  ("/home", "h: <used>/<size>")] [] 60
-                    , Run Volume "default" "Master" [] 10
+                    -- , Run Volume "default" "Master" [] 10
                     -- , Run DiskU [("/home", "<fn=1>\xf0c7</fn> home: <free> free")] [] 60
                       -- Runs custom script to check for pacman updates.
                       -- This script is in my dotfiles repo in .local/bin.
