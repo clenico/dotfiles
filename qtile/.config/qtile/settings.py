@@ -1,6 +1,6 @@
 import colors
 
-follow_mouse_focus = "click_or_drag_only"
+follow_mouse_focus = True
 focus_on_window_activation: str = "focus"
 bring_front_click: bool = False
 cursor_warp: bool = True  # Follow the focus and center the mouse on change

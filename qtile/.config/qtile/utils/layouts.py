@@ -203,3 +203,49 @@ def toggle_group_fullscreen(qtile_obj: Qtile) -> None:
         group.use_layout(max_index)
 
         set_bar_visible(qtile_obj, False)
+
+@lazy.function
+def move_float_keep_focus(qtile, dx, dy):
+    win = qtile.current_window
+    if not win:
+        return
+
+    old_follow = qtile.config.follow_mouse_focus
+
+    qtile.config.follow_mouse_focus = False
+
+    try:
+        win.move_floating(dx, dy)
+    except AttributeError:
+        win.cmd_move_floating(dx, dy)
+
+    win.focus(warp=False)
+
+    def restore_follow():
+        qtile.config.follow_mouse_focus = old_follow
+        win.focus(warp=False)
+
+    qtile.call_later(0.05, restore_follow)
+
+@lazy.function
+def resize_float_keep_focus(qtile, dw, dh):
+    win = qtile.current_window
+    if not win:
+        return
+
+    old_follow = qtile.config.follow_mouse_focus
+
+    qtile.config.follow_mouse_focus = False
+
+    try:
+        win.resize_floating(dw, dh)
+    except AttributeError:
+        win.cmd_resize_floating(dw, dh)
+
+    win.focus(warp=False)
+
+    def restore_follow():
+        qtile.config.follow_mouse_focus = old_follow
+        win.focus(warp=False)
+
+    qtile.call_later(0.05, restore_follow)

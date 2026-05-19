@@ -35,6 +35,8 @@ from utils.layouts import (
     kill_all,
     kill_all_and_remove_group,
     toggle_group_fullscreen,
+    move_float_keep_focus,
+    resize_float_keep_focus,
 )
 from utils.resize import smart_master_resize
 from utils.dynamic_ws import create_or_go_dynamic_ws, move_window_to_dynamic_ws
@@ -273,49 +275,50 @@ keys.extend(
         Key(
             [mod],
             "Left",
-            lazy.window.move_floating(-80, 0),
+            move_float_keep_focus(-80, 0),
             desc="Move floating window left",
         ),
         Key(
             [mod],
             "Up",
-            lazy.window.move_floating(0, -80),
+            move_float_keep_focus(0, -80),
             desc="Move floating window up",
         ),
         Key(
             [mod],
             "Down",
-            lazy.window.move_floating(0, 80),
+            move_float_keep_focus(0, 80),
             desc="Move floating window down",
         ),
         Key(
             [mod],
             "Right",
-            lazy.window.move_floating(80, 0),
+            move_float_keep_focus(80, 0),
             desc="Move floating window right",
         ),
+
         Key(
             [mod, shift],
             "Up",
-            lazy.window.resize_floating(0, -40),
+            resize_float_keep_focus(0, -40),
             desc="Resize floating window up",
         ),
         Key(
             [mod, shift],
             "Left",
-            lazy.window.resize_floating(-40, 0),
+            resize_float_keep_focus(-40, 0),
             desc="Resize floating window left",
         ),
         Key(
             [mod, shift],
             "Down",
-            lazy.window.resize_floating(0, 40),
+            resize_float_keep_focus(0, 40),
             desc="Resize floating window down",
         ),
         Key(
             [mod, shift],
             "Right",
-            lazy.window.resize_floating(40, 0),
+            resize_float_keep_focus(40, 0),
             desc="Resize floating window right",
         ),
         Key(
