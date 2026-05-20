@@ -27,3 +27,26 @@ def client_managed(win: Window) -> None:
             win.enable_fullscreen()
         except Exception:
             pass
+
+
+@hook.subscribe.client_killed
+def focus_previous_window(client):
+    """Focus the previous window in the group when a window is closed."""
+    group = client.group
+    if not group:
+        return
+
+    windows = group.windows
+    if len(windows) < 2:
+        return
+
+    focused = group.current_window
+
+    if focused not in windows:
+        group.focus(windows[-1], warp=False)
+        return
+
+    idx = windows.index(focused)
+    previous = windows[idx + 1]
+
+    group.focus(previous, warp=False)
