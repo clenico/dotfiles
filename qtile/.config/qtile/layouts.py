@@ -65,7 +65,7 @@ layouts: list[Layout] = [
         inactive_fg="#d0d0d0",
         bg_color="#292d3e",
     ),
-    layout.Max(name="Max", **layout_defaults),
+    layout.Max(name="Max", **{**layout_defaults, "border_width": 0}),
 ]
 
 floating_layout = layout.Floating(
