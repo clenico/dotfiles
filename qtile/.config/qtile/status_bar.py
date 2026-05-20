@@ -66,12 +66,6 @@ def init_widgets(with_systray: bool = False) -> WidgetList:
             foreground="#bbc2cf",
         ),
         widget.TextBox("|", foreground="#bbc2cf"),
-        widget.Net(
-            format="{interface}: {down} ↓ {up} ↑",
-            interface="auto",
-            foreground="#51afef",
-        ),
-        widget.TextBox("|", foreground="#bbc2cf"),
         widget.CPU(
             format="Cpu {load_percent:3.0f}%",
             foreground="#51afef",
