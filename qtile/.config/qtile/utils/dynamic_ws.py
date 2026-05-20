@@ -33,7 +33,8 @@ def create_or_go_dynamic_ws(qtile_obj: Qtile) -> None:
             return
 
         if name not in qtile_obj.groups_map:
-            qtile_obj.add_group(name)
+            qtile_obj.add_group(name=name,
+                                persist=True)
             logger.warning("Created group: %s", name)
 
         qtile_obj.groups_map[name].toscreen()
@@ -82,7 +83,8 @@ def move_window_to_dynamic_ws(qtile_obj: Qtile) -> None:
             return
 
         if name not in qtile_obj.groups_map:
-            qtile_obj.add_group(name)
+            qtile_obj.add_group(name=name,
+                                persist=True)
             logger.warning("Created group: %s", name)
 
         current_window.togroup(name)
