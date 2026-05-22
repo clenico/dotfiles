@@ -156,8 +156,7 @@ keys.extend(
         Key([mod, shift], "q", lazy.window.kill(), desc="Kill focused window"),
         # Key([mod], "r", ),
         # Key([mod, shift], "r", ),
-        Key([mod, ctrl], "r", lazy.reload_config(), desc="Reload Qtile config"),
-        Key([mod3], "r", lazy.restart(), desc="Restart Qtile"),
+        Key([mod, ctrl], "r", lazy.restart(), desc="Reload Qtile config"),
         # Key([mod], "s", ),
         Key(
             [mod, shift],

@@ -15,12 +15,16 @@ if TYPE_CHECKING:
 
 import subprocess
 import shutil
+import json
 
 
 from libqtile.lazy import lazy
+from libqtile import hook
 
+from config import groups as _config_groups
 from settings import *  # noqa
 
+from const import SESSION_FILE
 
 @lazy.function
 def create_or_go_dynamic_ws(qtile_obj: Qtile) -> None:
@@ -117,3 +121,112 @@ def move_window_to_dynamic_ws(qtile_obj: Qtile) -> None:
             "Move to group: ",
             move_to_group,
         )
+
+def save_session(qtile_obj: Qtile) -> None:
+    from libqtile.log_utils import logger
+
+    static_names = {g.name for g in _config_groups}
+    data: dict = {"groups": [], "windows": []}
+
+    for group in qtile_obj.groups:
+        if group.name not in static_names:
+            data["groups"].append(group.name)
+
+        for window in group.windows:
+            try:
+                info = window.info()
+                data["windows"].append({
+                    "wm_class": info.get("wm_class", ""),
+                    "name":     info.get("name", ""),
+                    "group":    group.name,
+                })
+            except Exception:
+                pass
+
+    with open(SESSION_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+    logger.warning("Session saved: %d groups, %d windows",
+                   len(data["groups"]), len(data["windows"]))
+
+
+def restore_groups_early() -> None:
+    """
+    Call from @hook.subscribe.startup — mutates the config groups list
+    so dynamic groups exist before Qtile re-adopts windows.
+    """
+    from libqtile.config import Group
+    from libqtile.log_utils import logger
+
+    try:
+        with open(SESSION_FILE) as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return
+
+    existing = {g.name for g in _config_groups}
+    for name in data.get("groups", []):
+        if name not in existing:
+            _config_groups.append(Group(name, persist=True))
+            logger.warning("Restored group (early): %s", name)
+
+
+def restore_windows(qtile_obj: Qtile) -> None:
+    """
+    Call from @hook.subscribe.startup_complete — reassigns windows
+    to their saved groups using wm_class + name matching.
+    """
+    from libqtile.log_utils import logger
+
+    try:
+        with open(SESSION_FILE) as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return
+
+    for entry in data.get("windows", []):
+        target = entry["group"]
+        if target not in qtile_obj.groups_map:
+            logger.warning("Group not found for window: %s", target)
+            continue
+
+        for window in qtile_obj.windows_map.values():
+            try:
+                info = window.info()
+                if (info.get("wm_class") == entry["wm_class"]
+                        and info.get("name") == entry["name"]):
+                    window.togroup(target)
+                    logger.warning("Restored window '%s' → %s",
+                                   entry["name"], target)
+                    break
+            except Exception:
+                pass
+
+    # Sweep up any remaining orphaned windows (no group → dump to first group)
+    fallback = qtile_obj.groups[0].name
+    for window in qtile_obj.windows_map.values():
+        try:
+            if window.group is None:
+                window.togroup(fallback)
+                logger.warning("Orphaned window moved to fallback group: %s", fallback)
+        except Exception:
+            pass
+
+
+
+
+@hook.subscribe.restart
+def on_restart():
+    from libqtile import qtile
+    save_session(qtile)
+
+
+@hook.subscribe.startup
+def on_startup():
+    restore_groups_early()
+
+
+@hook.subscribe.client_new
+def on_startup_complete():
+    from libqtile import qtile
+    restore_windows(qtile)
