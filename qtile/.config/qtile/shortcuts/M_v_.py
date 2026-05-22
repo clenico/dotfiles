@@ -11,6 +11,8 @@ from settings import *  # noqa
 
 from const import mod, shift
 
+
+
 keys_M_v_ = [
     KeyChord(
         [mod],
@@ -18,7 +20,7 @@ keys_M_v_ = [
         [
             Key([], "l", lazy.spawn("i3lock && sleep 1")),
             Key([], "e", lazy.shutdown()),
-            Key([], "s", lazy.spawn("i3lock && sleep 1 && systemctl suspend")),
+            Key([], "s", lazy.spawn("sh -c 'i3lock && sleep 1 && systemctl suspend &>/dev/null &'")),
             Key([], "h", lazy.spawn("pkexec systemctl hibernate")),
             Key([], "r", lazy.spawn("systemctl reboot")),
             Key([shift], "s", lazy.spawn("systemctl poweroff -i")),
