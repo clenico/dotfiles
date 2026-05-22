@@ -40,9 +40,9 @@ def init_widgets(with_systray: bool = False) -> WidgetList:
             # Current screen + current group (most important)
             this_current_screen_border="#ffcc00",  # vivid yellow
             # Current screen, inactive group
-            this_screen_border="#00d7ff",  # bright cyan
+            this_screen_border="#ff66cc",  # bright cyan
             # Other monitor, currently active there
-            other_current_screen_border="#ff66cc",  # vivid pink
+            other_current_screen_border="#5c6370",  # vivid pink
             # Other monitor, inactive
             other_screen_border="#5c6370",  # muted gray-blue
             # Urgent window
