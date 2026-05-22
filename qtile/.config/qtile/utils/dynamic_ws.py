@@ -226,7 +226,8 @@ def on_startup():
     restore_groups_early()
 
 
+
 @hook.subscribe.client_new
-def on_startup_complete():
+def on_startup_complete(_):
     from libqtile import qtile
     restore_windows(qtile)
