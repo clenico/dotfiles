@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import subprocess
+import os
 
 from libqtile import hook
 from libqtile.backend.base import Window
@@ -50,3 +52,8 @@ def focus_previous_window(client):
     previous = windows[idx + 1]
 
     group.focus(previous, warp=False)
+
+@hook.subscribe.startup_once
+def start_once():
+    subprocess.call(os.path.expanduser("~/MyScripts/autostart.sh"))
+
