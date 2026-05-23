@@ -63,6 +63,10 @@ if have diodon; then
     diodon &
 fi
 
+if have clipit; then
+    clipit &
+fi
+
 if have emacs; then
     emacs --daemon --with-x-toolkit=lucid &
 fi
