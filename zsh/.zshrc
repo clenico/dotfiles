@@ -229,7 +229,12 @@ export KUBECONFIG="$HOME/.kube/config"
 
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source $HOME/.local/bin/virtualenvwrapper.sh
+if command -v virtualenvwrapper.sh >/dev/null 2>&1; then
+  source "$(command -v virtualenvwrapper.sh)"
+elif command -v uv-virtualenvwrapper.sh >/dev/null 2>&1; then
+  source "$(command -v uv-virtualenvwrapper.sh)"
+fi
+
 
 export PATH="$PATH:$HOME/miniconda3/bin"
 
