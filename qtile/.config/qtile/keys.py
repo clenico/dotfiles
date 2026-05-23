@@ -106,7 +106,7 @@ keys.extend(
             "h",
             smart_master_resize("shrink"),
         ),
-        Key([alt, ctrl], "h", lazy.spawn("diodon"), desc="Spawn clipboard manager"),
+        # Key([alt, ctrl], "h", lazy.spawn("clipit"), desc="Spawn clipboard manager"),
         # Key([mod], "i", ),
         Key(
             [mod, shift],
