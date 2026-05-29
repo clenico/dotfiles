@@ -57,3 +57,20 @@ def focus_previous_window(client):
 def start_once():
     subprocess.call(os.path.expanduser("~/MyScripts/autostart.sh"))
 
+    import os
+    import subprocess
+
+    os.environ["XDG_SESSION_TYPE"] = "x11"
+    os.environ.pop("WAYLAND_DISPLAY", None)
+    os.environ["QT_QPA_PLATFORM"] = "xcb"
+    os.environ["GDK_BACKEND"] = "x11"
+
+    subprocess.run([
+        "systemctl", "--user", "import-environment",
+        "XDG_SESSION_TYPE", "DISPLAY", "QT_QPA_PLATFORM", "GDK_BACKEND"
+    ])
+    subprocess.run([
+        "dbus-update-activation-environment", "--systemd",
+        "XDG_SESSION_TYPE", "DISPLAY", "QT_QPA_PLATFORM", "GDK_BACKEND"
+    ])
+
