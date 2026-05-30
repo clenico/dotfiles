@@ -2,7 +2,7 @@ import colors
 
 follow_mouse_focus = True
 focus_on_window_activation: str = "focus"
-bring_front_click: bool = False
+bring_front_click: bool | str = "floating_only"
 cursor_warp: bool = True  # Follow the focus and center the mouse on change
 floats_kept_above: bool = True
 auto_fullscreen: bool = False
