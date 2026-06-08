@@ -82,8 +82,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 
-export EDITOR=/snap/bin/vim
-export VISUAL=/snap/bin/vim
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -273,4 +273,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
