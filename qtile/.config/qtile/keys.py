@@ -174,9 +174,7 @@ keys.extend(
         Key(
             [mod, ctrl],
             "x",
-            lazy.spawn(
-                os.path.expanduser("~/MyScripts/nsp_manager.py --key firefox_calendar")
-            ),
+            lazy.spawn(os.path.expanduser("~/MyScripts/nsp_manager.py --key firefox")),
             desc="Open Firefox calendar in floating window",
         ),  # TODO improve
         Key([mod], "semicolon", toggle_gaps, desc="Toggle gaps"),
@@ -295,7 +293,6 @@ keys.extend(
             move_float_keep_focus(80, 0),
             desc="Move floating window right",
         ),
-
         Key(
             [mod, shift],
             "Up",
