@@ -20,6 +20,7 @@ import json
 
 from libqtile.lazy import lazy
 from libqtile import hook
+from libqtile.log_utils import logger
 
 from config import groups as _config_groups
 from settings import *  # noqa
@@ -28,7 +29,6 @@ from const import SESSION_FILE
 
 @lazy.function
 def create_or_go_dynamic_ws(qtile_obj: Qtile) -> None:
-    from libqtile.log_utils import logger
 
     def goto_group(name: str) -> None:
         name = name.strip()
@@ -72,7 +72,6 @@ def create_or_go_dynamic_ws(qtile_obj: Qtile) -> None:
 
 @lazy.function
 def move_window_to_dynamic_ws(qtile_obj: Qtile) -> None:
-    from libqtile.log_utils import logger
 
     current_window = qtile_obj.current_window
 
@@ -123,14 +122,14 @@ def move_window_to_dynamic_ws(qtile_obj: Qtile) -> None:
         )
 
 def save_session(qtile_obj: Qtile) -> None:
-    from libqtile.log_utils import logger
 
     static_names = {g.name for g in _config_groups}
     data: dict = {"groups": [], "windows": []}
 
     for group in qtile_obj.groups:
+        layout_name = getattr(group.layout, "name", "") or ""
         if group.name not in static_names:
-            data["groups"].append(group.name)
+            data["groups"].append({"name": group.name, "layout": layout_name})
 
         for window in group.windows:
             try:
@@ -156,7 +155,6 @@ def restore_groups_early() -> None:
     so dynamic groups exist before Qtile re-adopts windows.
     """
     from libqtile.config import Group
-    from libqtile.log_utils import logger
 
     try:
         with open(SESSION_FILE) as f:
@@ -165,7 +163,8 @@ def restore_groups_early() -> None:
         return
 
     existing = {g.name for g in _config_groups}
-    for name in data.get("groups", []):
+    for group in data.get("groups", []):
+        name = group.get("name")
         if name not in existing:
             _config_groups.append(Group(name, persist=True))
             logger.warning("Restored group (early): %s", name)
@@ -176,7 +175,6 @@ def restore_windows(qtile_obj: Qtile) -> None:
     Call from @hook.subscribe.startup_complete — reassigns windows
     to their saved groups using wm_class + name matching.
     """
-    from libqtile.log_utils import logger
 
     try:
         with open(SESSION_FILE) as f:
@@ -184,8 +182,8 @@ def restore_windows(qtile_obj: Qtile) -> None:
     except (FileNotFoundError, json.JSONDecodeError):
         return
 
-    for entry in data.get("windows", []):
-        target = entry["group"]
+    for group in data.get("windows", []):
+        target = group["group"]
         if target not in qtile_obj.groups_map:
             logger.warning("Group not found for window: %s", target)
             continue
@@ -193,11 +191,11 @@ def restore_windows(qtile_obj: Qtile) -> None:
         for window in qtile_obj.windows_map.values():
             try:
                 info = window.info()
-                if (info.get("wm_class") == entry["wm_class"]
-                        and info.get("name") == entry["name"]):
+                if (info.get("wm_class") == group["wm_class"]
+                        and info.get("name") == group["name"]):
                     window.togroup(target)
                     logger.warning("Restored window '%s' → %s",
-                                   entry["name"], target)
+                                   group["name"], target)
                     break
             except Exception:
                 pass
@@ -211,6 +209,27 @@ def restore_windows(qtile_obj: Qtile) -> None:
                 logger.warning("Orphaned window moved to fallback group: %s", fallback)
         except Exception:
             pass
+
+    # Restore saved layouts for groups (if any)
+    for group in data.get("groups", []):
+        name = group.get("name")
+        layout_name = group.get("layout")
+        if not name or not layout_name:
+            continue
+        if name in qtile_obj.groups_map:
+            grp = qtile_obj.groups_map[name]
+            # find matching layout in the group's layout list
+            for lay in getattr(grp, "layouts", []):
+                if getattr(lay, "name", "").lower() == layout_name.lower():
+                    try:
+                        if hasattr(grp, "setlayout"):
+                            grp.setlayout(lay)
+                        elif hasattr(grp, "cmd_setlayout"):
+                            grp.cmd_setlayout(lay)
+                        logger.warning("Restored layout '%s' for group %s", layout_name, name)
+                    except Exception:
+                        pass
+                    break
 
 
 
@@ -227,7 +246,7 @@ def on_startup():
 
 
 
-@hook.subscribe.client_new
-def on_startup_complete(_):
+@hook.subscribe.startup_complete
+def on_startup_complete() -> None:
     from libqtile import qtile
     restore_windows(qtile)
