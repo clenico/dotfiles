@@ -276,3 +276,12 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 . "$HOME/.local/bin/env"
+
+insert-date() {
+    local ts=$(date '+%y%m%d%H%M%S')
+    print -rn -- "$ts" | xclip -selection clipboard
+    LBUFFER+="$ts"
+}
+
+zle -N insert-date
+bindkey '^[s' insert-date
