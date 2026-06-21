@@ -1,0 +1,99 @@
+# # ~/.config/alacritty/alacritty.toml
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 16.0
+
+[font.normal]
+family = "Terminess Nerd Font Mono"
+style = "Regular"
+
+[window]
+opacity = 0.95
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+
+[colors.primary]
+background = "#141c21"
+foreground = "#93a1a1"
+
+[colors.cursor]
+text = "#141c21"
+cursor = "#ff00ff"
+
+[colors.normal]
+black   = "#263640"
+red     = "#d12f2c"
+green   = "#819400"
+yellow  = "#b08500"
+blue    = "#2ca2f5"
+magenta = "#696ebf"
+cyan    = "#289c93"
+white   = "#bfbaac"
+
+[colors.bright]
+black   = "#4a697d"
+red     = "#fa3935"
+green   = "#a4bd00"
+yellow  = "#d9a400"
+blue    = "#5c5cff"
+magenta = "#8086e8"
+cyan    = "#33c5ba"
+white   = "#fdf6e3"
+
+[colors.hints.start]
+foreground = "#141c21"
+background = "#d9a400"
+
+[colors.hints.end]
+foreground = "#141c21"
+background = "#289c93"
+
+[hints]
+[[hints.enabled]]
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https?://|news:|file://|git://|ssh:|ftp://)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+binding = { key = "U", mods = "Alt" }
+command = "xdg-open"
+
+
+[keyboard]
+bindings = [
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+  { key = "Y", mods = "Control", action = "Paste" },
+
+  { key = "Equals", mods = "Alt", action = "ToggleViMode" },
+
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Key0", mods = "Alt", action = "ResetFontSize" },
+
+  { key = "Left",  mods = "Control", chars = "\u001b[1;5D" },
+  { key = "Right", mods = "Control", chars = "\u001b[1;5C" },
+  { key = "Up",    mods = "Control", chars = "\u001b[1;5A" },
+  { key = "Down",  mods = "Control", chars = "\u001b[1;5B" },
+
+  { key = "Left",  mods = "Control|Shift", chars = "\u001b[1;6D" },
+  { key = "Right", mods = "Control|Shift", chars = "\u001b[1;6C" },
+  { key = "Up",    mods = "Control|Shift", chars = "\u001b[1;6A" },
+  { key = "Down",  mods = "Control|Shift", chars = "\u001b[1;6B" }
+]
