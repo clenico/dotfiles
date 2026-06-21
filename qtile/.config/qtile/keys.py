@@ -46,6 +46,7 @@ from shortcuts.M_o_ import keys_M_o_
 from shortcuts.M_space_ import key_M_space_
 from shortcuts.workspaces import keys_workspaces
 from shortcuts.screens import keys_screens
+from utils.func_app import clip_datetime_stamp, clip_date
 import os
 
 keys: list[Key | KeyChord] = []
@@ -58,7 +59,7 @@ keys.extend(keys_screens)
 # Direct shortcuts
 keys.extend(
     [
-        # Key([mod], "a", ),
+        Key([mod], "a", clip_datetime_stamp, desc="Put YYMMDDHHmmss in clipboard"),
         # Key([mod, shift], "a", ),
         # Key([mod, ctrl], "a", ),
         # Key([mod], "b", ),
@@ -177,6 +178,7 @@ keys.extend(
             lazy.spawn(os.path.expanduser("~/MyScripts/nsp_manager.py --key firefox")),
             desc="Open Firefox calendar in floating window",
         ),  # TODO improve
+        Key([mod], "z", clip_date, desc="Put YYMMDDHHmmss in clipboard"),
         Key([mod], "semicolon", toggle_gaps, desc="Toggle gaps"),
         Key([mod], "Return", lazy.spawn(V.my_terminal), desc="Open terminal"),
         Key(
