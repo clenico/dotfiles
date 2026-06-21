@@ -364,13 +364,13 @@ keys.extend(
         Key(
             [],
             "XF86MonBrightnessUp",
-            lazy.spawn("xbacklight -inc 5"),
+            lazy.spawn(os.path.expanduser("~/MyScripts/brightness.sh +10%")),
             desc="Increase brightness",
         ),
         Key(
             [],
             "XF86MonBrightnessDown",
-            lazy.spawn("xbacklight -dec 5"),
+            lazy.spawn(os.path.expanduser("~/MyScripts/brightness.sh 10%-")),
             desc="Decrease brightness",
         ),
     ]
